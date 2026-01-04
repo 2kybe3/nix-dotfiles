@@ -64,6 +64,7 @@
     speedtest-cli
     neovim
     dunst
+    wl-clipboard-rs
     (prismlauncher.override {
       jdks = [
         jdk21
