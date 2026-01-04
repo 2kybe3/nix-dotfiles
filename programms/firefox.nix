@@ -1,4 +1,4 @@
-{ config, pklgs, lib, ... }:
+{ ... }:
 
 {
   programs.firefox = {

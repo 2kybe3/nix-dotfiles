@@ -8,23 +8,29 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, ... }:
   {
     nixosConfigurations.knx = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configuration.nix
-        ./hardware-configuration.nix
-        ./firefox.nix
-        ./nvidia.nix
-        ./user.nix
+        ./programms/programms.nix
+        ./modules/system.nix
+        ./modules/hyprland.nix
+        ./hardware/hardware-configuration.nix
+        ./hardware/nvidia.nix
+
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.kybe = ./home.nix;
+          home-manager.users.kybe = ./home/home.nix;
         }
       ];
     };

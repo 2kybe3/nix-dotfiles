@@ -1,21 +1,17 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   home.username = "kybe";
   home.homeDirectory = "/home/kybe";
+
+  services.ssh-agent.enable = true;
+
   programs.zsh = {
     enable = true;
     initContent = ''
       ssh-add ~/.ssh/kybe > /dev/null 2>&1
     '';
   };
-
-  home.stateVersion = "25.11";
-
-  home.packages = [
-  ];
-
-  services.ssh-agent.enable = true;
   programs.git = {
     enable = true;
 
@@ -32,15 +28,16 @@
       init.defaultBranch = "main";
     };
   };
+  programs.home-manager.enable = true;
 
   home.file = {
-    ".icons/theme_NotwaitaBlack".source = ./theme_NotwaitaBlack;
-    ".config/hypr/hyprland.conf".source = ./hypr/hyprland.conf;
-    ".config/hypr/hyprpaper.conf".source = ./hypr/hyprpaper.conf;
-    ".config/ashell/config.toml".source = ./ashell.toml;
-    ".config/hypr/wp.png".source = ./wp.png;
+    ".icons/theme_NotwaitaBlack".source = ./config/theme_NotwaitaBlack;
+    ".config/hypr/hyprland.conf".source = ./config/hyprland.conf;
+    ".config/hypr/hyprpaper.conf".source = ./config/hyprpaper.conf;
+    ".config/ashell/config.toml".source = ./config/ashell.toml;
+    ".config/hypr/wp.png".source = ./config/wp.png;
 
-    ".config/dunst/dunstrc".source = ./dunstrc;
+    ".config/dunst/dunstrc".source = ./config/dunstrc;
 
     ".ssh/config".text = ''
       Host kybe.xyz
@@ -68,5 +65,5 @@
   };
 
 
-  programs.home-manager.enable = true;
+  home.stateVersion = "25.11";
 }
