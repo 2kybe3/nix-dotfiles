@@ -20,7 +20,7 @@
   system.activationScripts = {
     tofi-cleanup.text = ''
       for userHome in /home/*; do
-        rm "$userHome/.cache/tofi-drun" || true
+        rm "$userHome/.cache/tofi-drun" &> /dev/null || true
       done
     '';
   };
