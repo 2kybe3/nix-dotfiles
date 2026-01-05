@@ -4,6 +4,7 @@
   networking.hostName = "knx";
   networking.networkmanager.enable = true;
   networking.nameservers = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
+  networking.firewall.allowedTCPPorts = [ 22 ];
 
   time.timeZone = "Europe/Berlin";
 
@@ -20,6 +21,9 @@
       "networkmanager"
     ];
     shell = pkgs.zsh;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7irWuDZwx7ZvPSiUwBbxUxKL/7aMQmy/8oxput1bID kybe@khost"
+    ];
   };
 
   ##### Nix Settings #####
@@ -45,6 +49,18 @@
     domains = [ "~." ];
     fallbackDns = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
     dnsovertls = "true";
+  };
+
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+    settings = {
+      PasswordAuthentication = false;
+      AllowUsers = [ "kybe" ];
+      UseDns = true;
+      X11Forwarding = false;
+      PermitRootLogin = "yes";
+    };
   };
 
   system.stateVersion = "25.11";

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ system, inputs, pkgs, ... }:
 {
   imports = [
     ./firefox.nix
@@ -16,8 +16,8 @@
     vim
 
     ## Apps
-    vesktop
     spotify
+    (inputs.nixpkgs-vesktop.legacyPackages.${system}.vesktop)
 
     ## CLI
     speedtest-cli
@@ -49,6 +49,7 @@
 
     zsh
     jdk21
+    pinentry-tty
   ];
 
   programs.git.enable = true;

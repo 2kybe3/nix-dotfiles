@@ -1,4 +1,4 @@
-{ ... }:
+{ config, lib, ... }:
 
 {
   home.username = "kybe";
@@ -7,6 +7,11 @@
   programs.nixvim.enable = true;
   programs.nixvim.imports = [ ./nixvim.nix ];
 
+  xdg.enable = true;
+  home.sessionVariables = rec {
+    EDITOR = "nvim";
+  };
+
   ##### Services ######
   services.ssh-agent.enable = true;
 
@@ -14,6 +19,7 @@
   ##### Programs ######
   programs.zsh = {
     enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
     initContent = ''
       ssh-add ~/.ssh/kybe > /dev/null 2>&1
     '';
@@ -65,11 +71,6 @@
       background-color = #000A
     '';
   };
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
-
 
   home.stateVersion = "25.11";
 }
