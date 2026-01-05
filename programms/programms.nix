@@ -26,6 +26,7 @@
     psmisc
     unzip
     file
+    sops
 
     ## TUI
     iamb

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   networking.hostName = "knx";
@@ -13,17 +13,33 @@
 
   hardware.bluetooth.enable = true;
 
+  #### Sops #####
+  imports = [ inputs.sops-nix.nixosModules.sops ];
+
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+
+  sops.age.keyFile = "/home/kybe/.config/sops/age/keys.txt";
+
+  sops.secrets.root-pass = { };
+  sops.secrets.kybe-pass = { };
+
   ##### Users #####
+  users.users.root = {
+    hashedPasswordFile = "/run/secrets/root-pass";
+  };
   users.users.kybe = {
     isNormalUser = true;
+    description = "2kybe3";
+    shell = pkgs.zsh;
     extraGroups = [ 
       "wheel"
       "networkmanager"
     ];
-    shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7irWuDZwx7ZvPSiUwBbxUxKL/7aMQmy/8oxput1bID kybe@khost"
     ];
+    hashedPasswordFile = "/run/secrets/kybe-pass";
   };
 
   ##### Nix Settings #####
@@ -34,7 +50,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   ##### Services #####
-
   services.printing.enable = true;
   services.mullvad-vpn.enable = true;
 
