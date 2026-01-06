@@ -34,7 +34,7 @@
     settings = {
       user = {
         name = "2kybe3";
-        email = "2kybe3";
+        email = "kybe@kybe.xyz";
       };
       init.defaultBranch = "main";
     };
