@@ -5,10 +5,11 @@
 
   hardware.bluetooth.enable = true;
 
-  ##### Networking #####
-  networking.networkmanager.enable = true;
-  networking.networkmanager.dns = "systemd-resolved";
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  ##### Docker #####
+  virtualisation.docker = {
+    enable = true;
+    storageDriver = "btrfs";
+  };
 
   ##### TTY #####
   services.getty = {
@@ -17,7 +18,7 @@
     helpLine = lib.mkForce "";
   };
 
-  ##### KWALLET #####
+  ##### Kwallet #####
   programs.kdeconnect.enable = true;
   security.pam.services.login.kwallet = {
     enable = true;
@@ -53,6 +54,7 @@
     extraGroups = [ 
       "wheel"
       "networkmanager"
+      "docker"
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7irWuDZwx7ZvPSiUwBbxUxKL/7aMQmy/8oxput1bID kybe@khost"
@@ -75,14 +77,6 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
-  };
-
-  services.resolved = {
-    enable = true;
-    dnssec = "true";
-    domains = [ "~." ];
-    fallbackDns = [ "1.1.1.1" "1.0.0.1" ];
-    dnsovertls = "false";
   };
 
   services.openssh = {

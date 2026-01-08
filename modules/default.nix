@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./wireguard.nix
+    ./networking.nix
     ./hyprland.nix
     ./programs.nix
     ./firefox.nix

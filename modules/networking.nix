@@ -1,5 +1,17 @@
 { config, ... }:
 {
+   networking.networkmanager.enable = true;
+   networking.networkmanager.dns = "systemd-resolved";
+   networking.firewall.allowedTCPPorts = [ 22 ];
+
+   services.resolved = {
+     enable = true;
+     dnssec = "true";
+     domains = [ "~." ];
+     fallbackDns = [ "1.1.1.1" "1.0.0.1" ];
+     dnsovertls = "false";
+   };
+  
    sops.secrets."wireguard/key" = { };
    sops.secrets."wireguard/pk"  = { };
 
