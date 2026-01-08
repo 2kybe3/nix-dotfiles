@@ -1,6 +1,5 @@
 { system, inputs, pkgs, ... }:
 {
-  # https://search.nixos.org/ https://mynixos.com/
   environment.systemPackages = with pkgs; [
     ## Netowrking
     wget
