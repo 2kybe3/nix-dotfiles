@@ -60,6 +60,9 @@
     ##### Wallpaper #####
     ".config/hypr/wp.png".source = ./config/wp.png;
 
+    ##### GIT #####
+    ".gitconfig".source = ./config/git/gitconfig;
+
     ##### SSH #####
     ".ssh/config".source = ./config/ssh/config;
   };

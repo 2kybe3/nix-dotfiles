@@ -22,26 +22,27 @@
 
     ## CLI
     speedtest-cli
-    ripgrep-all # ripgrep with extra files
+    ripgrep-all
     fastfetch
     pamixer # pulseaudio command line mixer
-    ripgrep # Fast file search
-    openssl # Provides some usefull stuff (openssl rand -hex <length>, etc.)
+    ripgrep
+    openssl
     psmisc # killall etc.
     unzip
+    delta
     file
-    sops # secrets
+    sops
     fzf # fuzzy find
     dig
     git
-    bat # cat
-    fd # find replacement
+    bat
+    fd
 
     ## TUI
-    himalaya
+    himalaya # E-Mail client
     btop
-    feh # iamge viewer
-    lf # file browser
+    feh # Image Viewer
+    lf
 
     ## Nix
     nixfmt-tree
