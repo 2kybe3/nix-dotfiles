@@ -55,7 +55,7 @@
 
     zsh
     jdk21
-    pinentry-tty # TODO: setup
+    pinentry-curses
   ];
 
   programs.zoxide.enable = true;
@@ -64,6 +64,7 @@
   ##### GPG Agent #####
   programs.gnupg.agent = {
     enable = true;
+    pinentryPackage = pkgs.pinentry-curses;
     enableSSHSupport = true;
   };
 }
