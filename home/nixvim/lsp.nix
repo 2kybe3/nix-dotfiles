@@ -5,42 +5,42 @@
       {
         key = "gd";
         lspBufAction = "definition";
-	mode = "n";
+        mode = "n";
       }
-      { 
+      {
         key = "gD";
         lspBufAction = "references";
-	mode = "n";
+        mode = "n";
       }
       {
         key = "gt";
         lspBufAction = "type_definition";
-	mode = "n";
+        mode = "n";
       }
       {
         key = "gi";
         lspBufAction = "implementation";
-	mode = "n";
+        mode = "n";
       }
       {
         key = "K";
         lspBufAction = "hover";
-	mode = "n";
+        mode = "n";
       }
       {
         action = "<CMD>LspStop<CR>";
         key = "<leader>lx";
-	mode = "n";
+        mode = "n";
       }
       {
         action = "<CMD>LspStart<CR>";
         key = "<leader>ls";
-	mode = "n";
+        mode = "n";
       }
       {
         action = "<CMD>LspRestart<CR>";
         key = "<leader>lr";
-	mode = "n";
+        mode = "n";
       }
     ];
   };
@@ -53,7 +53,7 @@
       rust_analyzer = {
         enable = true;
         installCargo = false;
-	installRustc = false;
+        installRustc = false;
       };
       docker_language_service.enable = true;
       docker_compose_language_service.enable = true;

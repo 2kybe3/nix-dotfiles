@@ -18,14 +18,14 @@
   ## Colorsheme Catppuccin - Mocha ##
   colorschemes.catppuccin.enable = true;
   extraConfigLua = ''
-  require("catppuccin").setup({
-    flavour = "mocha",
-    transparent_background = true,
-    float = {
-      transparent = true,
-      solid = false,
-    }
-  })
-  vim.cmd.colorscheme "catppuccin"
-  ''; 
+    require("catppuccin").setup({
+      flavour = "mocha",
+      transparent_background = true,
+      float = {
+        transparent = true,
+        solid = false,
+      }
+    })
+    vim.cmd.colorscheme "catppuccin"
+  '';
 }

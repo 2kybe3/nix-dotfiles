@@ -32,9 +32,9 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
-	overlays = [ (import ./overlays/ncspot.nix) ];
+        overlays = [ (import ./overlays/ncspot.nix) ];
 
-	config = {
+        config = {
           allowUnfree = true;
           nvidia.acceptLicense = true;
         };
@@ -47,16 +47,16 @@
 
       nixosConfigurations = {
         knx = nixpkgs.lib.nixosSystem {
-	  inherit system pkgs;
+          inherit system pkgs;
 
-	  specialArgs = {
-	    inherit inputs system;
-	  };
+          specialArgs = {
+            inherit inputs system;
+          };
 
-	  modules = [
-	    ./hosts/knx
-	  ];
-	};
+          modules = [
+            ./hosts/knx
+          ];
+        };
       };
     };
 }

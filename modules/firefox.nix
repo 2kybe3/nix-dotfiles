@@ -8,8 +8,11 @@
   config = lib.mkIf config.firefox.enable {
     programs.firefox = {
       enable = true;
-      languagePacks = [ "de" "en-US" ];
-  
+      languagePacks = [
+        "de"
+        "en-US"
+      ];
+
       policies = {
         DisablePocket = true;
         DisableAccounts = true;
@@ -27,7 +30,7 @@
         };
         OverrideFirstRunPage = "";
         OverridePostUpdatePage = "";
-  
+
         ExtensionSettings = {
           "*".installation_mode = "blocked";
           "uBlock0@raymondhill.net" = {

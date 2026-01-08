@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   time.timeZone = "Europe/Berlin";
@@ -51,7 +56,7 @@
     isNormalUser = true;
     description = "2kybe3";
     shell = pkgs.zsh;
-    extraGroups = [ 
+    extraGroups = [
       "wheel"
       "networkmanager"
       "docker"
@@ -63,7 +68,10 @@
   };
 
   ##### Nix Settings #####
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   ##### Boot loader #####
   boot.loader.systemd-boot.enable = true;

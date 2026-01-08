@@ -1,4 +1,9 @@
-{ system, inputs, pkgs, ... }:
+{
+  system,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   environment.systemPackages = with pkgs; [
     ## Netowrking
@@ -38,6 +43,7 @@
     lf # file browser
 
     ## Nix
+    nixfmt-tree
     nixfmt
     nixd
 
@@ -59,7 +65,7 @@
 
   programs.zoxide.enable = true;
   programs.steam.enable = true;
- 
+
   ##### GPG Agent #####
   programs.gnupg.agent = {
     enable = true;
