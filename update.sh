@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i bash -p git nixfmt nixfmt-tree nix
+#!nix-shell -i bash -p git nixfmt nixfmt-tree
 
 set -euo pipefail
 
