@@ -51,6 +51,9 @@
     ".config/dunst/dunstrc".source = ./config/dunst/dunstrc; # Dunstrc config (notification daemon)
     ".config/tofi/config".source = ./config/tofi/config; # Tofi (app selector)
 
+    ##### Himalaya #####
+    ".config/himalaya/config.toml".source = ./config/himalaya/config.toml;
+
     ##### BTOP #####
     ".config/btop/btop.conf".source = ./config/btop/btop.conf;
 
