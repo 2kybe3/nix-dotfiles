@@ -14,7 +14,6 @@
   ##### Services ######
   services.ssh-agent.enable = true;
 
-
   ##### Programs ######
   programs.fd = {
     enable = true;
