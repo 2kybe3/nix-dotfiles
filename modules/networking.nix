@@ -22,6 +22,7 @@
     dnsovertls = "false";
   };
 
+  ##### Wireguard #####
   sops.secrets = {
     "wireguard/key" = { };
     "wireguard/pk" = { };

@@ -1,8 +1,10 @@
 { config, ... }:
 
 {
-  home.username = "kybe";
-  home.homeDirectory = "/home/kybe";
+  home = {
+    username = "kybe";
+    homeDirectory = "/home/kybe";
+  };
 
   programs.nixvim.imports = [ ./nixvim ];
 
@@ -15,32 +17,34 @@
   services.ssh-agent.enable = true;
 
   ##### Programs ######
-  programs.fd = {
-    enable = true;
-    hidden = true;
-  };
-  programs.zsh = {
-    enable = true;
-    dotDir = "${config.xdg.configHome}/zsh";
-    initContent = builtins.readFile ./config/zshrc;
-  };
-  programs.git = {
-    enable = true;
-
-    signing = {
-      signByDefault = true;
-      key = "A96D0830396F4327";
+  programs = {
+    fd = {
+      enable = true;
+      hidden = true;
     };
+    zsh = {
+      enable = true;
+      dotDir = "${config.xdg.configHome}/zsh";
+      initContent = builtins.readFile ./config/zshrc;
+    };
+    git = {
+      enable = true;
 
-    settings = {
-      user = {
-        name = "2kybe3";
-        email = "kybe@kybe.xyz";
+      signing = {
+        signByDefault = true;
+        key = "A96D0830396F4327";
       };
-      init.defaultBranch = "main";
+
+      settings = {
+        user = {
+          name = "2kybe3";
+          email = "kybe@kybe.xyz";
+        };
+        init.defaultBranch = "main";
+      };
     };
+    home-manager.enable = true;
   };
-  programs.home-manager.enable = true;
 
   home.file = {
     ##### Hyprland #####

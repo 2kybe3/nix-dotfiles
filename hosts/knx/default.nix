@@ -14,14 +14,14 @@
 
   networking.hostName = "knx";
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-
-  home-manager.sharedModules = [
-    inputs.nixvim.homeModules.nixvim
-  ];
-
-  home-manager.users.kybe = import ../../home/home.nix;
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    sharedModules = [
+      inputs.nixvim.homeModules.nixvim
+    ];
+    users.kybe = import ../../home/home.nix;
+  };
 
   system.stateVersion = "25.11";
 }

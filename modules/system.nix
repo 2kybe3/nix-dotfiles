@@ -36,39 +36,45 @@
   ];
 
   #### Sops #####
-  sops.defaultSopsFile = ../secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
+  sops = {
+    defaultSopsFile = ../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
 
-  sops.age.keyFile = "/nix/persist/var/lib/sops-nix/key.txt";
+    age.keyFile = "/nix/persist/var/lib/sops-nix/key.txt";
 
-  sops.secrets.kybe-imap = {
-    owner = "kybe";
+    secrets.kybe-imap = {
+      owner = "kybe";
+    };
   };
 
   ##### Users #####
-  users.mutableUsers = false;
-
-  sops.secrets.root-pass = { };
-  sops.secrets.root-pass.neededForUsers = true;
-  users.users.root = {
-    hashedPasswordFile = config.sops.secrets.root-pass.path;
+  sops = {
+    secrets.root-pass = { };
+    secrets.root-pass.neededForUsers = true;
+    secrets.kybe-pass = { };
+    secrets.kybe-pass.neededForUsers = true;
   };
 
-  sops.secrets.kybe-pass = { };
-  sops.secrets.kybe-pass.neededForUsers = true;
-  users.users.kybe = {
-    isNormalUser = true;
-    description = "2kybe3";
-    shell = pkgs.zsh;
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-      "docker"
-    ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7irWuDZwx7ZvPSiUwBbxUxKL/7aMQmy/8oxput1bID kybe@khost"
-    ];
-    hashedPasswordFile = config.sops.secrets.kybe-pass.path;
+  users = {
+    mutableUsers = false;
+    users.root = {
+      hashedPasswordFile = config.sops.secrets.root-pass.path;
+    };
+
+    users.kybe = {
+      isNormalUser = true;
+      description = "2kybe3";
+      shell = pkgs.zsh;
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "docker"
+      ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7irWuDZwx7ZvPSiUwBbxUxKL/7aMQmy/8oxput1bID kybe@khost"
+      ];
+      hashedPasswordFile = config.sops.secrets.kybe-pass.path;
+    };
   };
 
   ##### Nix Settings #####
@@ -78,28 +84,32 @@
   ];
 
   ##### Boot loader #####
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  ##### Services #####
-  services.dbus.enable = true;
-  services.printing.enable = true;
-  services.mullvad-vpn.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
   };
 
-  services.openssh = {
-    enable = true;
-    ports = [ 22 ];
-    settings = {
-      PasswordAuthentication = true;
-      AllowUsers = [ "kybe" ];
-      UseDns = true;
-      X11Forwarding = false;
-      PermitRootLogin = "no";
+  ##### Services #####
+  services = {
+    dbus.enable = true;
+    printing.enable = true;
+    mullvad-vpn.enable = true;
+
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+    };
+
+    openssh = {
+      enable = true;
+      ports = [ 22 ];
+      settings = {
+        PasswordAuthentication = true;
+        AllowUsers = [ "kybe" ];
+        UseDns = true;
+        X11Forwarding = false;
+        PermitRootLogin = "no";
+      };
     };
   };
 }

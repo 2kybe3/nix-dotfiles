@@ -65,13 +65,15 @@
     pinentry-curses
   ];
 
-  programs.steam.enable = true;
-  programs.zoxide.enable = true;
+  programs = {
+    steam.enable = true;
+    zoxide.enable = true;
 
-  ##### GPG Agent #####
-  programs.gnupg.agent = {
-    enable = true;
-    pinentryPackage = pkgs.pinentry-curses;
-    enableSSHSupport = true;
+    ##### GPG Agent #####
+    gnupg.agent = {
+      enable = true;
+      pinentryPackage = pkgs.pinentry-curses;
+      enableSSHSupport = true;
+    };
   };
 }
