@@ -1,11 +1,18 @@
 {
-  globals.mapleader = " ";
+  globals = {
+    mapleader = " ";
+    maplocalleader = " ";
+  };
   opts = {
     number = true;
+    undofile = true;
+    ignorecase = true;
+    smartcase = true;
     encoding = "utf8";
     termguicolors = true;
     wrap = false;
     smarttab = true;
+    scrolloff = 10;
   };
   extraConfigLua = ''
     vim.g.mapleader = " "

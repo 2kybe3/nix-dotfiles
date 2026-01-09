@@ -32,7 +32,7 @@
     delta
     file
     sops
-    fzf # fuzzy find
+    fzf
     dig
     git
     bat
@@ -68,6 +68,8 @@
   programs = {
     steam.enable = true;
     zoxide.enable = true;
+
+    fzf.fuzzyCompletion = true;
 
     ##### GPG Agent #####
     gnupg.agent = {

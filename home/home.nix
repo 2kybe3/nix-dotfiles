@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 
 {
   home = {
@@ -24,6 +24,10 @@
     };
     zsh = {
       enable = true;
+      history = {
+        append = true;
+        extended = true;
+      };
       dotDir = "${config.xdg.configHome}/zsh";
       initContent = builtins.readFile ./config/zshrc;
     };
