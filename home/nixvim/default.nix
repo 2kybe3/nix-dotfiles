@@ -2,6 +2,7 @@
   imports = [
     ./lsp.nix
     ./flash.nix
+    ./treesj.nix
     ./nixvim.nix
     ./globals.nix
     ./harpoon.nix
