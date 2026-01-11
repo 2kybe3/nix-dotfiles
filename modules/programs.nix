@@ -13,12 +13,14 @@
 
     ## Editors
     vscodium
+    obsidian
 
     ## Apps
-    spotify
-    tor-browser
-    element-desktop
     (inputs.nixpkgs-vesktop.legacyPackages.${system}.vesktop)
+    element-desktop
+    tor-browser
+    spotify
+    slack
 
     ## CLI
     speedtest-cli
@@ -30,6 +32,7 @@
     psmisc # killall etc.
     unzip
     delta
+    tmux
     file
     sops
     fzf
@@ -48,6 +51,10 @@
     nixfmt-tree
     nixfmt
     nixd
+    nix-index
+
+    ## Bash
+    shellcheck
 
     ## Rust
     jetbrains.rust-rover

@@ -1,7 +1,9 @@
 {
   imports = [
-    ./globals.nix
     ./lsp.nix
     ./nixvim.nix
+    ./globals.nix
+    ./telescope.nix
+    ./lightline.nix
   ];
 }
