@@ -28,5 +28,9 @@
         ];
       };
     };
+    luaConfig.post = ''
+      vim.o.laststatus = 2
+      vim.o.cmdheight = 0
+    '';
   };
 }

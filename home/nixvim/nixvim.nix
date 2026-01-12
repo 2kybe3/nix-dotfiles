@@ -1,5 +1,10 @@
+{ pkgs, ... }:
 {
   enable = true;
+
+  extraPlugins = with pkgs.vimPlugins; [
+    vim-tpipeline
+  ];
 
   ## Default ##
   defaultEditor = true;
