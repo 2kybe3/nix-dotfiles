@@ -13,13 +13,17 @@
 
   services.resolved = {
     enable = true;
-    dnssec = "true";
-    domains = [ "~." ];
-    fallbackDns = [
-      "1.1.1.1"
-      "1.0.0.1"
-    ];
-    dnsovertls = "false";
+    settings = {
+      Resolve = {
+        DNSSEC = "true";
+        Domains = [ "~." ];
+        DNSOverTLS = "false";
+        FallbackDNS = [
+          "1.1.1.1"
+          "1.0.0.1"
+        ];
+      };
+    };
   };
 
   ##### Wireguard #####

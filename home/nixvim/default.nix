@@ -1,6 +1,7 @@
 {
   imports = [
     ./lsp.nix
+    ./cord.nix
     ./flash.nix
     ./treesj.nix
     ./nixvim.nix
