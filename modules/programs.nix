@@ -19,6 +19,7 @@
     (inputs.nixpkgs-vesktop.legacyPackages.${system}.vesktop)
     element-desktop
     tor-browser
+    burpsuite
     spotify
     slack
 
@@ -43,7 +44,11 @@
 
     ## TUI
     himalaya # E-Mail client
-    btop
+    (btop.override {
+      cudaSupport = true;
+    })
+    bottom
+    ncdu
     feh # Image Viewer
     lf
 
