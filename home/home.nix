@@ -30,7 +30,15 @@
       enable = true;
       hidden = true;
     };
-    # TODO: configure btop here instead of a symlink
+    btop = {
+      enable = true;
+      settings = {
+        color_theme = "adwaita-dark";
+        theme_background = false;
+        vim_keys = true;
+        update_ms = 200;
+      };
+    };
     zsh = {
       enable = true;
       history = {
@@ -94,9 +102,6 @@
 
       ##### Himalaya #####
       ".config/himalaya/config.toml".source = ./config/himalaya/config.toml;
-
-      ##### BTOP #####
-      ".config/btop/btop.conf".source = ./config/btop/btop.conf;
 
       ##### GIT #####
       ".gitconfig".source = ./config/git/gitconfig;
