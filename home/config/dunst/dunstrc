@@ -4,7 +4,7 @@
     height = (50, 300)
     origin = top-right
 
-    offset = (6, 6)
+    offset = (0, 20)
 
     # dunstify -h int:value:12
     progress_bar = true

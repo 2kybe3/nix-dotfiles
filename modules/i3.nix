@@ -36,6 +36,7 @@
         exec ${pkgs.i3status-rust}/bin/i3status-rs "$@"
       '')
       i3status-rust
+      brightnessctl
       kitty
       dunst
       xclip
@@ -60,6 +61,16 @@
       };
     };
 
-    services.displayManager.defaultSession = "none+i3";
+    services.displayManager = {
+      defaultSession = "none+i3";
+      ly = {
+        enable = true;
+        settings = {
+          animation = "doom";
+          vi_mode = true;
+          save = true;
+        };
+      };
+    };
   };
 }

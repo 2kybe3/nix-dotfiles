@@ -36,10 +36,7 @@ lib.mkIf i3Enabled {
           {
             block = "vpn";
             driver = "mullvad";
-          }
-          {
-            block = "external_ip";
-            format = " $ip $timezone $country_flag $asn ";
+            interval = 1;
           }
           {
             block = "docker";
@@ -50,6 +47,10 @@ lib.mkIf i3Enabled {
             hide_if_total_is_zero = true;
           }
           {
+            block = "external_ip";
+            format = " $ip $timezone $country_flag $asn ";
+          }
+          {
             block = "sound";
           }
           {
@@ -57,15 +58,15 @@ lib.mkIf i3Enabled {
             mac = "2C:BE:EE:4A:5B:32";
           }
           {
-            block = "time";
-            interval = 60;
-            format = " $timestamp.datetime(f:'%a %d/%m %R') ";
-          }
-          {
             block = "weather";
             service = {
               name = "openweathermap";
             };
+          }
+          {
+            block = "time";
+            format = " $timestamp.datetime(f:'%a %d/%m %R') ";
+            interval = 1;
           }
           {
             block = "scratchpad";
@@ -76,6 +77,7 @@ lib.mkIf i3Enabled {
       };
     };
   };
+
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3;
@@ -155,6 +157,7 @@ lib.mkIf i3Enabled {
           "${modifier}+Shift+j" = "move down";
           "${modifier}+Shift+k" = "move up";
           "${modifier}+Shift+l" = "move right";
+          "${modifier}+c" = "split h"; # c = h, v = v
         };
 
       modes = {
