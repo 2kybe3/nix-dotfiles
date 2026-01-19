@@ -30,6 +30,7 @@
       enable = true;
       hidden = true;
     };
+    # TODO: configure btop here instead of a symlink
     zsh = {
       enable = true;
       history = {
