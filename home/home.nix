@@ -14,7 +14,6 @@
   };
 
   imports = lib.optional i3Enabled ./i3;
-  programs.nixvim.imports = [ ./nixvim ];
 
   xdg.enable = true;
   home.sessionVariables = {
@@ -25,59 +24,7 @@
   services.ssh-agent.enable = true;
 
   ##### Programs ######
-  programs = {
-    fd = {
-      enable = true;
-      hidden = true;
-    };
-    btop = {
-      enable = true;
-      settings = {
-        color_theme = "adwaita-dark";
-        theme_background = false;
-        vim_keys = true;
-        update_ms = 200;
-      };
-    };
-    zsh = {
-      enable = true;
-      history = {
-        append = true;
-        extended = true;
-      };
-      dotDir = "${config.xdg.configHome}/zsh";
-      initContent = builtins.readFile ./config/zshrc;
-      plugins = [
-        {
-          name = "zsh-nix-shell";
-          file = "nix-shell.plugin.zsh";
-          src = pkgs.fetchFromGitHub {
-            owner = "chisui";
-            repo = "zsh-nix-shell";
-            rev = "v0.8.0";
-            sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
-          };
-        }
-      ];
-    };
-    git = {
-      enable = true;
-
-      signing = {
-        signByDefault = true;
-        key = "A96D0830396F4327";
-      };
-
-      settings = {
-        user = {
-          name = "2kybe3";
-          email = "kybe@kybe.xyz";
-        };
-        init.defaultBranch = "main";
-      };
-    };
-    home-manager.enable = true;
-  };
+  programs = import ./programs/default.nix { inherit pkgs config; };
 
   home.file = lib.mkMerge [
     (lib.mkIf hyprlandEnabled {
@@ -102,9 +49,6 @@
 
       ##### Himalaya #####
       ".config/himalaya/config.toml".source = ./config/himalaya/config.toml;
-
-      ##### GIT #####
-      ".gitconfig".source = ./config/git/gitconfig;
 
       ##### SSH #####
       ".ssh/config".source = ./config/ssh/config;
