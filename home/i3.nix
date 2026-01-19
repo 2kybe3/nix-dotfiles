@@ -157,7 +157,7 @@ lib.mkIf i3Enabled {
           "${modifier}+Shift+j" = "move down";
           "${modifier}+Shift+k" = "move up";
           "${modifier}+Shift+l" = "move right";
-          "${modifier}+c" = "split h"; # c = h, v = v
+          "${modifier}+b" = "split h"; # b = h, v = v
         };
 
       modes = {
