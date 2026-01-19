@@ -4,7 +4,7 @@
     networkmanager = {
       enable = true;
       dns = "systemd-resolved";
-      wifi.macAddress = "7A:3F:C2:91:4D:3B";
+      wifi.macAddress = "7A:3F:C2:91:4D:31";
     };
     firewall.allowedTCPPorts = [
       22

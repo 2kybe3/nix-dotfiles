@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -9,8 +9,9 @@
     inputs.sops-nix.nixosModules.sops
   ];
 
+  i3.enable = true;
   firefox.enable = true;
-  hyprland.enable = true;
+  hyprland.enable = false;
 
   networking.hostName = "knx";
 
@@ -20,6 +21,10 @@
     sharedModules = [
       inputs.nixvim.homeModules.nixvim
     ];
+    extraSpecialArgs = {
+      hyprlandEnabled = config.hyprland.enable or false;
+      i3Enabled = config.i3.enable or false;
+    };
     users.kybe = import ../../home/home.nix;
   };
 

@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ lib, pkgs, config, hyprlandEnabled, i3Enabled, ... }:
 
 {
   home = {
@@ -6,6 +6,7 @@
     homeDirectory = "/home/kybe";
   };
 
+  imports = [ ./i3.nix ];
   programs.nixvim.imports = [ ./nixvim ];
 
   xdg.enable = true;
@@ -62,30 +63,40 @@
     home-manager.enable = true;
   };
 
-  home.file = {
-    ##### Hyprland #####
-    ".icons/theme_NotwaitaBlack".source = ./config/hypr/theme-notwaita-black; # Hyprcursor Theme
-    ".config/hypr/hyprland.conf".source = ./config/hypr/hyprland.conf; # Hyprland
-    ".config/hypr/hyprpaper.conf".source = ./config/hypr/hyprpaper.conf; # Hyprpaper
-    ".config/ashell/config.toml".source = ./config/ashell/ashell.toml; # Ashell (bar)
-    ".config/dunst/dunstrc".source = ./config/dunst/dunstrc; # Dunstrc config (notification daemon)
-    ".config/tofi/config".source = ./config/tofi/config; # Tofi (app selector)
+  home.file = lib.mkMerge [
+    (lib.mkIf hyprlandEnabled {
+      ##### Hyprland #####
+      ".icons/theme_NotwaitaBlack".source = ./config/hypr/theme-notwaita-black; # Hyprcursor Theme
+      ".config/hypr/hyprland.conf".source = ./config/hypr/hyprland.conf; # Hyprland
+      ".config/hypr/hyprpaper.conf".source = ./config/hypr/hyprpaper.conf; # Hyprpaper
+      ".config/ashell/config.toml".source = ./config/ashell/ashell.toml; # Ashell (bar)
+      ".config/tofi/config".source = ./config/tofi/config; # Tofi (app selector)
+    })
 
-    ##### Himalaya #####
-    ".config/himalaya/config.toml".source = ./config/himalaya/config.toml;
+    (lib.mkIf (hyprlandEnabled || i3Enabled) {
+      ".config/dunst/dunstrc".source = ./config/dunst/dunstrc; # Dunstrc config (notification daemon)
 
-    ##### BTOP #####
-    ".config/btop/btop.conf".source = ./config/btop/btop.conf;
+      ##### Wallpaper #####
+      ".config/wp.png".source = ./config/wp.png;
+    })
 
-    ##### Wallpaper #####
-    ".config/hypr/wp.png".source = ./config/wp.png;
+    {
+      ".config/kybe-scripts".source = ./config/scripts;
 
-    ##### GIT #####
-    ".gitconfig".source = ./config/git/gitconfig;
+      ##### Himalaya #####
+      ".config/himalaya/config.toml".source = ./config/himalaya/config.toml;
 
-    ##### SSH #####
-    ".ssh/config".source = ./config/ssh/config;
-  };
+      ##### BTOP #####
+      ".config/btop/btop.conf".source = ./config/btop/btop.conf;
+
+      
+      ##### GIT #####
+      ".gitconfig".source = ./config/git/gitconfig;
+
+      ##### SSH #####
+      ".ssh/config".source = ./config/ssh/config;
+    }
+  ];
 
   home.stateVersion = "25.11";
 }

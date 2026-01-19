@@ -2,11 +2,8 @@
     monitor = 0
     width = (100, 300)
     height = (50, 300)
-    origin = top-center
+    origin = top-right
 
-    # Offset from the origin
-    # NOTE: Dunst from version 1.11 and older use this alternative notation
-    # offset = 10x50
     offset = (6, 6)
 
     # dunstify -h int:value:12

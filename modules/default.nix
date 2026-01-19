@@ -8,5 +8,6 @@
     ./system.nix
     ./zsh.nix
     ./obs.nix
+    ./i3.nix
   ];
 }

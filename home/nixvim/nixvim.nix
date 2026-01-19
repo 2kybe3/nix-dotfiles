@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   enable = true;
 
@@ -16,7 +16,8 @@
   ## Clipboard ##
   clipboard = {
     register = "unnamedplus";
-    clipboard.providers.wl-copy.enable = true;
+    clipboard.providers.wl-copy.enable = config.hyprland.enable;
+    clipboard.providers.xclip.enable = config.i3.enable;
   };
 
   ## Plugins

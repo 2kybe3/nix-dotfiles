@@ -10,6 +10,11 @@
 
   hardware.bluetooth.enable = true;
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.hack
+    nerd-fonts.symbols-only
+  ];
+
   ##### Docker #####
   virtualisation.docker = {
     enable = true;
