@@ -1,4 +1,11 @@
-{ lib, pkgs, config, hyprlandEnabled, i3Enabled, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  hyprlandEnabled,
+  i3Enabled,
+  ...
+}:
 
 {
   home = {
@@ -89,7 +96,6 @@
       ##### BTOP #####
       ".config/btop/btop.conf".source = ./config/btop/btop.conf;
 
-      
       ##### GIT #####
       ".gitconfig".source = ./config/git/gitconfig;
 
