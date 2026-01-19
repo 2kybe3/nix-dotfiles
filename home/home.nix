@@ -13,7 +13,7 @@
     homeDirectory = "/home/kybe";
   };
 
-  imports = [ ./i3.nix ];
+  imports = lib.optional i3Enabled ./i3;
   programs.nixvim.imports = [ ./nixvim ];
 
   xdg.enable = true;
