@@ -10,10 +10,14 @@
 
   hardware.bluetooth.enable = true;
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.hack
-    nerd-fonts.symbols-only
-  ];
+  fonts = {
+    packages = with pkgs; [
+      nerd-fonts.departure-mono
+    ];
+    fontconfig.defaultFonts = {
+      monospace = [ "DepartureMono Nerd Font Mono" ];
+    };
+  };
 
   ##### Docker #####
   virtualisation.docker = {
