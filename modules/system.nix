@@ -9,15 +9,9 @@
   time.timeZone = "Europe/Berlin";
 
   hardware.bluetooth.enable = true;
-
-  fonts = {
-    packages = with pkgs; [
-      nerd-fonts.departure-mono
-    ];
-    fontconfig.defaultFonts = {
-      monospace = [ "DepartureMono Nerd Font Mono" ];
-    };
-  };
+  fonts.packages = with pkgs; [
+    nerd-fonts.departure-mono
+  ];
 
   ##### Docker #####
   virtualisation.docker = {

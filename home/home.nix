@@ -15,7 +15,31 @@
 
   imports = lib.optional i3Enabled ./i3;
 
-  xdg.enable = true;
+  fonts.fontconfig = {
+    enable = true;
+    antialiasing = true;
+    defaultFonts = {
+      monospace = [ "DepartureMono Nerd Font Mono" ];
+    };
+  };
+
+  gtk = {
+    enable = true;
+    colorScheme = "dark";
+    font.name = "DepartureMono Nerd Font Mono";
+  };
+
+  xdg = {
+    enable = true;
+    autostart = {
+      enable = true;
+      readOnly = true;
+      entries = [
+        "${pkgs.firefox}/share/applications/firefox.desktop"
+        "${pkgs.vesktop}/share/applications/vesktop.desktop"
+      ];
+    };
+  };
   home.sessionVariables = {
     EDITOR = "nvim";
   };

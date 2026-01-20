@@ -1,6 +1,4 @@
 {
-  system,
-  inputs,
   pkgs,
   ...
 }:
@@ -16,12 +14,10 @@
     obsidian
 
     ## Apps
-    (inputs.nixpkgs-vesktop.legacyPackages.${system}.vesktop)
+    vesktop
     element-desktop
     tor-browser
-    burpsuite
     spotify
-    slack
 
     ## CLI
     speedtest-cli
@@ -32,7 +28,7 @@
     openssl
     psmisc # killall etc.
     unzip
-    delta
+    delta # git diff viewer
     tmux
     file
     sops
@@ -50,7 +46,7 @@
     bottom
     ncdu
     feh # Image Viewer
-    lf
+    lf # file browser
 
     ## Nix
     nixfmt-tree

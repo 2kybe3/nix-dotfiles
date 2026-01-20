@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-vesktop.url = "github:nixos/nixpkgs/pull/476347/head";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";

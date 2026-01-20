@@ -10,7 +10,6 @@
   ];
 
   i3.enable = true;
-  firefox.enable = true;
   hyprland.enable = false;
 
   networking.hostName = "knx";

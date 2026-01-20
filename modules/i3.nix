@@ -45,30 +45,34 @@
       jq
     ];
 
-    services.xserver = {
-      enable = true;
+    programs.dconf.enable = true;
 
-      desktopManager = {
-        xterm.enable = false;
+    services = {
+      xserver = {
+        enable = true;
+
+        desktopManager = {
+          xterm.enable = false;
+        };
+
+        windowManager.i3 = {
+          enable = true;
+          extraPackages = with pkgs; [
+            dmenu
+            i3status
+          ];
+        };
       };
 
-      windowManager.i3 = {
-        enable = true;
-        extraPackages = with pkgs; [
-          dmenu
-          i3status
-        ];
-      };
-    };
-
-    services.displayManager = {
-      defaultSession = "none+i3";
-      ly = {
-        enable = true;
-        settings = {
-          animation = "doom";
-          vi_mode = true;
-          save = true;
+      displayManager = {
+        defaultSession = "none+i3";
+        ly = {
+          enable = true;
+          settings = {
+            animation = "doom";
+            vi_mode = true;
+            save = true;
+          };
         };
       };
     };
