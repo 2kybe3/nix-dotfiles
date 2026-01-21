@@ -11,6 +11,9 @@
   home = {
     username = "kybe";
     homeDirectory = "/home/kybe";
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
 
   imports = lib.optional i3Enabled ./i3;
@@ -39,9 +42,6 @@
         "${pkgs.vesktop}/share/applications/vesktop.desktop"
       ];
     };
-  };
-  home.sessionVariables = {
-    EDITOR = "nvim";
   };
 
   ##### Services ######
