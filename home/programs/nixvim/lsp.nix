@@ -1,4 +1,4 @@
-{ lib }:
+{ lib, ... }:
 {
   lsp = {
     inlayHints.enable = true;
@@ -29,11 +29,11 @@
         mode = "n";
       }
       {
-        action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=-1, float=true }) end";
+        action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=1, float=true }) end";
         key = "<leader>dj";
       }
       {
-        action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=1, float=true }) end";
+        action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=-1, float=true }) end";
         key = "<leader>dk";
       }
       {
