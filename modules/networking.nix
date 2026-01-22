@@ -60,7 +60,7 @@
             "10.0.6.0/24"
           ];
           persistentKeepalive = 25;
-          endpoint = "kybe.xyz:51820";
+          endpoint = "ip.kybe.xyz:51820";
           publicKey = "Dumq+QBDIAmAzTC1lo+njEh5v1ZJ+epGfxCheGWOsxc=";
           presharedKeyFile = config.sops.secrets."wireguard/pk".path;
         }
