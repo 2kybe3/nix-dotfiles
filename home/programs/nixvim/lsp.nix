@@ -92,30 +92,6 @@
           )
           vim.keymap.set(
             "n",
-            "<leader>dc",
-            function()
-              vim.cmd.RustLsp({'renderDiagnostic', 'current'})
-            end,
-            { silent = true, buffer = bufnr }
-          )
-          vim.keymap.set(
-            "n",
-            "<leader>dn",
-            function()
-              vim.cmd.RustLsp({'renderDiagnostic', 'cycle'})
-            end,
-            { silent = true, buffer = bufnr }
-          )
-          vim.keymap.set(
-            "n",
-            "<leader>dp",
-            function()
-              vim.cmd.RustLsp({'renderDiagnostic', 'cycle_prev'})
-            end,
-            { silent = true, buffer = bufnr }
-          )
-          vim.keymap.set(
-            "n",
             "<leader>dr",
             function()
               vim.cmd.RustLsp({'relatedDiagnostics'})
