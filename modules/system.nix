@@ -105,7 +105,7 @@
 
     openssh = {
       enable = true;
-      ports = [ 22 ];
+      ports = [ 22 3000 ];
       settings = {
         PasswordAuthentication = true;
         AllowUsers = [ "kybe" ];

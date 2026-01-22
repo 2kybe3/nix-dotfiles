@@ -1,3 +1,4 @@
+{ lib }:
 {
   lsp = {
     inlayHints.enable = true;
@@ -28,6 +29,14 @@
         mode = "n";
       }
       {
+        action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=-1, float=true }) end";
+        key = "<leader>dj";
+      }
+      {
+        action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=1, float=true }) end";
+        key = "<leader>dk";
+      }
+      {
         action = "<CMD>LspStop<CR>";
         key = "<leader>lx";
         mode = "n";
@@ -42,15 +51,29 @@
         key = "<leader>lr";
         mode = "n";
       }
+      {
+        action = lib.nixvim.mkRaw "require('telescope.builtin').lsp_definitions";
+        key = "gd";
+      }
+      {
+        action = "<CMD>Lspsaga hover_doc<Enter>";
+        key = "K";
+      }
     ];
   };
   plugins = {
     lsp = {
       enable = true;
       servers = {
+        nixd.enable = true;
+        sqls.enable = true;
         html.enable = true;
+        stylua.enable = true;
         nil_ls.enable = true;
+        yamlls.enable = true;
         bash_ls.enable = true;
+        superhtml.enable = true;
+        systemd_lsp.enable = true;
         docker_language_service.enable = true;
         docker_compose_language_service.enable = true;
       };
