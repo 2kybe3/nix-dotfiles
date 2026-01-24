@@ -48,16 +48,14 @@
     secrets.kybe-imap = {
       owner = "kybe";
     };
-  };
 
-  ##### Users #####
-  sops = {
     secrets.root-pass = { };
     secrets.root-pass.neededForUsers = true;
     secrets.kybe-pass = { };
     secrets.kybe-pass.neededForUsers = true;
   };
 
+  ##### Users #####
   users = {
     mutableUsers = false;
     users.root = {

@@ -37,6 +37,7 @@
     git
     bat
     fd
+    gh
 
     ## TUI
     himalaya # E-Mail client
