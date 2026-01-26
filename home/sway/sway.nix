@@ -6,9 +6,10 @@
 }:
 
 {
-  xsession.windowManager.i3 = {
+
+  wayland.windowManager.sway = {
     enable = true;
-    package = pkgs.i3;
+    wrapperFeatures.gtk = true;
     config = {
       bars = [
         {
@@ -66,14 +67,14 @@
       };
       modifier = "Mod4";
       terminal = "kitty";
-      menu = "${pkgs.dmenu}/bin/dmenu_run";
+      menu = "${pkgs.bemenu}/bin/bemenu-run";
       gaps = {
         inner = 0;
         outer = 0;
       };
       keybindings =
         let
-          modifier = config.xsession.windowManager.i3.config.modifier;
+          modifier = config.wayland.windowManager.sway.config.modifier;
         in
         lib.mkOptionDefault {
           "${modifier}+h" = "focus left";
@@ -98,18 +99,14 @@
           "Return" = "mode default";
         };
       };
-
-      startup = [
-        { command = "feh --bg-scale .config/wp.png"; }
-      ];
     };
     extraConfig =
       let
-        modifier = config.xsession.windowManager.i3.config.modifier;
+        modifier = config.wayland.windowManager.sway.config.modifier;
       in
       ''
-        bindsym ${modifier}+o exec maim --select | xclip -selection clipboard -t image/png
-        bindsym ${modifier}+Shift+o exec ~/.config/kybe-scripts/i3/ss.bash
+        bindsym ${modifier}+o exec grim -g "$(slurp)" - | wl-copy
+        bindsym ${modifier}+Shift+o exec ~/.config/kybe-scripts/sway/ss.bash
       '';
   };
 }

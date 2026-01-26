@@ -6,11 +6,16 @@
 }:
 {
   options = {
-    i3.enable = lib.mkEnableOption "enables i3";
+    sway.enable = lib.mkEnableOption "enables sway";
   };
 
-  config = lib.mkIf config.i3.enable {
-    environment.pathsToLink = [ "/libexec" ];
+  config = lib.mkIf config.sway.enable {
+    security.polkit.enable = true;
+
+    xdg.portal = {
+      enable = true;
+      wlr.enable = true;
+    };
 
     fonts.packages = with pkgs; [
       font-awesome_6
@@ -35,46 +40,21 @@
         export OPENWEATHERMAP_ZIP="$(cat /run/secrets/openweathermap/zip)"
         exec ${pkgs.i3status-rust}/bin/i3status-rs "$@"
       '')
+      wl-clipboard-rs
       i3status-rust
-      brightnessctl
+      bemenu
       kitty
       dunst
-      xclip
-      maim
-      feh
+      grim
+      slurp
       jq
     ];
 
     programs.dconf.enable = true;
 
-    services = {
-      xserver = {
-        enable = true;
-
-        desktopManager = {
-          xterm.enable = false;
-        };
-
-        windowManager.i3 = {
-          enable = true;
-          extraPackages = with pkgs; [
-            dmenu
-            i3status
-          ];
-        };
-      };
-
-      displayManager = {
-        defaultSession = "none+i3";
-        ly = {
-          enable = true;
-          settings = {
-            animation = "doom";
-            vi_mode = true;
-            save = true;
-          };
-        };
-      };
+    programs.sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
     };
   };
 }

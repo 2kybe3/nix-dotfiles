@@ -9,7 +9,7 @@
     inputs.sops-nix.nixosModules.sops
   ];
 
-  i3.enable = true;
+  sway.enable = true;
   hyprland.enable = false;
 
   networking.hostName = "knx";
@@ -22,7 +22,7 @@
     ];
     extraSpecialArgs = {
       hyprlandEnabled = config.hyprland.enable or false;
-      i3Enabled = config.i3.enable or false;
+      swayEnabled = config.sway.enable or false;
     };
     users.kybe = import ../../home/home.nix;
   };

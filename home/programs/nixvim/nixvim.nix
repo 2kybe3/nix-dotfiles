@@ -16,8 +16,7 @@
   ## Clipboard ##
   clipboard = {
     register = "unnamedplus";
-    clipboard.providers.wl-copy.enable = config.hyprland.enable;
-    clipboard.providers.xclip.enable = config.i3.enable;
+    clipboard.providers.wl-copy.enable = true;
   };
 
   ## Plugins

@@ -26,18 +26,6 @@
     helpLine = lib.mkForce "";
   };
 
-  ##### Kwallet #####
-  programs.kdeconnect.enable = true;
-  security.pam.services.login.kwallet = {
-    enable = true;
-    package = pkgs.kdePackages.kwallet-pam;
-  };
-  environment.systemPackages = with pkgs; [
-    kdePackages.kwallet
-    kdePackages.kwallet-pam
-    kdePackages.kwalletmanager
-  ];
-
   #### Sops #####
   sops = {
     defaultSopsFile = ../secrets/secrets.yaml;
@@ -95,6 +83,8 @@
     dbus.enable = true;
     printing.enable = true;
     mullvad-vpn.enable = true;
+
+    gnome.gnome-keyring.enable = true;
 
     tor = {
       enable = true;

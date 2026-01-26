@@ -6,8 +6,8 @@
     ./programs.nix
     ./firefox.nix
     ./system.nix
+    ./sway.nix
     ./zsh.nix
     ./obs.nix
-    ./i3.nix
   ];
 }

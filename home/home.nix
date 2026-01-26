@@ -3,7 +3,7 @@
   pkgs,
   config,
   hyprlandEnabled,
-  i3Enabled,
+  swayEnabled,
   ...
 }:
 
@@ -16,7 +16,7 @@
     };
   };
 
-  imports = lib.optional i3Enabled ./i3;
+  imports = lib.optional swayEnabled ./sway;
 
   fonts.fontconfig = {
     enable = true;
@@ -60,7 +60,7 @@
       ".config/tofi/config".source = ./config/tofi/config; # Tofi (app selector)
     })
 
-    (lib.mkIf (hyprlandEnabled || i3Enabled) {
+    (lib.mkIf (hyprlandEnabled || swayEnabled) {
       ".config/dunst/dunstrc".source = ./config/dunst/dunstrc; # Dunstrc config (notification daemon)
 
       ##### Wallpaper #####

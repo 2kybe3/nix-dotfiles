@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-maim --select | curl \
+grim -g "$(slurp)" - | curl \
   -H "authorization: $(cat /run/secrets/image-token)" \
   https://i.kybe.xyz/api/upload \
   -F "file=@-;type=image/png" \
-  -H "content-type: multipart/form-data" \
-| jq -r .files[0].url \
-| xclip -selection clipboard
+| jq -r '.files[0].url' \
+| wl-copy
