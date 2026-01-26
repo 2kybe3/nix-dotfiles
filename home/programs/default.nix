@@ -1,6 +1,7 @@
 { pkgs, config }:
 {
   home-manager.enable = true;
+
   nixvim.imports = [ ./nixvim ];
 
   fd = import ./fd.nix;

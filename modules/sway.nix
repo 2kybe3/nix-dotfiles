@@ -22,18 +22,6 @@
       font-awesome_6
     ];
 
-    sops.secrets.image-token = {
-      owner = "kybe";
-    };
-    sops.secrets.github-notifications = {
-      owner = "kybe";
-    };
-    sops.secrets."openweathermap/key" = {
-      owner = "kybe";
-    };
-    sops.secrets."openweathermap/zip" = {
-      owner = "kybe";
-    };
     environment.systemPackages = with pkgs; [
       (pkgs.writeShellScriptBin "i3status-rs-wrapper" ''
         export I3RS_GITHUB_TOKEN="$(cat /run/secrets/github-notifications)"

@@ -8,6 +8,8 @@
 {
   time.timeZone = "Europe/Berlin";
 
+  sops = import ./sops.nix;
+
   hardware.bluetooth.enable = true;
   fonts.packages = with pkgs; [
     nerd-fonts.departure-mono
@@ -17,23 +19,6 @@
   virtualisation.docker = {
     enable = true;
     storageDriver = "btrfs";
-  };
-
-  #### Sops #####
-  sops = {
-    defaultSopsFile = ../secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
-
-    age.keyFile = "/nix/persist/var/lib/sops-nix/key.txt";
-
-    secrets.kybe-imap = {
-      owner = "kybe";
-    };
-
-    secrets.root-pass = { };
-    secrets.root-pass.neededForUsers = true;
-    secrets.kybe-pass = { };
-    secrets.kybe-pass.neededForUsers = true;
   };
 
   ##### Users #####

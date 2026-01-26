@@ -17,6 +17,9 @@
 
   imports = lib.optional swayEnabled ./sway;
 
+  services = import ./services;
+  programs = import ./programs/default.nix { inherit pkgs config; };
+
   fonts.fontconfig = {
     enable = true;
     antialiasing = true;
@@ -31,23 +34,7 @@
     font.name = "DepartureMono Nerd Font Mono";
   };
 
-  xdg = {
-    enable = true;
-    autostart = {
-      enable = true;
-      readOnly = true;
-      entries = [
-        "${pkgs.firefox}/share/applications/firefox.desktop"
-        "${pkgs.vesktop}/share/applications/vesktop.desktop"
-      ];
-    };
-  };
-
-  ##### Services ######
-  services.ssh-agent.enable = true;
-
-  ##### Programs ######
-  programs = import ./programs/default.nix { inherit pkgs config; };
+  xdg.enable = true;
 
   home.file = lib.mkMerge [
     (lib.mkIf swayEnabled {

@@ -27,12 +27,6 @@
     };
   };
 
-  ##### Wireguard #####
-  sops.secrets = {
-    "wireguard/key" = { };
-    "wireguard/pk" = { };
-  };
-
   networking.wg-quick.interfaces = {
     "kybe.xyz" = {
       address = [
