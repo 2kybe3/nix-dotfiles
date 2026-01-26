@@ -17,6 +17,7 @@
       wlr.enable = true;
     };
 
+    # for i3status-rs
     fonts.packages = with pkgs; [
       font-awesome_6
     ];

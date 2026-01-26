@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  hyprlandEnabled,
   swayEnabled,
   ...
 }:
@@ -51,16 +50,7 @@
   programs = import ./programs/default.nix { inherit pkgs config; };
 
   home.file = lib.mkMerge [
-    (lib.mkIf hyprlandEnabled {
-      ##### Hyprland #####
-      ".icons/theme_NotwaitaBlack".source = ./config/hypr/theme-notwaita-black; # Hyprcursor Theme
-      ".config/hypr/hyprland.conf".source = ./config/hypr/hyprland.conf; # Hyprland
-      ".config/hypr/hyprpaper.conf".source = ./config/hypr/hyprpaper.conf; # Hyprpaper
-      ".config/ashell/config.toml".source = ./config/ashell/ashell.toml; # Ashell (bar)
-      ".config/tofi/config".source = ./config/tofi/config; # Tofi (app selector)
-    })
-
-    (lib.mkIf (hyprlandEnabled || swayEnabled) {
+    (lib.mkIf swayEnabled {
       ".config/dunst/dunstrc".source = ./config/dunst/dunstrc; # Dunstrc config (notification daemon)
 
       ##### Wallpaper #####

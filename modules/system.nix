@@ -19,13 +19,6 @@
     storageDriver = "btrfs";
   };
 
-  ##### TTY #####
-  services.getty = {
-    autologinOnce = true;
-    autologinUser = "kybe";
-    helpLine = lib.mkForce "";
-  };
-
   #### Sops #####
   sops = {
     defaultSopsFile = ../secrets/secrets.yaml;
@@ -45,6 +38,7 @@
 
   ##### Users #####
   users = {
+    defaultUserShell = pkgs.zsh;
     mutableUsers = false;
     users.root = {
       hashedPasswordFile = config.sops.secrets.root-pass.path;
@@ -79,44 +73,5 @@
   };
 
   ##### Services #####
-  services = {
-    dbus.enable = true;
-    printing.enable = true;
-    mullvad-vpn.enable = true;
-
-    gnome.gnome-keyring.enable = true;
-
-    tor = {
-      enable = true;
-
-      client = {
-        enable = true;
-        dns.enable = true;
-        socksListenAddress = {
-          IsolateDestAddr = true;
-          addr = "127.0.0.1";
-          port = 9050;
-        };
-      };
-    };
-
-    pipewire = {
-      enable = true;
-      pulse.enable = true;
-    };
-
-    openssh = {
-      enable = true;
-      ports = [
-        22
-      ];
-      settings = {
-        PasswordAuthentication = true;
-        AllowUsers = [ "kybe" ];
-        UseDns = true;
-        X11Forwarding = false;
-        PermitRootLogin = "no";
-      };
-    };
-  };
+  services = import ./services.nix { inherit lib; };
 }
