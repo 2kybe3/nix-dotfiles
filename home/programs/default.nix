@@ -8,5 +8,6 @@
   git = import ./git.nix;
   tmux = import ./tmux.nix;
   btop = import ./btop.nix;
+  ranger = import ./ranger.nix;
   zsh = import ./zsh.nix { inherit pkgs config; };
 }

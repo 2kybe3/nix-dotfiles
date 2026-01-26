@@ -43,9 +43,9 @@ with pkgs;
     cudaSupport = true;
   })
   bottom
+  ranger
   ncdu
   feh # Image Viewer
-  lf # file browser
 
   ## Nix
   nixfmt-tree
