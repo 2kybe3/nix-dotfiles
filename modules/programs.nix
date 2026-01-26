@@ -18,6 +18,7 @@
     element-desktop
     tor-browser
     spotify
+    gimp
 
     ## CLI
     speedtest-cli
