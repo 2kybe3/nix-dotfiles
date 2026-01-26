@@ -9,8 +9,6 @@
         find_left = "sF"; # Find surrounding (to the left)
         highlight = "sh"; # Highlight surrounding
         replace = "sr"; # Replace surrounding
-        suffix_last = "l"; # Suffix to search with "prev" method
-        suffix_next = "n"; # Suffix to search with "next" method
       };
     };
   };

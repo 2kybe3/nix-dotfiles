@@ -5,8 +5,7 @@
       highlight.enable = true;
       nixvimInjections = true;
     };
-    treesitter-context = {
-      enable = true;
-    };
+    treesitter-textobjects.enable = true;
+    treesitter-context.enable = true;
   };
 }
