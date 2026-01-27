@@ -6,10 +6,19 @@
       dns = "systemd-resolved";
       wifi.macAddress = "7A:3F:C2:91:4D:21";
     };
-    firewall.allowedTCPPorts = [
-      22
-      3000
-    ];
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        22
+        22000 # syncthing
+        3000
+        8383 # syncthing gui
+      ];
+      allowedUDPPorts = [
+        22000 # syncthing
+        21027 # syncthing
+      ];
+    };
   };
 
   services.resolved = {

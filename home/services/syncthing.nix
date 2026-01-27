@@ -1,6 +1,6 @@
 {
   enable = true;
-  guiAddress = "127.0.0.1:8383";
+  guiAddress = "0.0.0.0:8383";
   passwordFile = "/run/secrets/syncthing"; # sops
   overrideDevices = true;
   settings = {
