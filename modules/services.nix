@@ -9,13 +9,16 @@
     autologinUser = "kybe";
     helpLine = lib.mkForce "";
   };
-  tor.client = {
+  tor = {
     enable = true;
-    dns.enable = true;
-    socksListenAddress = {
-      IsolateDestAddr = true;
-      addr = "127.0.0.1";
-      port = 9050;
+    client = {
+      enable = true;
+      dns.enable = true;
+      socksListenAddress = {
+        IsolateDestAddr = true;
+        addr = "127.0.0.1";
+        port = 9050;
+      };
     };
   };
   pipewire = {
