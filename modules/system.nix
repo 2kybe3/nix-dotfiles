@@ -12,6 +12,11 @@
   services = import ./services.nix { inherit lib; };
   users = import ./users.nix { inherit pkgs config; };
 
+  nix.gc = {
+    automatic = true;
+    dates = "20:00";
+  };
+
   hardware.bluetooth.enable = true;
   fonts.packages = with pkgs; [
     nerd-fonts.departure-mono
