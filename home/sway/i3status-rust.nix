@@ -13,12 +13,12 @@
             info_type = "available";
           }
           {
-            block = "disk_iostats";
-            device = "sdc";
+            block = "memory";
             interval = 1;
           }
           {
-            block = "memory";
+            block = "disk_iostats";
+            device = "sdc";
             interval = 1;
           }
           {
@@ -26,21 +26,8 @@
             interval = 1;
           }
           {
-            block = "vpn";
-            driver = "mullvad";
-            interval = 1;
-          }
-          {
-            block = "docker";
-            interval = 1;
-          }
-          {
             block = "github";
             hide_if_total_is_zero = true;
-          }
-          {
-            block = "external_ip";
-            format = " $ip $timezone $country_flag $asn ";
           }
           {
             block = "sound";
@@ -57,11 +44,8 @@
           }
           {
             block = "time";
-            format = " $timestamp.datetime(f:'%a %d/%m %R') ";
+            format = " $timestamp.datetime(f:'%R %a %d') ";
             interval = 1;
-          }
-          {
-            block = "scratchpad";
           }
         ];
         icons = "awesome6";

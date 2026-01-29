@@ -6,7 +6,6 @@
 }:
 
 {
-
   wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
@@ -28,28 +27,8 @@
             background = "#000000";
             statusline = "#ffffff";
             separator = "#666666";
-            focusedWorkspace = {
-              border = "#1c1c1c";
-              background = "#1c1c1c";
-              text = "#ffffff";
-            };
-            activeWorkspace = {
-              border = "#333333";
-              background = "#5f676a";
-              text = "#ffffff";
-            };
-            inactiveWorkspace = {
-              border = "#333333";
-              background = "#222222";
-              text = "#888888";
-            };
-            urgentWorkspace = {
-              border = "#2f343a";
-              background = "#900000";
-              text = "#ffffff";
-            };
             bindingMode = {
-              border = "#2f343a";
+              border = "#000000";
               background = "#900000";
               text = "#ffffff";
             };
@@ -107,6 +86,7 @@
       ''
         bindsym ${modifier}+o exec grim -g "$(slurp)" - | wl-copy
         bindsym ${modifier}+Shift+o exec ~/.config/kybe-scripts/sway/ss.bash
+        default_border none
       '';
   };
 }
