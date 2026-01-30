@@ -10,14 +10,19 @@
   home = {
     username = "kybe";
     homeDirectory = "/home/kybe";
+
     sessionVariables = {
       EDITOR = "nvim";
     };
+
+    stateVersion = "25.11";
   };
 
-  imports = lib.optional swayEnabled ./sway;
+  imports = lib.flatten [
+    (lib.optional swayEnabled ./sway)
+    ./services
+  ];
 
-  services = import ./services;
   programs = import ./programs/default.nix { inherit pkgs config; };
 
   fonts.fontconfig = {
@@ -56,5 +61,4 @@
     }
   ];
 
-  home.stateVersion = "25.11";
 }

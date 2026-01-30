@@ -1,4 +1,8 @@
 {
-  ssh-agent.enable = true;
-  syncthing = import ./syncthing.nix;
+  imports = [
+    ./syncthing.nix
+  ];
+  services = {
+    ssh-agent.enable = true;
+  };
 }
