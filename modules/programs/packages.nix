@@ -20,7 +20,7 @@ with pkgs;
   ## CLI
   speedtest-cli
   ripgrep-all
-  fastfetch
+  neofetch
   pamixer # pulseaudio command line mixer
   ripgrep
   openssl
