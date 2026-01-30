@@ -1,9 +1,11 @@
 {
-  enable = true;
-  autosuggestions.enable = true;
-  syntaxHighlighting.enable = true;
-  ohMyZsh = {
+  programs.zsh = {
     enable = true;
-    theme = "clean";
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+    ohMyZsh = {
+      enable = true;
+      theme = "clean";
+    };
   };
 }

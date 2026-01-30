@@ -9,14 +9,16 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [
-        22
+        22 # SSH
         22000 # syncthing
-        3000
-        8383 # syncthing gui
+        3000 # DEV
       ];
       allowedUDPPorts = [
         22000 # syncthing
         21027 # syncthing
+      ];
+      interfaces."kybe.xyz".allowedTCPPorts = [
+        8383
       ];
     };
   };
