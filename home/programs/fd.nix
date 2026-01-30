@@ -1,4 +1,6 @@
 {
-  enable = true;
-  hidden = true;
+  programs.fd = {
+    enable = true;
+    hidden = true;
+  };
 }

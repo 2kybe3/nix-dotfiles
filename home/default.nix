@@ -1,7 +1,5 @@
 {
   lib,
-  pkgs,
-  config,
   swayEnabled,
   ...
 }:
@@ -21,9 +19,8 @@
   imports = lib.flatten [
     (lib.optional swayEnabled ./sway)
     ./services
+    ./programs
   ];
-
-  programs = import ./programs/default.nix { inherit pkgs config; };
 
   fonts.fontconfig = {
     enable = true;
@@ -43,9 +40,8 @@
 
   home.file = lib.mkMerge [
     (lib.mkIf swayEnabled {
-      ".config/dunst/dunstrc".source = ./config/dunst/dunstrc; # Dunstrc config (notification daemon)
+      ".config/dunst/dunstrc".source = ./config/dunst/dunstrc;
 
-      ##### Wallpaper #####
       ".config/wp.png".source = ./config/wp.png;
     })
 
@@ -53,10 +49,8 @@
       ".tmux.conf".source = ./config/tmux/tmux.conf;
       ".config/kybe-scripts".source = ./config/scripts;
 
-      ##### Himalaya #####
       ".config/himalaya/config.toml".source = ./config/himalaya/config.toml;
 
-      ##### SSH #####
       ".ssh/config".source = ./config/ssh/config;
     }
   ];
