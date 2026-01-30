@@ -25,7 +25,6 @@
       set -g mouse on
 
       # Neovim stuff
-      set -g focus-events on
       set -g status-style bg=default
       set -g status-left-length 99
       set -g status-right-length 99
