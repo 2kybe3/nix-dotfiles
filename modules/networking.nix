@@ -20,6 +20,12 @@
         3000 # DEV
       ];
     };
+    hosts = {
+      "127.0.0.1" = [
+        "*.knx.kybe.xyz"
+        "knx.kybe.xyz"
+      ];
+    };
   };
 
   services.resolved = {
