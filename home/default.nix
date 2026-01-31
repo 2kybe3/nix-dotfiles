@@ -42,8 +42,6 @@
 
   home.file = lib.mkMerge [
     (lib.mkIf swayEnabled {
-      ".config/dunst/dunstrc".source = ./config/dunst/dunstrc;
-
       ".config/wp.png".source = ./config/wp2.png;
 
       ".config/kitty/kitty.conf".source = ./config/kitty/kitty.conf;
