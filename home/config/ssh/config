@@ -1,4 +1,0 @@
-Host kybe.xyz
-  User root
-  IdentityFile ~/.ssh/kybe
-  IdentitiesOnly yes

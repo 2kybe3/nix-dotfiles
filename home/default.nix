@@ -40,19 +40,8 @@
 
   xdg.enable = true;
 
-  home.file = lib.mkMerge [
-    (lib.mkIf swayEnabled {
-      ".config/wp.png".source = ./config/wp2.png;
-
-      ".config/kitty/kitty.conf".source = ./config/kitty/kitty.conf;
-    })
-
-    {
-      ".tmux.conf".source = ./config/tmux/tmux.conf;
-      ".config/kybe-scripts".source = ./config/scripts;
-
-      ".ssh/config".source = ./config/ssh/config;
-    }
-  ];
-
+  home.file = {
+    ".config/wp.png".source = ./config/wp2.png;
+    ".config/kybe-scripts".source = ./config/scripts;
+  };
 }

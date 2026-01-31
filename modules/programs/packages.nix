@@ -27,7 +27,6 @@ with pkgs;
   psmisc # killall etc.
   unzip
   delta
-  tmux
   file
   sops
   fzf

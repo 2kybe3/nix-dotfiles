@@ -4,8 +4,10 @@
     ./fd.nix
     ./zsh.nix
     ./git.nix
+    ./ssh.nix
     ./tmux.nix
     ./btop.nix
+    ./kitty.nix
     ./ranger.nix
   ];
   programs = {
