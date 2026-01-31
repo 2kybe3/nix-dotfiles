@@ -75,6 +75,7 @@
         { command = "kitty"; }
         { command = "vesktop"; }
         { command = "firefox"; }
+        { command = "swaybg -i /home/kybe/.config/wp.png"; }
       ];
 
       window = {
@@ -152,6 +153,13 @@
       ''
         bindsym ${modifier}+o exec grim -g "$(slurp)" - | wl-copy
         bindsym ${modifier}+Shift+o exec ~/.config/kybe-scripts/sway/ss.bash
+
+        blur enable
+        blur_xray disable
+        blur_passes 5
+        blur_radius 5
+
+        shadows enable
 
         default_dim_inactive 0.2
       '';
