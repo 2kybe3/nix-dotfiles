@@ -17,9 +17,6 @@
         22000 # syncthing
         21027 # syncthing
       ];
-      interfaces."kybe.xyz".allowedTCPPorts = [
-        8383
-      ];
     };
   };
 
