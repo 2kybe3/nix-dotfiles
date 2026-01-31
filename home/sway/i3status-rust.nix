@@ -1,11 +1,23 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
+  sops.secrets = {
+    github-notifications = {
+      sopsFile = ../../secrets/i3status.yaml;
+    };
+    "openweathermap/key" = {
+      sopsFile = ../../secrets/i3status.yaml;
+    };
+    "openweathermap/zip" = {
+      sopsFile = ../../secrets/i3status.yaml;
+    };
+  };
+
   home.packages = with pkgs; [
     i3status-rust
     (pkgs.writeShellScriptBin "i3status-rs-wrapper" ''
-      export I3RS_GITHUB_TOKEN="$(cat /run/secrets/github-notifications)"
-      export OPENWEATHERMAP_API_KEY="$(cat /run/secrets/openweathermap/key)"
-      export OPENWEATHERMAP_ZIP="$(cat /run/secrets/openweathermap/zip)"
+      export I3RS_GITHUB_TOKEN="$(cat ${config.sops.secrets.github-notifications.path})"
+      export OPENWEATHERMAP_API_KEY="$(cat ${config.sops.secrets."openweathermap/key".path})"
+      export OPENWEATHERMAP_ZIP="$(cat ${config.sops.secrets."openweathermap/zip".path})"
       exec ${pkgs.i3status-rust}/bin/i3status-rs "$@"
     '')
   ];

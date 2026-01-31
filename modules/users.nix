@@ -7,6 +7,16 @@
 {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
 
+  sops.secrets = {
+    root-pass = {
+      sopsFile = ../secrets/users.yaml;
+      neededForUsers = true;
+    };
+    kybe-pass = {
+      sopsFile = ../secrets/users.yaml;
+      neededForUsers = true;
+    };
+  };
   users = {
     mutableUsers = false;
     defaultUserShell = pkgs.zsh;
@@ -35,6 +45,7 @@
     useUserPackages = true;
     sharedModules = [
       inputs.nixvim.homeModules.nixvim
+      inputs.sops-nix.homeManagerModules.sops
     ];
     extraSpecialArgs = {
       swayEnabled = config.sway.enable or false;

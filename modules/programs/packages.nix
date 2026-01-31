@@ -38,7 +38,6 @@ with pkgs;
   gh
 
   ## TUI
-  himalaya
   (btop.override {
     cudaSupport = true;
   })

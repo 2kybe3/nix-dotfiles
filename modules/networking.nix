@@ -37,6 +37,17 @@
     };
   };
 
+  sops.secrets = {
+    "wg-key" = {
+      sopsFile = ../secrets/wireguard.yaml;
+      key = "key";
+    };
+    "wg-pk" = {
+      sopsFile = ../secrets/wireguard.yaml;
+      key = "pk";
+    };
+  };
+
   networking.wg-quick.interfaces = {
     "kybe.xyz" = {
       address = [
@@ -67,10 +78,10 @@
           persistentKeepalive = 25;
           endpoint = "ip.kybe.xyz:51820";
           publicKey = "Dumq+QBDIAmAzTC1lo+njEh5v1ZJ+epGfxCheGWOsxc=";
-          presharedKeyFile = config.sops.secrets."wireguard/pk".path;
+          presharedKeyFile = config.sops.secrets."wg-pk".path;
         }
       ];
-      privateKeyFile = config.sops.secrets."wireguard/key".path;
+      privateKeyFile = config.sops.secrets."wg-key".path;
     };
   };
 }

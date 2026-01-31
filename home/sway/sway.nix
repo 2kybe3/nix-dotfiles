@@ -5,6 +5,13 @@
 }:
 
 {
+  sops.secrets = {
+    image-token = {
+      sopsFile = ../../secrets/i3status.yaml;
+      path = "/home/kybe/.config/image-token";
+    };
+  };
+
   home.packages = with pkgs; [
     kitty
     swaybg
@@ -103,7 +110,6 @@
 
           "${modifier}+Shift+space" = "floating toggle";
           "${modifier}+space" = "focus mode_toggle";
-
           "${modifier}+1" = "workspace number 1";
           "${modifier}+2" = "workspace number 2";
           "${modifier}+3" = "workspace number 3";

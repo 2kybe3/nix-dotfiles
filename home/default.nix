@@ -18,8 +18,10 @@
 
   imports = lib.flatten [
     (lib.optional swayEnabled ./sway)
+    ./accounts.nix
     ./services
     ./programs
+    ./sops.nix
   ];
 
   fonts.fontconfig = {
@@ -50,8 +52,6 @@
     {
       ".tmux.conf".source = ./config/tmux/tmux.conf;
       ".config/kybe-scripts".source = ./config/scripts;
-
-      ".config/himalaya/config.toml".source = ./config/himalaya/config.toml;
 
       ".ssh/config".source = ./config/ssh/config;
     }
