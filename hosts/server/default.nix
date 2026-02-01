@@ -1,10 +1,14 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ./proxmox.nix
 
     ../../modules/nix.nix
     ../../modules/programs/zsh.nix
+    ../../modules/sops.nix
+    ../../modules/syncthing.nix
+
+    inputs.sops-nix.nixosModules.sops
   ];
 
   services.openssh = {
