@@ -22,6 +22,10 @@
     };
   };
 
+  networking = {
+    hostId = "c0b62a";
+  };
+
   users.users.root = {
     shell = pkgs.zsh;
   };
