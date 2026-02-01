@@ -8,10 +8,6 @@
     ../../modules/programs/zsh.nix
   ];
 
-  boot = {
-    loader.systemd-boot.enable = true;
-  };
-
   services.openssh = {
     enable = true;
     openFirewall = true;
