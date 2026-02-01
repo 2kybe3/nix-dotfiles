@@ -8,13 +8,14 @@
     ./proxmox.nix
 
     ../../modules/lib
+    ../../modules/arr.nix
     ../../modules/nix.nix
     ../../modules/sops.nix
     ../../modules/caddy.nix
+    ../../modules/networking
     ../../modules/torrents.nix
     ../../modules/syncthing.nix
     ../../modules/programs/zsh.nix
-    ../../modules/networking
 
     inputs.sops-nix.nixosModules.sops
   ];

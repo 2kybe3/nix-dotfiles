@@ -7,6 +7,7 @@
     ../../modules/torrents.nix
 
     ../../modules/lib
+    ../../modules/arr.nix
     ../../modules/nix.nix
     ../../modules/sops.nix
     ../../modules/sway.nix
@@ -14,13 +15,13 @@
     ../../modules/programs
     ../../modules/caddy.nix
     ../../modules/users.nix
+    ../../modules/networking
     ../../modules/system.nix
     ../../modules/services.nix
     ../../modules/syncthing.nix
-    ../../modules/networking
-    ../../modules/networking/networkmanager.nix
-    ../../modules/networking/kybe-vpn.nix
     ../../modules/virtualisation.nix
+    ../../modules/networking/kybe-vpn.nix
+    ../../modules/networking/networkmanager.nix
 
     inputs.sops-nix.nixosModules.sops
   ];
