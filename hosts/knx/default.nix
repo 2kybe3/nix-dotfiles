@@ -15,7 +15,9 @@
     ../../modules/system.nix
     ../../modules/services.nix
     ../../modules/syncthing.nix
-    ../../modules/networking.nix
+    ../../modules/networking
+    ../../modules/networking/networkmanager.nix
+    ../../modules/networking/kybe-vpn.nix
     ../../modules/virtualisation.nix
 
     inputs.sops-nix.nixosModules.sops

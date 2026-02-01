@@ -9,9 +9,11 @@
 
     ../../modules/lib
     ../../modules/nix.nix
-    ../../modules/programs/zsh.nix
     ../../modules/sops.nix
+    ../../modules/caddy.nix
     ../../modules/syncthing.nix
+    ../../modules/programs/zsh.nix
+    ../../modules/networking
 
     inputs.sops-nix.nixosModules.sops
   ];

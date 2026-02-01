@@ -36,7 +36,7 @@ in
   users.groups.acme.members = [
     "caddy"
   ];
-  networking.firewall.interfaces."kybe.xyz".allowedTCPPorts = [
+  networking.firewall.allowedTCPPorts = [
     80
     443
   ];
