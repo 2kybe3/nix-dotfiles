@@ -4,18 +4,18 @@
     ./hardware-configuration.nix
     ./nvidia.nix
 
-    ../../lib
-    ../../programs
-    ../../boot.nix
-    ../../caddy.nix
-    ../../networking.nix
-    ../../nix.nix
-    ../../services.nix
-    ../../sops.nix
-    ../../sway.nix
-    ../../system.nix
-    ../../users.nix
-    ../../virtualisation.nix
+    ../../modules/lib
+    ../../modules/programs
+    ../../modules/boot.nix
+    ../../modules/caddy.nix
+    ../../modules/networking.nix
+    ../../modules/nix.nix
+    ../../modules/services.nix
+    ../../modules/sops.nix
+    ../../modules/sway.nix
+    ../../modules/system.nix
+    ../../modules/users.nix
+    ../../modules/virtualisation.nix
 
     inputs.sops-nix.nixosModules.sops
   ];
