@@ -3,7 +3,7 @@
   imports = [
     ./proxmox.nix
 
-    ../../modules/lib.nix
+    ../../modules/lib
     ../../modules/nix.nix
     ../../modules/programs/zsh.nix
     ../../modules/sops.nix
