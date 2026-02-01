@@ -23,8 +23,6 @@
   outputs =
     {
       nixpkgs,
-      home-manager,
-      nixvim,
       ...
     }@inputs:
     let
@@ -39,6 +37,17 @@
     in
     {
       nixosConfigurations = {
+        server = nixpkgs.lib.nixosSystem {
+          inherit system pkgs;
+
+          specialArgs = {
+            inherit inputs system;
+          };
+
+          modules = [
+            ./hosts/server
+          ];
+        };
         knx = nixpkgs.lib.nixosSystem {
           inherit system pkgs;
 
