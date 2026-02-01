@@ -1,9 +1,8 @@
 { config, ... }:
 let
   domain = config.kybe.lib.caddy.domain;
-  certloc = config.kybe.lib.caddy.certloc;
   createCaddyProxy = config.kybe.lib.caddy.createCaddyProxy;
-  createRawCaddyProxy = config.kybe.lib.caddy.createCaddyProxy;
+  createRawCaddyProxy = config.kybe.lib.caddy.createRawCaddyProxy;
 in
 {
   sops.secrets.acme = {

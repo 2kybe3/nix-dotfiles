@@ -25,6 +25,7 @@ with pkgs;
   openssl
   psmisc # killall etc.
   unzip
+  # unrar
   delta
   file
   sops
