@@ -46,7 +46,7 @@ in
     };
     
     caddy.virtualHosts = {
-      "jellyfin.${domain}" = createCaddyProxy 5055;
+      "jellyfin.${domain}" = createCaddyProxy 8096;
 
       "sonarr.${domain}" = createCaddyProxy 8989;
       "radarr.${domain}" = createCaddyProxy 7878;
