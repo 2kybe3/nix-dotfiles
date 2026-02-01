@@ -23,7 +23,7 @@
   };
 
   networking = {
-    hostId = "c0b62a";
+    hostId = "e775ce5";
   };
 
   users.users.root = {
