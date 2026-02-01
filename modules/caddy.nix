@@ -1,7 +1,9 @@
 { config, ... }:
 let
-  domain = "knx.kybe.xyz";
-  certloc = "/var/lib/acme/knx.kybe.xyz";
+  domain = config.kybe.lib.caddy.domain;
+  certloc = config.kybe.lib.caddy.certloc;
+  createCaddyProxy = config.kybe.lib.caddy.createCaddyProxy;
+  createRawCaddyProxy = config.kybe.lib.caddy.createCaddyProxy;
 in
 {
   sops.secrets.acme = {
@@ -29,18 +31,8 @@ in
     enable = true;
 
     virtualHosts = {
-      "${domain}".extraConfig = ''
-        encode
-        tls ${certloc}/cert.pem ${certloc}/key.pem
-
-        respond "KNX"
-      '';
-      "syncthing.${domain}".extraConfig = ''
-        encode
-        tls ${certloc}/cert.pem ${certloc}/key.pem
-
-        reverse_proxy http://localhost:8383
-      '';
+      "${domain}" = createRawCaddyProxy ''respond "KNX"'';
+      "syncthing.${domain}" = createCaddyProxy "8383";
     };
   };
 
