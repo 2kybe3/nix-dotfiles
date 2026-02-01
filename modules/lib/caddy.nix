@@ -4,8 +4,6 @@ let
   certloc = "/var/lib/acme/${domain}";
 in
 {
-  domain = domain;
-  certloc = certloc;
   createCaddyProxy = port: {
     extraConfig = ''
       encode

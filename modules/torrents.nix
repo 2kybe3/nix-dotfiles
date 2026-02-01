@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  domain = config.kybe.lib.caddy.domain;
+  domain = config.kybe.lib.domain;
   address = "transmission.${domain}";
 
   wgNamespace = "mullvad";
