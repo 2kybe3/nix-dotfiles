@@ -2,6 +2,7 @@
 {
   imports = [
     ../../modules/nix.nix
+    ../../modules/programs/zsh.nix
   ];
 
   services.openssh = {
@@ -14,7 +15,6 @@
     };
   };
 
-  programs.zsh.enable = true;
   users.users.root = {
     shell = pkgs.zsh;
   };
