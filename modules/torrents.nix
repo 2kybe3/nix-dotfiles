@@ -48,7 +48,11 @@ in
         "netns-${wgNamespace}.service"
         "wireguard-${wgInterface}.service"
       ];
-      serviceConfig.NetworkNamespacePath = "/var/run/netns/${wgNamespace}";
+      serviceConfig = {
+        NetworkNamespacePath = "/var/run/netns/${wgNamespace}";
+        AmbientCapabilities = "CAP_NET_RAW";
+        NoNewPrivileges = false;
+      };
     };
 
     transmission-namespace-forward = {
