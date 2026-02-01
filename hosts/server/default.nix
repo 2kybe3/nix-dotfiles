@@ -1,4 +1,9 @@
-{ lib, inputs, pkgs, ... }:
+{
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./proxmox.nix
@@ -23,9 +28,9 @@
   };
 
   networking = {
-    hostName = lib.mkForce "server";
     hostId = "e2775ce5";
   };
+  kybe.lib.hostName = "server";
 
   users.users.root = {
     shell = pkgs.zsh;

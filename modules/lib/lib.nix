@@ -1,5 +1,6 @@
-{ config }:
-{
+{ lib, config }:
+rec {
   caddy = import ./caddy.nix { inherit config; };
-  domain = "${config.networking.hostName}.kybe.xyz";
+  hostName = "${config.networking.hostName}";
+  domain = "${hostName}.kybe.xyz";
 }

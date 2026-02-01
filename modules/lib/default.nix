@@ -6,5 +6,5 @@
       default = { };
     };
   };
-  config.kybe.lib = import ./lib.nix { inherit config; };
+  config.kybe.lib = import ./lib.nix { inherit config lib; };
 }

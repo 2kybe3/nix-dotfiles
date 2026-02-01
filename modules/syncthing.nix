@@ -13,9 +13,9 @@ let
     phoneDevice
   ];
 
-  syncthingUser = if config.networking.hostName == "server" then "root" else "kybe";
+  syncthingUser = if config.kybe.lib.hostName == "server" then "root" else "kybe";
   folderDir =
-    if config.networking.hostName == "server" then
+    if config.kybe.lib.hostName == "server" then
       "/root/syncthing"
     else
       "/home/${syncthingUser}/syncthing";
@@ -28,11 +28,11 @@ in
       owner = config.services.syncthing.user;
     };
     syncthingKey = {
-      sopsFile = ../secrets/${config.networking.hostName}-syncthing-key.pem;
+      sopsFile = ../secrets/${config.kybe.lib.hostName}-syncthing-key.pem;
       format = "binary";
     };
     syncthingCert = {
-      sopsFile = ../secrets/${config.networking.hostName}-syncthing-cert.pem;
+      sopsFile = ../secrets/${config.kybe.lib.hostName}-syncthing-cert.pem;
       format = "binary";
     };
   };
