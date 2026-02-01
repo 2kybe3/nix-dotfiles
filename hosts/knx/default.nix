@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -27,7 +27,8 @@
 
   sway.enable = true;
 
-  networking.hostName = "knx";
+  kybe.lib.hostName = "knx";
+  networking.hostName = config.kybe.lib.hostName;
 
   system.stateVersion = "25.11";
 }

@@ -29,10 +29,11 @@
     };
   };
 
+  kybe.lib.hostName = "server";
+
   networking = {
     hostId = "e2775ce5";
   };
-  kybe.lib.hostName = "server";
 
   users.users.root = {
     shell = pkgs.zsh;
