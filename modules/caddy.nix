@@ -17,6 +17,10 @@ in
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
       dnsPropagationCheck = true;
+      postRun = ''
+        chmod g+rwx .
+        chmod g+rwx key.pem cert.pem
+      '';
     };
 
     certs."${domain}" = {
