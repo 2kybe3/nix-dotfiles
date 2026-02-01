@@ -59,12 +59,4 @@ in
       "readarr.${domain}" = createCaddyProxy 8787;
     };
   };
-
-  users.extraUsers.jellyfin.extraGroups = [ "media" ];
-  users.extraUsers.sonarr.extraGroups = [ "media" ];
-  users.extraUsers.radarr.extraGroups = [ "media" ];
-  users.extraUsers.prowlarr.extraGroups = [ "media" ];
-  users.extraUsers.bazarr.extraGroups = [ "media" ];
-  users.extraUsers.jackett.extraGroups = [ "media" ];
-  users.extraUsers.readarr.extraGroups = [ "media" ];
 }
