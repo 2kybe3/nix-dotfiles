@@ -4,11 +4,9 @@ let
   address = "transmission.${domain}";
 
   wgNamespace = "mullvad";
-  wgInterface = "mullvad";
+  wgInterface = "mullvad0";
   wgDns = "10.64.0.1";
-  wgIps = [
-    "10.66.190.176/32"
-  ];
+  wgIps = [ "10.66.190.176/32" "fc00:bbbb:bbbb:bb01::3:beaf/128" ];
   wgEndpoint = "193.32.248.66:51820";
   wgPublicKey = "0qSP0VxoIhEhRK+fAHVvmfRdjPs2DmmpOCNLFP/7cGw=";
 
@@ -26,8 +24,8 @@ in
         rpc-url = "/transmission/";
         rpc-host-whitelist-enabled = true;
         rpc-host-whitelist = address;
-        rpc-port = 9091;
 
+        rpc-port = 9091;
         peer-port = 39894;
 
         script-torrent-done-enabled = true;
@@ -107,11 +105,8 @@ in
         {
           endpoint = wgEndpoint;
           publicKey = wgPublicKey;
-          allowedIPs = [
-            "0.0.0.0/0"
-            "::/0"
-          ];
-          persistentKeepalive = 25;
+          allowedIPs = [ "0.0.0.0/0" "::0/0" ];
+          persistentKeepalive = 15;
         }
       ];
 
