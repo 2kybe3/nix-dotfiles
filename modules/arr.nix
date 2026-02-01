@@ -25,10 +25,7 @@ in
       enable = true;
       group = "media";
     };
-    prowlarr = {
-      enable = true;
-      group = "media";
-    };
+    prowlarr.enable = true;
 
 
     bazarr = {
