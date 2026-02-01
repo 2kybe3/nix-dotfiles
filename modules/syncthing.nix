@@ -43,7 +43,7 @@ in
     overrideFolders = true;
     user = syncthingUser;
     dataDir = dataDir;
-    guiAddress = "127.0.0.1:8384";
+    guiAddress = "0.0.0.0:8384";
     guiPasswordFile = config.sops.secrets.syncthingPass.path;
     cert = config.sops.secrets.syncthingCert.path;
     key = config.sops.secrets.syncthingKey.path;
@@ -100,7 +100,7 @@ in
   networking.firewall = {
     allowedTCPPorts = [
       22000
-      80
+      8384
     ];
     allowedUDPPorts = [
       22000
