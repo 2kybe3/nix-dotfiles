@@ -8,20 +8,22 @@ in
   services = {
     sonarr.enable = true;
     radarr.enable = true;
+    prowlarr.enable = true;
+    bazarr.enable = true;
+    flaresolverr.enable = true;
     readarr = {
       enable = false; # TODO
       user = if config.services.calibre-server.enable then config.calibre-server.user else "readarr";
     };
 
-    prowlarr.enable = true;
-    bazarr.enable = true;
-
+    
     caddy.virtualHosts = {
       "sonarr.${domain}" = createCaddyProxy 8989;
       "radarr.${domain}" = createCaddyProxy 7878;
-      "readarr.${domain}" = createCaddyProxy 8787;
       "prowlarr.${domain}" = createCaddyProxy 9696;
       "bazarr.${domain}" = createCaddyProxy 6767;
+      "flaresolverr.${domain}" = createCaddyProxy 8191;
+      "readarr.${domain}" = createCaddyProxy 8787;
     };
   };
 
