@@ -1,19 +1,44 @@
-{ config, lib, ... }:
+{ config, ... }:
 let
   domain = config.kybe.lib.domain;
-
   createCaddyProxy = config.kybe.lib.caddy.createCaddyProxy;
 in
 {
+  users.groups.media = { };
+
+  environment.etc."media".source = null;
+  systemd.tmpfiles.rules = [
+    "d /media 0775 root media -"
+  ];
+
   services = {
-    jellyfin.enable = true;
+    jellyfin = {
+      enable = true;
+      group = "media";
+    };
 
-    sonarr.enable = true;
-    radarr.enable = true;
-    prowlarr.enable = true;
+    sonarr = {
+      enable = true;
+      group = "media";
+    };
+    radarr = {
+      enable = true;
+      group = "media";
+    };
+    prowlarr = {
+      enable = true;
+      group = "media";
+    };
 
-    bazarr.enable = true;
-    jackett.enable = true;
+
+    bazarr = {
+      enable = true;
+      group = "media";
+    };
+    jackett = {
+      enable = true;
+      group = "media";
+    };
 
     flaresolverr.enable = true;
 
@@ -37,4 +62,12 @@ in
       "readarr.${domain}" = createCaddyProxy 8787;
     };
   };
+
+  users.extraUsers.jellyfin.extraGroups = [ "media" ];
+  users.extraUsers.sonarr.extraGroups = [ "media" ];
+  users.extraUsers.radarr.extraGroups = [ "media" ];
+  users.extraUsers.prowlarr.extraGroups = [ "media" ];
+  users.extraUsers.bazarr.extraGroups = [ "media" ];
+  users.extraUsers.jackett.extraGroups = [ "media" ];
+  users.extraUsers.readarr.extraGroups = [ "media" ];
 }
