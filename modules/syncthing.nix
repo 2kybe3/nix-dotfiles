@@ -97,5 +97,16 @@ in
     };
   };
 
+  networking.firewall = {
+    allowedTCPPorts = [
+      22000
+      80
+    ];
+    allowedUDPPorts = [
+      22000
+      21027
+    ];
+  };
+
   services.caddy.virtualHosts."syncthing.${domain}" = createCaddyProxy "8384";
 }

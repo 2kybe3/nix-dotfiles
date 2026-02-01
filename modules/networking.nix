@@ -10,11 +10,6 @@
       enable = true;
       allowedTCPPorts = [
         22 # SSH
-        22000 # syncthing
-      ];
-      allowedUDPPorts = [
-        22000 # syncthing
-        21027 # syncthing
       ];
       interfaces."kybe.xyz".allowedTCPPorts = [
         3000 # DEV
