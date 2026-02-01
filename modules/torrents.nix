@@ -8,7 +8,6 @@ let
   wgDns = "10.64.0.1";
   wgIps = [
     "10.66.190.176/32"
-    "fc00:bbbb:bbbb:bb01::3:beaf/128"
   ];
   wgEndpoint = "193.32.248.66:51820";
   wgPublicKey = "0qSP0VxoIhEhRK+fAHVvmfRdjPs2DmmpOCNLFP/7cGw=";
@@ -19,6 +18,7 @@ in
   services = {
     transmission = {
       enable = true;
+      openPeerPorts = true;
       package = pkgs.transmission_4;
 
       settings = {
