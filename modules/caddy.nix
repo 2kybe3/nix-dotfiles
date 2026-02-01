@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  domain = config.kybe.lib.caddy.domain;
+  domain = config.kybe.lib.domain;
   createRawCaddyProxy = config.kybe.lib.caddy.createRawCaddyProxy;
 in
 {
