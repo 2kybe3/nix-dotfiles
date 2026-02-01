@@ -24,9 +24,9 @@ in
       settings = {
         rpc-bind-address = "127.0.0.1";
         rpc-url = "/transmission/";
-        rpc-port = 9091;
         rpc-host-whitelist-enabled = true;
         rpc-host-whitelist = address;
+        rpc-port = 9091;
 
         peer-port = 39894;
 
@@ -102,7 +102,7 @@ in
       ips = wgIps;
       privateKeyFile = config.sops.secrets."mullvad-key".path;
       interfaceNamespace = wgNamespace;
-
+      mtu = 1320;
       peers = [
         {
           endpoint = wgEndpoint;
