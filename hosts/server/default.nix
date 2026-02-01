@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
   imports = [
+    ./proxmox.nix
+    ./hardware-configuration.nix
+
     ../../modules/nix.nix
     ../../modules/programs/zsh.nix
   ];
