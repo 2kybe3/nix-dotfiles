@@ -12,6 +12,7 @@
     ../../modules/sops.nix
     ../../modules/caddy.nix
     ../../modules/syncthing.nix
+    ../../modules/transmission.nix
     ../../modules/programs/zsh.nix
     ../../modules/networking
 
