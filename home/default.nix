@@ -3,7 +3,6 @@
   swayEnabled,
   ...
 }:
-
 {
   home = {
     username = "kybe";
