@@ -31,7 +31,7 @@ in
 
     virtualHosts = {
       "${domain}" = createRawCaddyProxy ''respond "KNX"'';
-      "syncthing.${domain}" = createCaddyProxy "8383";
+      "syncthing.${domain}" = createCaddyProxy "8384";
     };
   };
 

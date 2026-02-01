@@ -3,7 +3,7 @@
   sops.secrets.syncthing.sopsFile = ../../secrets/syncthing.yaml;
   services.syncthing = {
     enable = true;
-    guiAddress = "0.0.0.0:8383";
+    guiAddress = "0.0.0.0:8384";
     passwordFile = config.sops.secrets.syncthing.path;
     overrideDevices = true;
     settings = {
