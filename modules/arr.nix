@@ -8,7 +8,7 @@ in
   services = {
     sonarr.enable = true;
     radarr.enable = true;
-    prowlarr.enable = true;
+    jackett.enable = true;
     bazarr.enable = true;
     flaresolverr.enable = true;
     readarr = {
@@ -20,13 +20,10 @@ in
     caddy.virtualHosts = {
       "sonarr.${domain}" = createCaddyProxy 8989;
       "radarr.${domain}" = createCaddyProxy 7878;
-      "prowlarr.${domain}" = createCaddyProxy 9696;
+      "jackett.${domain}" = createCaddyProxy 9117;
       "bazarr.${domain}" = createCaddyProxy 6767;
       "flaresolverr.${domain}" = createCaddyProxy 8191;
       "readarr.${domain}" = createCaddyProxy 8787;
     };
   };
-
-  systemd.services.prowlarr.serviceConfig.DynamicUser = lib.mkForce false;
-  systemd.services.bazarr.serviceConfig.DynamicUser = lib.mkForce false;
 }
