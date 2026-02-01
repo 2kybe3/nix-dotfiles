@@ -22,8 +22,8 @@
     };
     hosts = {
       "127.0.0.1" = [
-        "*.knx.kybe.xyz"
-        "knx.kybe.xyz"
+        "*.${config.kybe.lib.domain}"
+        "${config.kybe.lib.domain}"
       ];
     };
   };

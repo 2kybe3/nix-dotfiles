@@ -1,6 +1,6 @@
 { config }:
 let
-  domain = "${config.networking.hostName}.kybe.xyz";
+  domain = config.kybe.lib.domain;
   certloc = "/var/lib/acme/${domain}";
 in
 {

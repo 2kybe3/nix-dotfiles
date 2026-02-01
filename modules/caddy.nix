@@ -1,7 +1,6 @@
 { config, ... }:
 let
   domain = config.kybe.lib.caddy.domain;
-  createCaddyProxy = config.kybe.lib.caddy.createCaddyProxy;
   createRawCaddyProxy = config.kybe.lib.caddy.createRawCaddyProxy;
 in
 {
@@ -31,7 +30,6 @@ in
 
     virtualHosts = {
       "${domain}" = createRawCaddyProxy ''respond "KNX"'';
-      "syncthing.${domain}" = createCaddyProxy "8384";
     };
   };
 

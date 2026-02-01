@@ -5,16 +5,17 @@
     ./nvidia.nix
 
     ../../modules/lib
-    ../../modules/programs
-    ../../modules/boot.nix
-    ../../modules/caddy.nix
-    ../../modules/networking.nix
     ../../modules/nix.nix
-    ../../modules/services.nix
     ../../modules/sops.nix
     ../../modules/sway.nix
-    ../../modules/system.nix
+    ../../modules/boot.nix
+    ../../modules/programs
+    ../../modules/caddy.nix
     ../../modules/users.nix
+    ../../modules/system.nix
+    ../../modules/services.nix
+    ../../modules/syncthing.nix
+    ../../modules/networking.nix
     ../../modules/virtualisation.nix
 
     inputs.sops-nix.nixosModules.sops

@@ -5,6 +5,10 @@ creation_rules:
     key_groups:
     - age:
       - *primary
+  - path_regex: secrets/(knx|server)-syncthing-(cert|key).pem$
+    key_groups:
+    - age:
+      - *primary
   - path_regex: secrets/acme.env.bin$
     key_groups:
     - age:
