@@ -8,6 +8,8 @@ in
 
   systemd.tmpfiles.rules = [
     "d /media 0775 root media -"
+    "d /media/sonarr 0775 root media -"
+    "d /media/radarr 0775 root media -"
   ];
 
   services = {
