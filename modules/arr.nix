@@ -6,7 +6,6 @@ in
 {
   users.groups.media = { };
 
-  environment.etc."media".source = null;
   systemd.tmpfiles.rules = [
     "d /media 0775 root media -"
   ];
