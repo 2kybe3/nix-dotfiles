@@ -4,10 +4,7 @@
     ./hardware-configuration.nix
     ./nvidia.nix
 
-    ../../modules/torrents.nix
-
     ../../modules/lib
-    ../../modules/arr.nix
     ../../modules/nix.nix
     ../../modules/sops.nix
     ../../modules/sway.nix
