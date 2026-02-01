@@ -11,8 +11,8 @@
     ../../modules/nix.nix
     ../../modules/sops.nix
     ../../modules/caddy.nix
+    ../../modules/torrents.nix
     ../../modules/syncthing.nix
-    ../../modules/transmission.nix
     ../../modules/programs/zsh.nix
     ../../modules/networking
 
