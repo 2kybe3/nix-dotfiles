@@ -25,7 +25,7 @@
         DNSSEC = "true";
         Domains = [ "~." ];
         DNSOverTLS = "false";
-        FallbackDNS = (
+        DNS = (
           if config.kybe.lib.hostName == "server" then
             [ "10.0.4.1" ]
           else
