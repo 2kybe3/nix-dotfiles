@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 let
   domain = config.kybe.lib.domain;
   address = "transmission.${domain}";
@@ -50,7 +50,7 @@ in
       ];
       serviceConfig = {
         NetworkNamespacePath = "/var/run/netns/${wgNamespace}";
-        AmbientCapabilities = "CAP_NET_RAW";
+        AmbientCapabilities = lib.mkForce "CAP_NET_RAW";
         NoNewPrivileges = false;
       };
     };
