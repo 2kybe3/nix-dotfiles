@@ -28,11 +28,11 @@ in
       owner = config.services.syncthing.user;
     };
     syncthingKey = {
-      sopsFile = ../secrets + builtins.toPath "/${config.networking.hostName}-syncthing-key.pem";
+      sopsFile = ../secrets/${config.networking.hostName}-syncthing-key.pem;
       format = "binary";
     };
     syncthingCert = {
-      sopsFile = ../secrets + builtins.toPath "/${config.networking.hostName}-syncthing-cert.pem";
+      sopsFile = ../secrets/${config.networking.hostName}-syncthing-cert.pem;
       format = "binary";
     };
   };
