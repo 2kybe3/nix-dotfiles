@@ -22,12 +22,14 @@
     enable = true;
     settings = {
       Resolve = {
-        DNSSEC = "true";
+        DNSSEC = if config.kybe.lib.hostName == "server" then "true" else "false";
         Domains = [ "~." ];
         DNSOverTLS = "false";
         DNS = (
           if config.kybe.lib.hostName == "server" then
-            [ "10.0.4.1" ]
+            [
+              "10.0.4.1"
+            ]
           else
             [
               "1.1.1.1"
