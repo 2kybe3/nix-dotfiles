@@ -10,7 +10,7 @@ in
     extraConfig = ''
       encode
       tls ${certloc}/cert.pem ${certloc}/key.pem
-      reverse_proxy localhost:${port}
+      reverse_proxy localhost:${toString port}
     '';
   };
   createRawCaddyProxy = block: {

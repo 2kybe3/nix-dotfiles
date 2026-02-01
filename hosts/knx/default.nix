@@ -4,6 +4,8 @@
     ./hardware-configuration.nix
     ./nvidia.nix
 
+    ../../modules/torrents.nix
+
     ../../modules/lib
     ../../modules/nix.nix
     ../../modules/sops.nix

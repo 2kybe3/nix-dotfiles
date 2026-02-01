@@ -108,5 +108,5 @@ in
     ];
   };
 
-  services.caddy.virtualHosts."syncthing.${domain}" = createCaddyProxy "8384";
+  services.caddy.virtualHosts."syncthing.${domain}" = createCaddyProxy 8384;
 }

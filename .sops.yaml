@@ -1,7 +1,7 @@
 keys:
   - &primary age1j5m502xft87rhgal0929h4urzspv3qd03mkrcek23rmm8dsuf5rq2465td
 creation_rules:
-  - path_regex: secrets/(wireguard|secrets|users|i3status|mail|syncthing).yaml$
+  - path_regex: secrets/(wireguard|secrets|users|i3status|mail|syncthing|mullvad).yaml$
     key_groups:
     - age:
       - *primary
