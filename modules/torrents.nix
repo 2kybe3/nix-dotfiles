@@ -19,6 +19,7 @@ in
   services = {
     transmission = {
       enable = true;
+      package = pkgs.transmission_4;
 
       settings = {
         rpc-bind-address = "127.0.0.1";
