@@ -51,7 +51,7 @@ in
       serviceConfig = {
         NetworkNamespacePath = "/var/run/netns/${wgNamespace}";
         AmbientCapabilities = lib.mkForce "CAP_NET_RAW";
-        NoNewPrivileges = false;
+        NoNewPrivileges = lib.mkForce false;
       };
     };
 
