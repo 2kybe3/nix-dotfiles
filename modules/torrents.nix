@@ -91,27 +91,30 @@ in
     };
   };
 
-  networking.wireguard.interfaces.${wgInterface} = {
-    ips = wgIps;
-    privateKeyFile = config.sops.secrets."mullvad-key".path;
-    interfaceNamespace = wgNamespace;
+  networking.wireguard = {
+    useNetworkd = false;
+    interfaces.${wgInterface} = {
+      ips = wgIps;
+      privateKeyFile = config.sops.secrets."mullvad-key".path;
+      interfaceNamespace = wgNamespace;
 
-    peers = [
-      {
-        endpoint = wgEndpoint;
-        publicKey = wgPublicKey;
-        allowedIPs = [
-          "0.0.0.0/0"
-          "::/0"
-        ];
-        persistentKeepalive = 25;
-      }
-    ];
+      peers = [
+        {
+          endpoint = wgEndpoint;
+          publicKey = wgPublicKey;
+          allowedIPs = [
+            "0.0.0.0/0"
+            "::/0"
+          ];
+          persistentKeepalive = 25;
+        }
+      ];
 
-    postSetup = [
-      "${pkgs.iproute2}/bin/ip -n ${wgNamespace} link set lo up"
-      "${pkgs.iproute2}/bin/ip -n ${wgNamespace} route add default dev ${wgInterface} || true"
-    ];
+      postSetup = [
+        "${pkgs.iproute2}/bin/ip -n ${wgNamespace} link set lo up"
+        "${pkgs.iproute2}/bin/ip -n ${wgNamespace} route add default dev ${wgInterface} || true"
+      ];
+    };
   };
 
   environment.etc."netns/${wgNamespace}/resolv.conf".text = ''
