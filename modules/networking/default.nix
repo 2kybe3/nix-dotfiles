@@ -22,7 +22,7 @@
     enable = true;
     settings = {
       Resolve = {
-        DNSSEC = if config.kybe.lib.hostName == "server" then "true" else "false";
+        DNSSEC = if config.kybe.lib.hostName == "server" then "false" else "true";
         Domains = [ "~." ];
         DNSOverTLS = "false";
         DNS = (
