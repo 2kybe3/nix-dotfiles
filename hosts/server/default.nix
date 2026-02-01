@@ -22,7 +22,7 @@
   };
 
   networking = {
-    hostname = "server";
+    hostName = "server";
     hostId = "e2775ce5";
   };
 
