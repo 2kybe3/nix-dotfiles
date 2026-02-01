@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ lib, inputs, pkgs, ... }:
 {
   imports = [
     ./proxmox.nix
@@ -23,7 +23,7 @@
   };
 
   networking = {
-    hostName = "server";
+    hostName = lib.mkForce "server";
     hostId = "e2775ce5";
   };
 
