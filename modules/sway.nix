@@ -5,9 +5,7 @@
   ...
 }:
 {
-  options = {
-    sway.enable = lib.mkEnableOption "enables sway";
-  };
+  options.sway.enable = lib.mkEnableOption "enables sway";
 
   config = lib.mkIf config.sway.enable {
     security.polkit.enable = true;
@@ -16,9 +14,7 @@
       enable = true;
       wlr.enable = true;
 
-      config = {
-        common.default = "wlr";
-      };
+      config.common.default = "wlr";
     };
 
     # for i3status-rs

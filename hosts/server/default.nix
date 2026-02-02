@@ -31,14 +31,8 @@
   };
 
   kybe.lib.hostName = "server";
-
-  networking = {
-    hostId = "e2775ce5";
-  };
-
-  users.users.root = {
-    shell = pkgs.zsh;
-  };
+  networking.hostId = "e2775ce5";
+  users.users.root.shell = pkgs.zsh;
 
   environment.systemPackages = with pkgs; [
     vim

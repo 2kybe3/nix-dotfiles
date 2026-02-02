@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ config, ... }:
 {
   sops.secrets = {
     "kybe.xyz".sopsFile = ../secrets/mail.yaml;

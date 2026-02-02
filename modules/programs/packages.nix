@@ -6,9 +6,6 @@ with pkgs;
   curl
   mtr
 
-  ## Editors
-  obsidian
-
   ## Apps
   vesktop
   element-desktop
@@ -25,7 +22,7 @@ with pkgs;
   openssl
   psmisc # killall etc.
   unzip
-  # unrar
+  unrar
   delta
   file
   sops
@@ -65,7 +62,6 @@ with pkgs;
     ];
   })
 
-  zsh
   jdk21
   pinentry-curses
 
