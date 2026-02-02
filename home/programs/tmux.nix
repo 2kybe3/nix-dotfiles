@@ -13,15 +13,13 @@
       unbind '"'
       unbind %
 
-      bind r source-file ~/.tmux.conf
-
       # fast pane switching (Meta + vim)
       bind -n M-h select-pane -L
       bind -n M-j select-pane -D
       bind -n M-k select-pane -U
       bind -n M-l select-pane -R
 
-      # Allow mouse support
+      # Allow mouse
       set -g mouse on
 
       # Neovim stuff
@@ -30,6 +28,22 @@
       set -g status-left-length 99
       set -g status-right-length 99
       set -g status-justify centre
+
+      # Fix Vim ESC delay
+      set -sg escape-time 0
+
+      # Increase scrollback buffer
+      set -g history-limit 50000
+
+      # Start windows and panes at 1, not 0
+      set -g base-index 1
+      setw -g pane-base-index 1
+
+      # Set terminal with proper colors
+      set -g default-terminal "tmux-256color"
+      set -as terminal-features ",xterm-256color:RGB"
+
+      set -g status-position top
     '';
   };
 }

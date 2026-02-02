@@ -28,7 +28,6 @@ in
     };
     prowlarr.enable = true;
 
-
     bazarr = {
       enable = true;
       group = "media";
@@ -44,7 +43,7 @@ in
       enable = false; # TODO
       user = if config.services.calibre-server.enable then config.calibre-server.user else "readarr";
     };
-    
+
     caddy.virtualHosts = {
       "jellyfin.${domain}" = createCaddyProxy 8096;
 

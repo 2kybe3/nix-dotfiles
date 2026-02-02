@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   domain = config.kybe.lib.domain;
   address = "transmission.${domain}";
@@ -6,7 +11,10 @@ let
   wgNamespace = "mullvad";
   wgInterface = "mullvad0";
   wgDns = "10.64.0.1";
-  wgIps = [ "10.66.190.176/32" "fc00:bbbb:bbbb:bb01::3:beaf/128" ];
+  wgIps = [
+    "10.66.190.176/32"
+    "fc00:bbbb:bbbb:bb01::3:beaf/128"
+  ];
   wgEndpoint = "193.32.248.66:51820";
   wgPublicKey = "0qSP0VxoIhEhRK+fAHVvmfRdjPs2DmmpOCNLFP/7cGw=";
 
@@ -105,7 +113,10 @@ in
         {
           endpoint = wgEndpoint;
           publicKey = wgPublicKey;
-          allowedIPs = [ "0.0.0.0/0" "::0/0" ];
+          allowedIPs = [
+            "0.0.0.0/0"
+            "::0/0"
+          ];
           persistentKeepalive = 15;
         }
       ];
