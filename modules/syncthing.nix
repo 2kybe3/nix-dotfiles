@@ -72,6 +72,9 @@ in
           id = "P366B4T-SOUZTBV-G4G5IE2-7MXQ4DQ-DFKXKKM-WVBJMSZ-Q7ZPOAN-32MUFAY";
         };
       };
+
+      # Generate a folder ID (similar to Syncthing’s default format):
+      #   nix run ./tools/syncthing-folder-id-gen
       folders = {
         "phone/documents" = {
           id = "nbrf9-2w4wy";
@@ -92,6 +95,11 @@ in
           id = "c2vbp-mdgxw";
           devices = allDevices;
           path = "${folderDir}/phone/aesis";
+        };
+        "keepass" = {
+          id = "zepjc-kbxe4";
+          devices = allDevices;
+          path = "${folderDir}/keepass";
         };
       };
     };
