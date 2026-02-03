@@ -1,6 +1,11 @@
+{ pkgs, ... }:
 {
   programs.firefox = {
     enable = true;
+    nativeMessagingHosts.packages = [
+      pkgs.keepassxc
+    ];
+
     languagePacks = [
       "de"
       "en-US"
@@ -46,10 +51,10 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi";
           installation_mode = "force_installed";
         };
-        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-          installation_mode = "force_installed";
-        };
+        # "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+        #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
+        #   installation_mode = "force_installed";
+        # };
       };
       Preferences = {
         "browser.search.suggest.enabled" = false;
@@ -65,6 +70,9 @@
         "browser.newtabpage.activity-stream.section.highlights.includeVisited" = false;
         "browser.newtabpage.activity-stream.section.highlights.includeBookmarks" = false;
         "browser.newtabpage.activity-stream.section.highlights.includeDownloads" = false;
+
+        # Tweak to make keepasses PassKeys work work
+        "security.webauth.webauthn_enable_usbtoken" = false;
       };
 
       SearchEngines = {

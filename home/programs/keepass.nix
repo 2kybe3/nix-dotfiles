@@ -14,6 +14,7 @@
         HidePasswords = true;
       };
 
+      Browser.Enabled = true;
       SSHAgent.Enabled = true;
     };
   };
