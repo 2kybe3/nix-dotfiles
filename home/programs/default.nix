@@ -8,6 +8,7 @@
     ./btop.nix
     ./kitty.nix
     ./ranger.nix
+    ./keepass.nix
   ];
   programs = {
     home-manager.enable = true;
