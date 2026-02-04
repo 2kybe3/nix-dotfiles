@@ -15,7 +15,7 @@
         eval "$(ssh-agent -s)" >/dev/null
       fi
 
-      ssh-add -l | grep -q ~/.ssh/kybe || ssh-add ~/.ssh/kybe
+      ssh-add -l | grep -q ~/.ssh/kybe || ssh-add ~/.ssh/kybe >/dev/null 2>&1
     '';
     shellAliases = {
       _select_dir = "fd --hidden -t d . | fzf --preview 'ls -lah {}'";
@@ -45,7 +45,7 @@
         '';
 
       tm = "tmux attach || tmux new";
-      dev = "nix develop -c $SHELL";
+      dev = "nix develop ~/.dotfiles#rust -c $SHELL";
     };
     plugins = [
       {
