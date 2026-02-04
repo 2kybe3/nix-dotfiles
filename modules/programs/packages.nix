@@ -22,7 +22,6 @@ with pkgs;
   openssl
   psmisc # killall etc.
   unzip
-  unrar
   delta
   file
   sops
@@ -50,10 +49,6 @@ with pkgs;
 
   ## Bash
   shellcheck
-
-  ## Rust
-  jetbrains.datagrip
-  rustup
 
   ## Games
   (prismlauncher.override {

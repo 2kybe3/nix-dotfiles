@@ -23,6 +23,7 @@ let
   wgPublicKey = "0qSP0VxoIhEhRK+fAHVvmfRdjPs2DmmpOCNLFP/7cGw=";
 in
 {
+  environment.systemPackages = [ pkgs.unrar ];
   services = {
     transmission = {
       enable = true;
