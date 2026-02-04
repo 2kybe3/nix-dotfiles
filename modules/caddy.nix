@@ -2,10 +2,10 @@
 let
   inherit (config.kybe.lib)
     domain
-  ;
+    ;
   inherit (config.kybe.lib.caddy)
     createRawCaddyProxy
-  ;
+    ;
 in
 {
   sops.secrets.acme = {

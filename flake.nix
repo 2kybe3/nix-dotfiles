@@ -18,11 +18,17 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    rust-dev = {
+      url = "path:./tools/rust-dev";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       nixpkgs,
+      rust-dev,
       ...
     }@inputs:
     let
@@ -60,5 +66,7 @@
           ];
         };
       };
+
+      devShells.${system}.rust = rust-dev.devShells.${system}.default;
     };
 }

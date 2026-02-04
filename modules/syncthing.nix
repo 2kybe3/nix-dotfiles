@@ -3,10 +3,10 @@ let
   inherit (config.kybe.lib)
     domain
     hostName
-  ;
+    ;
   inherit (config.kybe.lib.caddy)
     createCaddyProxy
-  ;
+    ;
 
   knxDevice = "knx";
   serverDevice = "server";
