@@ -26,6 +26,7 @@ in
       enable = true;
       openPeerPorts = true;
       package = pkgs.transmission_4;
+      group = "media";
 
       settings = {
         rpc-bind-address = "127.0.0.1";
