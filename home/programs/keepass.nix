@@ -5,7 +5,16 @@
     autostart = true;
     settings = {
       General.LastActiveDatabase = "${config.home.homeDirectory}/syncthing/keepass/vault.kdbx";
-      Browser.UpdateBinaryPath = false;
+      SSHAgent.Enabled = true;
+
+      Browser = {
+        Enabled = true;
+        UpdateBinaryPath = false;
+      };
+
+      Security = {
+        IconDownloadFallback = true;
+      };
 
       GUI = {
         AdvancedSettings = true;
@@ -13,9 +22,6 @@
         CompactMode = true;
         HidePasswords = true;
       };
-
-      Browser.Enabled = true;
-      SSHAgent.Enabled = true;
     };
   };
 }

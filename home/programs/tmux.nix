@@ -19,6 +19,11 @@
       bind -n M-k select-pane -U
       bind -n M-l select-pane -R
 
+      # fast session switching
+      bind-key C-c new-session
+      bind-key C-n switch-client -n
+      bind-key C-p switch-client -p
+
       # Allow mouse
       set -g mouse on
 
