@@ -1,7 +1,11 @@
 { config, ... }:
 let
-  domain = config.kybe.lib.domain;
-  createRawCaddyProxy = config.kybe.lib.caddy.createRawCaddyProxy;
+  inherit (config.kybe.lib)
+    domain
+  ;
+  inherit (config.kybe.lib.caddy)
+    createRawCaddyProxy
+  ;
 in
 {
   sops.secrets.acme = {

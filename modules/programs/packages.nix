@@ -44,8 +44,8 @@ with pkgs;
 
   ## Nix
   nixfmt-tree
-  nix-index
   nixfmt
+  statix
   nixd
 
   ## Bash

@@ -1,7 +1,9 @@
 { config, ... }:
 let
-  domain = config.kybe.lib.domain;
-  createCaddyProxy = config.kybe.lib.caddy.createCaddyProxy;
+  inherit (config.kybe.lib)
+    domain
+    createCaddyProxy
+    ;
 in
 {
   users.groups.media = { };

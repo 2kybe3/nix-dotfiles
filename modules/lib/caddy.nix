@@ -1,6 +1,8 @@
 { config }:
 let
-  domain = config.kybe.lib.domain;
+  inherit (config.kybe.lib)
+    domain
+    ;
   certloc = "/var/lib/acme/${domain}";
 in
 {

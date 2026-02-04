@@ -1,7 +1,12 @@
 { config, ... }:
 let
-  domain = config.kybe.lib.domain;
-  createCaddyProxy = config.kybe.lib.caddy.createCaddyProxy;
+  inherit (config.kybe.lib)
+    domain
+    hostName
+  ;
+  inherit (config.kybe.lib.caddy)
+    createCaddyProxy
+  ;
 
   knxDevice = "knx";
   serverDevice = "server";
@@ -13,7 +18,7 @@ let
     phoneDevice
   ];
 
-  syncthingUser = if config.kybe.lib.hostName == "server" then "root" else "kybe";
+  syncthingUser = if hostName == "server" then "root" else "kybe";
   folderDir =
     if config.kybe.lib.hostName == "server" then
       "/root/syncthing"
@@ -41,8 +46,8 @@ in
     enable = true;
     overrideDevices = true;
     overrideFolders = true;
+    inherit dataDir;
     user = syncthingUser;
-    dataDir = dataDir;
     guiAddress = "0.0.0.0:8384";
     guiPasswordFile = config.sops.secrets.syncthingPass.path;
     cert = config.sops.secrets.syncthingCert.path;

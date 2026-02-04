@@ -5,7 +5,11 @@
   ...
 }:
 let
-  domain = config.kybe.lib.domain;
+  inherit (config.kybe.lib)
+    domain
+    createCaddyProxy
+    ;
+
   address = "transmission.${domain}";
 
   wgNamespace = "mullvad";
@@ -17,8 +21,6 @@ let
   ];
   wgEndpoint = "193.32.248.66:51820";
   wgPublicKey = "0qSP0VxoIhEhRK+fAHVvmfRdjPs2DmmpOCNLFP/7cGw=";
-
-  createCaddyProxy = config.kybe.lib.caddy.createCaddyProxy;
 in
 {
   services = {

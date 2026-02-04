@@ -91,9 +91,11 @@
 
       keybindings =
         let
-          modifier = config.wayland.windowManager.sway.config.modifier;
-          terminal = config.wayland.windowManager.sway.config.terminal;
-          menu = config.wayland.windowManager.sway.config.menu;
+          inherit (config.wayland.windowManager.sway.config)
+            modifier
+            terminal
+            menu
+            ;
         in
         {
           "${modifier}+Return" = "exec ${terminal}";
@@ -153,7 +155,9 @@
 
     extraConfig =
       let
-        modifier = config.wayland.windowManager.sway.config.modifier;
+        inherit (config.wayland.windowManager.sway.config)
+          modifier
+          ;
       in
       ''
         bindsym ${modifier}+o exec grim -g "$(slurp)" - | wl-copy
