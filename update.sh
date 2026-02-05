@@ -26,7 +26,7 @@ fi
 
 if [[ $CHANGES -eq 1 ]]; then
   echo "Testing NixOS rebuild..."
-  if nix flake check then
+  if nix flake check; then
     git push github
     git push codeberg
     echo "Changes pushed!"
