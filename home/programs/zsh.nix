@@ -46,6 +46,8 @@
 
       tm = "tmux attach || tmux new";
       dev = "nix develop ~/.dotfiles#rust -c $SHELL";
+
+      cd = "z";
     };
     plugins = [
       {
