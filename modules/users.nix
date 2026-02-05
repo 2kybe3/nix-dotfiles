@@ -47,7 +47,6 @@
     sharedModules = [
       inputs.nixvim.homeModules.nixvim
       inputs.sops-nix.homeManagerModules.sops
-      inputs.nix-index-database.homeModules.default
     ];
     extraSpecialArgs = {
       swayEnabled = config.sway.enable or false;

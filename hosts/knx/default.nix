@@ -21,6 +21,7 @@
     ../../modules/networking/networkmanager.nix
 
     inputs.sops-nix.nixosModules.sops
+    inputs.nix-index-database.nixosModules.default
   ];
 
   sway.enable = true;
