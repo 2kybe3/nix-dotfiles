@@ -1,4 +1,9 @@
-{ nixosConfig, config, pkgs, ... }:
+{
+  nixosConfig,
+  config,
+  pkgs,
+  ...
+}:
 
 let
   nixosConfigPath = "~/.dotfiles";
