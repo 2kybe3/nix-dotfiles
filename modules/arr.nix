@@ -2,6 +2,8 @@
 let
   inherit (config.kybe.lib)
     domain
+    ;
+  inherit (config.kybe.lib.caddy)
     createCaddyProxy
     ;
 in
