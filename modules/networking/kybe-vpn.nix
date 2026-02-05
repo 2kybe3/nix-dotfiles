@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   sops.secrets = {
     "wg-key" = {
       sopsFile = ../../secrets/wireguard.yaml;
@@ -30,7 +29,7 @@
 
   networking.wireguard.interfaces = {
     "kybe.xyz" = {
-      ips = [ "10.0.6.5/32" ];
+      ips = ["10.0.6.5/32"];
       privateKeyFile = config.sops.secrets."wg-key".path;
 
       peers = [

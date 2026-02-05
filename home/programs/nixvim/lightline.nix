@@ -15,11 +15,10 @@
             "filename"
             "modified"
           ]
-
         ];
         right = [
-          [ "lineinfo" ]
-          [ "percent" ]
+          ["lineinfo"]
+          ["percent"]
           [
             "fileformat"
             "fileencoding"

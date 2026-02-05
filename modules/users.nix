@@ -3,9 +3,8 @@
   pkgs,
   config,
   ...
-}:
-{
-  imports = [ inputs.home-manager.nixosModules.home-manager ];
+}: {
+  imports = [inputs.home-manager.nixosModules.home-manager];
 
   sops.secrets = {
     root-pass = {

@@ -1,5 +1,8 @@
-{ config, inputs, ... }:
 {
+  config,
+  inputs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix

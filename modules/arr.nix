@@ -1,14 +1,14 @@
-{ config, ... }:
-let
-  inherit (config.kybe.lib)
+{config, ...}: let
+  inherit
+    (config.kybe.lib)
     domain
     ;
-  inherit (config.kybe.lib.caddy)
+  inherit
+    (config.kybe.lib.caddy)
     createCaddyProxy
     ;
-in
-{
-  users.groups.media = { };
+in {
+  users.groups.media = {};
 
   systemd.tmpfiles.rules = [
     "d /media 0775 root media -"
@@ -45,7 +45,10 @@ in
 
     readarr = {
       enable = false; # TODO
-      user = if config.services.calibre-server.enable then config.calibre-server.user else "readarr";
+      user =
+        if config.services.calibre-server.enable
+        then config.calibre-server.user
+        else "readarr";
     };
 
     caddy.virtualHosts = {

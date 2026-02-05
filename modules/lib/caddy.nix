@@ -1,11 +1,10 @@
-{ config }:
-let
-  inherit (config.kybe.lib)
+{config}: let
+  inherit
+    (config.kybe.lib)
     domain
     ;
   certloc = "/var/lib/acme/${domain}";
-in
-{
+in {
   createCaddyProxy = port: {
     extraConfig = ''
       encode

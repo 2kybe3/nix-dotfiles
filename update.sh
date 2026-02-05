@@ -11,7 +11,7 @@ COMMIT_MSG="${1:-Config-change $(date '+%Y-%m-%d %H:%M:%S')}"
 cd "$DOTFILES_DIR" || { echo "Failed to enter $DOTFILES_DIR"; exit 1; }
 
 echo "Formatting files"
-if treefmt; then
+if nix fmt -- .; then
   echo "Files formatted successfully."
 else
   echo "File formatting failed!" >&2

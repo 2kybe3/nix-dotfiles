@@ -1,10 +1,11 @@
-{ config, ... }:
-let
-  inherit (config.kybe.lib)
+{config, ...}: let
+  inherit
+    (config.kybe.lib)
     domain
     hostName
     ;
-  inherit (config.kybe.lib.caddy)
+  inherit
+    (config.kybe.lib.caddy)
     createCaddyProxy
     ;
 
@@ -18,15 +19,16 @@ let
     phoneDevice
   ];
 
-  syncthingUser = if hostName == "server" then "root" else "kybe";
+  syncthingUser =
+    if hostName == "server"
+    then "root"
+    else "kybe";
   folderDir =
-    if config.kybe.lib.hostName == "server" then
-      "/root/syncthing"
-    else
-      "/home/${syncthingUser}/syncthing";
+    if config.kybe.lib.hostName == "server"
+    then "/root/syncthing"
+    else "/home/${syncthingUser}/syncthing";
   dataDir = folderDir;
-in
-{
+in {
   sops.secrets = {
     syncthingPass = {
       sopsFile = ../secrets/syncthing.yaml;

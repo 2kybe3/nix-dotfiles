@@ -2,8 +2,7 @@
   lib,
   swayEnabled,
   ...
-}:
-{
+}: {
   home = {
     username = "kybe";
     homeDirectory = "/home/kybe";
@@ -27,7 +26,7 @@
     enable = true;
     antialiasing = true;
     defaultFonts = {
-      monospace = [ "DepartureMono Nerd Font Mono" ];
+      monospace = ["DepartureMono Nerd Font Mono"];
     };
   };
 

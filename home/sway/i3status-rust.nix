@@ -1,5 +1,8 @@
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  ...
+}: {
   sops.secrets = {
     github-notifications = {
       sopsFile = ../../secrets/i3status.yaml;

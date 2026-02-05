@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   services = {
     dbus.enable = true;
     printing.enable = true;
@@ -33,7 +32,7 @@
       ];
       settings = {
         PasswordAuthentication = true;
-        AllowUsers = [ "kybe" ];
+        AllowUsers = ["kybe"];
         UseDns = true;
         PermitRootLogin = "no";
       };

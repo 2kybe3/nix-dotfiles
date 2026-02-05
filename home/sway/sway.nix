@@ -2,8 +2,7 @@
   config,
   pkgs,
   ...
-}:
-{
+}: {
   sops.secrets = {
     image-token = {
       sopsFile = ../../secrets/i3status.yaml;
@@ -50,7 +49,7 @@
           workspaceNumbers = false;
           statusCommand = "i3status-rs-wrapper config-default.toml";
           fonts = {
-            names = [ "monospace" ];
+            names = ["monospace"];
             size = 8.0;
           };
           trayOutput = "primary";
@@ -78,10 +77,10 @@
       };
 
       startup = [
-        { command = "kitty"; }
-        { command = "vesktop"; }
-        { command = "firefox"; }
-        { command = "swaybg -i /home/kybe/.config/wp.png"; }
+        {command = "kitty";}
+        {command = "vesktop";}
+        {command = "firefox";}
+        {command = "swaybg -i /home/kybe/.config/wp.png";}
       ];
 
       window = {
@@ -89,88 +88,86 @@
         titlebar = false;
       };
 
-      keybindings =
-        let
-          inherit (config.wayland.windowManager.sway.config)
-            modifier
-            terminal
-            menu
-            ;
-        in
-        {
-          "${modifier}+Return" = "exec ${terminal}";
-          "${modifier}+Shift+q" = "kill";
-          "${modifier}+d" = "exec ${menu}";
+      keybindings = let
+        inherit
+          (config.wayland.windowManager.sway.config)
+          modifier
+          terminal
+          menu
+          ;
+      in {
+        "${modifier}+Return" = "exec ${terminal}";
+        "${modifier}+Shift+q" = "kill";
+        "${modifier}+d" = "exec ${menu}";
 
-          "${modifier}+f" = "fullscreen toggle";
-          "${modifier}+a" = "focus parent";
+        "${modifier}+f" = "fullscreen toggle";
+        "${modifier}+a" = "focus parent";
 
-          "${modifier}+s" = "layout stacking";
-          "${modifier}+w" = "layout tabbed";
-          "${modifier}+e" = "layout toggle split";
+        "${modifier}+s" = "layout stacking";
+        "${modifier}+w" = "layout tabbed";
+        "${modifier}+e" = "layout toggle split";
 
-          "${modifier}+Shift+space" = "floating toggle";
-          "${modifier}+space" = "focus mode_toggle";
-          "${modifier}+1" = "workspace number 1";
-          "${modifier}+2" = "workspace number 2";
-          "${modifier}+3" = "workspace number 3";
-          "${modifier}+4" = "workspace number 4";
-          "${modifier}+5" = "workspace number 5";
-          "${modifier}+6" = "workspace number 6";
-          "${modifier}+7" = "workspace number 7";
-          "${modifier}+8" = "workspace number 8";
-          "${modifier}+9" = "workspace number 9";
-          "${modifier}+0" = "workspace number 10";
+        "${modifier}+Shift+space" = "floating toggle";
+        "${modifier}+space" = "focus mode_toggle";
+        "${modifier}+1" = "workspace number 1";
+        "${modifier}+2" = "workspace number 2";
+        "${modifier}+3" = "workspace number 3";
+        "${modifier}+4" = "workspace number 4";
+        "${modifier}+5" = "workspace number 5";
+        "${modifier}+6" = "workspace number 6";
+        "${modifier}+7" = "workspace number 7";
+        "${modifier}+8" = "workspace number 8";
+        "${modifier}+9" = "workspace number 9";
+        "${modifier}+0" = "workspace number 10";
 
-          "${modifier}+Shift+1" = "move container to workspace number 1";
-          "${modifier}+Shift+2" = "move container to workspace number 2";
-          "${modifier}+Shift+3" = "move container to workspace number 3";
-          "${modifier}+Shift+4" = "move container to workspace number 4";
-          "${modifier}+Shift+5" = "move container to workspace number 5";
-          "${modifier}+Shift+6" = "move container to workspace number 6";
-          "${modifier}+Shift+7" = "move container to workspace number 7";
-          "${modifier}+Shift+8" = "move container to workspace number 8";
-          "${modifier}+Shift+9" = "move container to workspace number 9";
-          "${modifier}+Shift+0" = "move container to workspace number 10";
+        "${modifier}+Shift+1" = "move container to workspace number 1";
+        "${modifier}+Shift+2" = "move container to workspace number 2";
+        "${modifier}+Shift+3" = "move container to workspace number 3";
+        "${modifier}+Shift+4" = "move container to workspace number 4";
+        "${modifier}+Shift+5" = "move container to workspace number 5";
+        "${modifier}+Shift+6" = "move container to workspace number 6";
+        "${modifier}+Shift+7" = "move container to workspace number 7";
+        "${modifier}+Shift+8" = "move container to workspace number 8";
+        "${modifier}+Shift+9" = "move container to workspace number 9";
+        "${modifier}+Shift+0" = "move container to workspace number 10";
 
-          "${modifier}+Shift+minus" = "move scratchpad";
-          "${modifier}+minus" = "scratchpad show";
+        "${modifier}+Shift+minus" = "move scratchpad";
+        "${modifier}+minus" = "scratchpad show";
 
-          "${modifier}+Shift+c" = "reload";
-          "${modifier}+Shift+e" = "exec swaynag -t warning -m 'EXIT?' -b 'Yes' 'swaymsg exit'";
+        "${modifier}+Shift+c" = "reload";
+        "${modifier}+Shift+e" = "exec swaynag -t warning -m 'EXIT?' -b 'Yes' 'swaymsg exit'";
 
-          "${modifier}+h" = "focus left";
-          "${modifier}+j" = "focus down";
-          "${modifier}+k" = "focus up";
-          "${modifier}+l" = "focus right";
+        "${modifier}+h" = "focus left";
+        "${modifier}+j" = "focus down";
+        "${modifier}+k" = "focus up";
+        "${modifier}+l" = "focus right";
 
-          "${modifier}+Shift+h" = "move left";
-          "${modifier}+Shift+j" = "move down";
-          "${modifier}+Shift+k" = "move up";
-          "${modifier}+Shift+l" = "move right";
-          "${modifier}+v" = "split v"; # b = h, v = v
-          "${modifier}+b" = "split h"; # b = h, v = v
-        };
+        "${modifier}+Shift+h" = "move left";
+        "${modifier}+Shift+j" = "move down";
+        "${modifier}+Shift+k" = "move up";
+        "${modifier}+Shift+l" = "move right";
+        "${modifier}+v" = "split v"; # b = h, v = v
+        "${modifier}+b" = "split h"; # b = h, v = v
+      };
     };
 
-    extraConfig =
-      let
-        inherit (config.wayland.windowManager.sway.config)
-          modifier
-          ;
-      in
-      ''
-        bindsym ${modifier}+o exec grim -g "$(slurp)" - | wl-copy
-        bindsym ${modifier}+Shift+o exec ~/.config/kybe-scripts/sway/ss.bash
+    extraConfig = let
+      inherit
+        (config.wayland.windowManager.sway.config)
+        modifier
+        ;
+    in ''
+      bindsym ${modifier}+o exec grim -g "$(slurp)" - | wl-copy
+      bindsym ${modifier}+Shift+o exec ~/.config/kybe-scripts/sway/ss.bash
 
-        blur enable
-        blur_xray disable
-        blur_passes 5
-        blur_radius 5
+      blur enable
+      blur_xray disable
+      blur_passes 5
+      blur_radius 5
 
-        shadows enable
+      shadows enable
 
-        default_dim_inactive 0.2
-      '';
+      default_dim_inactive 0.2
+    '';
   };
 }

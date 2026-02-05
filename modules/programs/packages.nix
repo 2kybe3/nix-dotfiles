@@ -1,6 +1,5 @@
-{ pkgs }:
-with pkgs;
-[
+{pkgs}:
+with pkgs; [
   ## Netowrking
   wget
   curl
@@ -42,8 +41,6 @@ with pkgs;
   feh # Image Viewer
 
   ## Nix
-  nixfmt-tree
-  nixfmt
   statix
   nixd
 

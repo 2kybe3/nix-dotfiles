@@ -3,12 +3,9 @@
   config,
   pkgs,
   ...
-}:
-
-let
+}: let
   nixosConfigPath = "~/.dotfiles";
-in
-{
+in {
   programs.zsh = {
     enable = true;
     autocd = true;

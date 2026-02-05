@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   lsp = {
     inlayHints.enable = true;
     keymaps = [
@@ -146,9 +145,9 @@
       autoEnableSources = true;
       settings = {
         sources = [
-          { name = "nvim_lsp"; }
-          { name = "luasnip"; }
-          { name = "buffer"; }
+          {name = "nvim_lsp";}
+          {name = "luasnip";}
+          {name = "buffer";}
         ];
         mapping = {
           "<C-e>" = "cmp.mapping.close()";

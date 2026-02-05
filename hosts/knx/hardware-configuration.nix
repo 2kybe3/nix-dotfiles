@@ -6,9 +6,7 @@
   lib,
   modulesPath,
   ...
-}:
-
-{
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -22,28 +20,28 @@
       "usb_storage"
       "sd_mod"
     ];
-    initrd.kernelModules = [ ];
-    kernelModules = [ "kvm-intel" ];
-    extraModulePackages = [ ];
+    initrd.kernelModules = [];
+    kernelModules = ["kvm-intel"];
+    extraModulePackages = [];
   };
 
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/6e0608a2-2100-4110-ae6e-db0e9021ecbe";
       fsType = "btrfs";
-      options = [ "subvol=@" ];
+      options = ["subvol=@"];
     };
 
     "/home" = {
       device = "/dev/disk/by-uuid/6e0608a2-2100-4110-ae6e-db0e9021ecbe";
       fsType = "btrfs";
-      options = [ "subvol=@home" ];
+      options = ["subvol=@home"];
     };
 
     "/nix" = {
       device = "/dev/disk/by-uuid/6e0608a2-2100-4110-ae6e-db0e9021ecbe";
       fsType = "btrfs";
-      options = [ "subvol=@nix" ];
+      options = ["subvol=@nix"];
     };
 
     "/boot" = {

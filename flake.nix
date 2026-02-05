@@ -30,48 +30,46 @@
     };
   };
 
-  outputs =
-    {
-      nixpkgs,
-      rust-dev,
-      ...
-    }@inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-          nvidia.acceptLicense = true;
-        };
+  outputs = {
+    nixpkgs,
+    rust-dev,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config = {
+        allowUnfree = true;
+        nvidia.acceptLicense = true;
       };
-    in
-    {
-      nixosConfigurations = {
-        server = nixpkgs.lib.nixosSystem {
-          inherit system pkgs;
-
-          specialArgs = {
-            inherit inputs system;
-          };
-
-          modules = [
-            ./hosts/server
-          ];
-        };
-        knx = nixpkgs.lib.nixosSystem {
-          inherit system pkgs;
-
-          specialArgs = {
-            inherit inputs system;
-          };
-
-          modules = [
-            ./hosts/knx
-          ];
-        };
-      };
-
-      devShells.${system}.rust = rust-dev.devShells.${system}.default;
     };
+  in {
+    nixosConfigurations = {
+      server = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+
+        specialArgs = {
+          inherit inputs system;
+        };
+
+        modules = [
+          ./hosts/server
+        ];
+      };
+      knx = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+
+        specialArgs = {
+          inherit inputs system;
+        };
+
+        modules = [
+          ./hosts/knx
+        ];
+      };
+    };
+
+    formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
+    devShells.${system}.rust = rust-dev.devShells.${system}.default;
+  };
 }

@@ -1,13 +1,13 @@
-{ config, ... }:
-let
-  inherit (config.kybe.lib)
+{config, ...}: let
+  inherit
+    (config.kybe.lib)
     domain
     ;
-  inherit (config.kybe.lib.caddy)
+  inherit
+    (config.kybe.lib.caddy)
     createRawCaddyProxy
     ;
-in
-{
+in {
   sops.secrets.acme = {
     sopsFile = ../secrets/acme.env.bin;
     format = "binary";
@@ -29,7 +29,7 @@ in
 
     certs."${domain}" = {
       domain = "${domain}";
-      extraDomainNames = [ "*.${domain}" ];
+      extraDomainNames = ["*.${domain}"];
     };
   };
 

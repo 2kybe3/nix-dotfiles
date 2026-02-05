@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   enable = true;
 
   extraPlugins = with pkgs.vimPlugins; [
@@ -39,7 +38,7 @@
     })
     vim.cmd.colorscheme "catppuccin"
 
-    -- Leader 
+    -- Leader
     vim.g.mapleader = " "
     vim.g.maplocalleader = ","
     vim.keymap.set("n", "<Space>", "<Nop>", { silent = true })

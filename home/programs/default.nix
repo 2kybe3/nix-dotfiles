@@ -13,6 +13,6 @@
   programs = {
     home-manager.enable = true;
 
-    nixvim.imports = [ ./nixvim ];
+    nixvim.imports = [./nixvim];
   };
 }
