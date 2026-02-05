@@ -3,12 +3,7 @@
 
 set -euo pipefail
 
-DOTFILES_DIR="$HOME/.dotfiles"
-FLAKE_REF="knx"
-
 COMMIT_MSG="${1:-Config-change $(date '+%Y-%m-%d %H:%M:%S')}"
-
-cd "$DOTFILES_DIR" || { echo "Failed to enter $DOTFILES_DIR"; exit 1; }
 
 echo "Formatting files"
 if nix fmt -- .; then
@@ -31,7 +26,7 @@ fi
 
 if [[ $CHANGES -eq 1 ]]; then
   echo "Testing NixOS rebuild..."
-  if sudo nixos-rebuild switch --flake "$DOTFILES_DIR#$FLAKE_REF"; then
+  if nix flake check then
     git push github
     git push codeberg
     echo "Changes pushed!"
