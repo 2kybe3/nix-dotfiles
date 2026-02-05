@@ -1,4 +1,8 @@
-{ config, pkgs, ... }:
+{ nixosConfig, config, pkgs, ... }:
+
+let
+  nixosConfigPath = "~/.dotfiles";
+in
 {
   programs.zsh = {
     enable = true;
@@ -45,7 +49,10 @@
         '';
 
       tm = "tmux attach || tmux new";
-      dev = "nix develop ~/.dotfiles#rust -c $SHELL";
+      dev = "nix develop ${nixosConfigPath}#rust -c $SHELL";
+
+      os-update = "nix flake update --flake ${nixosConfigPath}; sudo nixos-rebuild switch --flake ${nixosConfigPath}#${nixosConfig.networking.hostName} --upgrade";
+      os-rebuild = "nixos-rebuild switch --flake ${nixosConfigPath}#${nixosConfig.networking.hostName}";
 
       cd = "z";
     };
