@@ -1,4 +1,5 @@
 {
+  system,
   config,
   inputs,
   ...
@@ -26,6 +27,8 @@
     inputs.sops-nix.nixosModules.sops
     inputs.nix-index-database.nixosModules.default
   ];
+
+  environment.systemPackages = [inputs.simplebacky.packages.${system}.simplebacky];
 
   sway.enable = true;
 
