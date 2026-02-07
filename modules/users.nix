@@ -1,4 +1,5 @@
 {
+  screenshot-sway-zipline,
   inputs,
   pkgs,
   config,
@@ -49,6 +50,7 @@
     ];
     extraSpecialArgs = {
       swayEnabled = config.sway.enable or false;
+      inherit screenshot-sway-zipline;
     };
     users.kybe = import ../home;
   };

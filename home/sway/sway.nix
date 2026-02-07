@@ -1,4 +1,5 @@
 {
+  screenshot-sway-zipline,
   config,
   pkgs,
   ...
@@ -155,10 +156,10 @@
       inherit
         (config.wayland.windowManager.sway.config)
         modifier
-        ;
+      ;
     in ''
       bindsym ${modifier}+o exec grim -g "$(slurp)" - | wl-copy
-      bindsym ${modifier}+Shift+o exec ~/.config/kybe-scripts/sway/ss.bash
+      bindsym ${modifier}+Shift+o exec ${screenshot-sway-zipline}/bin/screenshot-sway-zipline https://i.kybe.xyz/api/upload ${config.sops.secrets.image-token.path}
 
       blur enable
       blur_xray disable

@@ -43,6 +43,8 @@
         nvidia.acceptLicense = true;
       };
     };
+
+    screenshot-sway-zipline = import ./scripts/screenshot-sway-zipline { inherit pkgs; };
   in {
     nixosConfigurations = {
       server = nixpkgs.lib.nixosSystem {
@@ -60,7 +62,7 @@
         inherit system pkgs;
 
         specialArgs = {
-          inherit inputs system;
+          inherit inputs system screenshot-sway-zipline;
         };
 
         modules = [
