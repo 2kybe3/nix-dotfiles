@@ -1,8 +1,4 @@
 {
-  lib,
-  swayEnabled,
-  ...
-}: {
   home = {
     username = "kybe";
     homeDirectory = "/home/kybe";
@@ -14,8 +10,7 @@
     stateVersion = "25.11";
   };
 
-  imports = lib.flatten [
-    (lib.optional swayEnabled ./sway)
+  imports = [
     ./accounts.nix
     ./services
     ./programs

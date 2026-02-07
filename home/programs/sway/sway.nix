@@ -6,7 +6,7 @@
 }: {
   sops.secrets = {
     image-token = {
-      sopsFile = ../../secrets/i3status.yaml;
+      sopsFile = ../../../secrets/i3status.yaml;
       path = "/home/kybe/.config/image-token";
     };
   };
