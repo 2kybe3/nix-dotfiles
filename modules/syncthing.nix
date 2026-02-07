@@ -107,6 +107,12 @@ in {
           id = "zepjc-kbxe4";
           devices = allDevices;
           path = "${folderDir}/keepass";
+          versioning = {
+            type = "staggered";
+            params = {
+              maxAge = toString (60 * 60 * 24 * 7);
+            };
+          };
         };
       };
     };
