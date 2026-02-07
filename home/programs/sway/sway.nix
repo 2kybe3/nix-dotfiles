@@ -79,6 +79,8 @@
         };
       };
 
+      defaultWorkspace = "workspace number 1";
+
       startup = [
         {command = "kitty";}
         {command = "vesktop";}
