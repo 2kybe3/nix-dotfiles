@@ -1,4 +1,14 @@
 {
+  self,
+  config,
+  ...
+}: {
+  sops.secrets.access-token = {
+    path = "${config.home.homeDirectory}/.config/nix/access-tokens.conf";
+    mode = "0400";
+    sopsFile = "${self}/secrets/nix.conf.yaml";
+  };
+
   home = {
     username = "kybe";
     homeDirectory = "/home/kybe";
@@ -9,6 +19,8 @@
 
     stateVersion = "25.11";
   };
+
+  nix.extraOptions = "!include ${config.sops.secrets.access-token.path}";
 
   imports = [
     ./accounts.nix
@@ -35,6 +47,5 @@
 
   home.file = {
     ".config/wp.png".source = ./config/wp2.png;
-    ".config/kybe-scripts".source = ./config/scripts;
   };
 }

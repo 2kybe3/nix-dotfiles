@@ -1,4 +1,5 @@
 {
+  self,
   config,
   inputs,
   ...
@@ -7,22 +8,22 @@
     ./hardware-configuration.nix
     ./nvidia.nix
 
-    ../../modules/lib
-    ../../modules/nix.nix
-    ../../modules/sops.nix
-    ../../modules/sway.nix
-    ../../modules/boot.nix
-    ../../modules/programs
-    ../../modules/caddy.nix
-    ../../modules/users.nix
-    ../../modules/networking
-    ../../modules/system.nix
-    ../../modules/services.nix
-    ../../modules/syncthing.nix
-    ../../modules/journal-clear.nix
-    ../../modules/virtualisation.nix
-    ../../modules/networking/kybe-vpn.nix
-    ../../modules/networking/networkmanager.nix
+    "${self}/modules/lib"
+    "${self}/modules/nix.nix"
+    "${self}/modules/sops.nix"
+    "${self}/modules/sway.nix"
+    "${self}/modules/boot.nix"
+    "${self}/modules/programs"
+    "${self}/modules/caddy.nix"
+    "${self}/modules/users.nix"
+    "${self}/modules/networking"
+    "${self}/modules/system.nix"
+    "${self}/modules/services.nix"
+    "${self}/modules/syncthing.nix"
+    "${self}/modules/journal-clear.nix"
+    "${self}/modules/virtualisation.nix"
+    "${self}/modules/networking/kybe-vpn.nix"
+    "${self}/modules/networking/networkmanager.nix"
 
     inputs.sops-nix.nixosModules.sops
     inputs.nix-index-database.nixosModules.default

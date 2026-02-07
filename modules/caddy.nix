@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  self,
+  config,
+  ...
+}: let
   inherit
     (config.kybe.lib)
     domain
@@ -9,7 +13,7 @@
     ;
 in {
   sops.secrets.acme = {
-    sopsFile = ../secrets/acme.env.bin;
+    sopsFile = "${self}/secrets/acme.env.bin";
     format = "binary";
   };
 

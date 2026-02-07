@@ -1,12 +1,13 @@
 {
-  screenshot-sway-zipline,
-  config,
+  self,
   pkgs,
+  config,
+  screenshot-sway-zipline,
   ...
 }: {
   sops.secrets = {
     image-token = {
-      sopsFile = ../../../secrets/i3status.yaml;
+      sopsFile = "${self}/secrets/i3status.yaml";
       path = "/home/kybe/.config/image-token";
     };
   };
@@ -156,7 +157,7 @@
       inherit
         (config.wayland.windowManager.sway.config)
         modifier
-      ;
+        ;
     in ''
       bindsym ${modifier}+o exec grim -g "$(slurp)" - | wl-copy
       bindsym ${modifier}+Shift+o exec ${screenshot-sway-zipline}/bin/screenshot-sway-zipline https://i.kybe.xyz/api/upload ${config.sops.secrets.image-token.path}

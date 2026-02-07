@@ -1,19 +1,20 @@
 {
-  screenshot-sway-zipline,
-  inputs,
+  self,
   pkgs,
+  inputs,
   config,
+  screenshot-sway-zipline,
   ...
 }: {
   imports = [inputs.home-manager.nixosModules.home-manager];
 
   sops.secrets = {
     root-pass = {
-      sopsFile = ../secrets/users.yaml;
+      sopsFile = "${self}/secrets/users.yaml";
       neededForUsers = true;
     };
     kybe-pass = {
-      sopsFile = ../secrets/users.yaml;
+      sopsFile = "${self}/secrets/users.yaml";
       neededForUsers = true;
     };
   };
@@ -50,8 +51,8 @@
     ];
     extraSpecialArgs = {
       swayEnabled = config.sway.enable or false;
-      inherit screenshot-sway-zipline;
+      inherit self screenshot-sway-zipline;
     };
-    users.kybe = import ../home;
+    users.kybe = import "${self}/home";
   };
 }

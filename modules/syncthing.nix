@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  self,
+  config,
+  ...
+}: let
   inherit
     (config.kybe.lib)
     domain
@@ -31,15 +35,15 @@
 in {
   sops.secrets = {
     syncthingPass = {
-      sopsFile = ../secrets/syncthing.yaml;
+      sopsFile = "${self}/secrets/syncthing.yaml";
       owner = config.services.syncthing.user;
     };
     syncthingKey = {
-      sopsFile = ../secrets/${config.kybe.lib.hostName}-syncthing-key.pem;
+      sopsFile = "${self}/secrets/${config.kybe.lib.hostName}-syncthing-key.pem";
       format = "binary";
     };
     syncthingCert = {
-      sopsFile = ../secrets/${config.kybe.lib.hostName}-syncthing-cert.pem;
+      sopsFile = "${self}/secrets/${config.kybe.lib.hostName}-syncthing-cert.pem";
       format = "binary";
     };
   };

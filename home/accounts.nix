@@ -1,6 +1,10 @@
-{config, ...}: {
+{
+  self,
+  config,
+  ...
+}: {
   sops.secrets = {
-    "kybe.xyz".sopsFile = ../secrets/mail.yaml;
+    "kybe.xyz".sopsFile = "${self}/secrets/mail.yaml";
   };
 
   programs.himalaya.enable = true;

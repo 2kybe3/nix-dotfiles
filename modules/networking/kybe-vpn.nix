@@ -1,11 +1,15 @@
-{config, ...}: {
+{
+  self,
+  config,
+  ...
+}: {
   sops.secrets = {
     "wg-key" = {
-      sopsFile = ../../secrets/wireguard.yaml;
+      sopsFile = "${self}/secrets/wireguard.yaml";
       key = "key";
     };
     "wg-pk" = {
-      sopsFile = ../../secrets/wireguard.yaml;
+      sopsFile = "${self}/secrets/wireguard.yaml";
       key = "pk";
     };
   };

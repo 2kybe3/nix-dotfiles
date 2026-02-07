@@ -31,6 +31,7 @@
   };
 
   outputs = {
+    self,
     nixpkgs,
     rust-dev,
     ...
@@ -44,31 +45,22 @@
       };
     };
 
-    screenshot-sway-zipline = import ./scripts/screenshot-sway-zipline { inherit pkgs; };
+    makeSystem = hostModule:
+      nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
+
+        specialArgs = {
+          inherit self inputs system screenshot-sway-zipline;
+        };
+
+        modules = [hostModule];
+      };
+
+    screenshot-sway-zipline = import ./scripts/screenshot-sway-zipline {inherit pkgs;};
   in {
     nixosConfigurations = {
-      server = nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
-
-        specialArgs = {
-          inherit inputs system;
-        };
-
-        modules = [
-          ./hosts/server
-        ];
-      };
-      knx = nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
-
-        specialArgs = {
-          inherit inputs system screenshot-sway-zipline;
-        };
-
-        modules = [
-          ./hosts/knx
-        ];
-      };
+      knx = makeSystem ./hosts/knx;
+      server = makeSystem ./hosts/server;
     };
 
     formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;

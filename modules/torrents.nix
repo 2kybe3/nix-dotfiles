@@ -1,7 +1,8 @@
 {
   lib,
-  config,
+  self,
   pkgs,
+  config,
   ...
 }: let
   inherit
@@ -102,7 +103,7 @@ in {
 
   sops.secrets = {
     "mullvad-key" = {
-      sopsFile = ../secrets/mullvad.yaml;
+      sopsFile = "${self}/secrets/mullvad.yaml";
     };
   };
 

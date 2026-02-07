@@ -1,17 +1,18 @@
 {
+  self,
   pkgs,
   config,
   ...
 }: {
   sops.secrets = {
     github-notifications = {
-      sopsFile = ../../../secrets/i3status.yaml;
+      sopsFile = "${self}/secrets/i3status.yaml";
     };
     "openweathermap/key" = {
-      sopsFile = ../../../secrets/i3status.yaml;
+      sopsFile = "${self}/secrets/i3status.yaml";
     };
     "openweathermap/zip" = {
-      sopsFile = ../../../secrets/i3status.yaml;
+      sopsFile = "${self}/secrets/i3status.yaml";
     };
   };
 

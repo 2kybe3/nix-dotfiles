@@ -1,21 +1,22 @@
 {
-  inputs,
+  self,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
     ./proxmox.nix
 
-    ../../modules/lib
-    ../../modules/arr.nix
-    ../../modules/nix.nix
-    ../../modules/sops.nix
-    ../../modules/caddy.nix
-    ../../modules/networking
-    ../../modules/torrents.nix
-    ../../modules/syncthing.nix
-    ../../modules/programs/zsh.nix
-    ../../modules/journal-clear.nix
+    "${self}/modules/lib"
+    "${self}/modules/arr.nix"
+    "${self}/modules/nix.nix"
+    "${self}/modules/sops.nix"
+    "${self}/modules/caddy.nix"
+    "${self}/modules/networking"
+    "${self}/modules/torrents.nix"
+    "${self}/modules/syncthing.nix"
+    "${self}/modules/programs/zsh.nix"
+    "${self}/modules/journal-clear.nix"
 
     inputs.sops-nix.nixosModules.sops
   ];
