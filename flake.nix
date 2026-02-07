@@ -28,11 +28,6 @@
       url = "path:./tools/rust-dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    simplebacky = {
-      url = "github:2kybe3/simplebacky";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
