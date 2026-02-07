@@ -15,6 +15,7 @@
     ../../modules/torrents.nix
     ../../modules/syncthing.nix
     ../../modules/programs/zsh.nix
+    ../../modules/journal-clear.nix
 
     inputs.sops-nix.nixosModules.sops
   ];

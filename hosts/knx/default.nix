@@ -1,5 +1,4 @@
 {
-  system,
   config,
   inputs,
   ...
@@ -20,6 +19,7 @@
     ../../modules/system.nix
     ../../modules/services.nix
     ../../modules/syncthing.nix
+    ../../modules/journal-clear.nix
     ../../modules/virtualisation.nix
     ../../modules/networking/kybe-vpn.nix
     ../../modules/networking/networkmanager.nix
