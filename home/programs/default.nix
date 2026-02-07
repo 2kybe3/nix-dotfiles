@@ -1,8 +1,4 @@
-{
-  lib,
-  nixConfig,
-  ...
-}: {
+{lib, ...}: {
   imports = lib.flatten [
     ./sway
     ./fd.nix

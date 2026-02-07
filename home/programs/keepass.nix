@@ -12,6 +12,7 @@
       };
 
       Security = {
+        LockDatabaseIdle = false;
         IconDownloadFallback = true;
       };
 
