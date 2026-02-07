@@ -23,4 +23,8 @@
       };
     };
   };
+
+  wayland.windowManager.sway.config.startup = [
+    {command = "cat ${config.sops.secrets.keepass.path} | keepassxc --pw-stdin ~/syncthing/keepass/vault.kdbx";}
+  ];
 }

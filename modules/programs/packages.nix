@@ -23,7 +23,6 @@ with pkgs; [
   unzip
   delta
   file
-  sops
   fzf
   dig
   git
@@ -35,7 +34,6 @@ with pkgs; [
   (btop.override {
     cudaSupport = true;
   })
-  bottom
   ranger
   ncdu
   feh # Image Viewer

@@ -50,7 +50,7 @@
       inputs.sops-nix.homeManagerModules.sops
     ];
     extraSpecialArgs = {
-      swayEnabled = config.sway.enable or false;
+      nixConfig = config;
       inherit self screenshot-sway-zipline;
     };
     users.kybe = import "${self}/home";

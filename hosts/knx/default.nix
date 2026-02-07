@@ -29,8 +29,6 @@
     inputs.nix-index-database.nixosModules.default
   ];
 
-  sway.enable = true;
-
   kybe.lib.hostName = "knx";
   networking.hostName = config.kybe.lib.hostName;
 

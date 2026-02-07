@@ -6,9 +6,10 @@
   ...
 }: {
   sops.secrets = {
-    image-token = {
-      sopsFile = "${self}/secrets/i3status.yaml";
-      path = "/home/kybe/.config/image-token";
+    image-token.sopsFile = "${self}/secrets/i3status.yaml";
+    keepass = {
+      sopsFile = "${self}/secrets/keepass.yaml";
+      key = "key";
     };
   };
 

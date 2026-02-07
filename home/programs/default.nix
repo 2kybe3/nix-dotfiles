@@ -1,9 +1,10 @@
 {
   lib,
-  swayEnabled,
+  nixConfig,
   ...
 }: {
   imports = lib.flatten [
+    ./sway
     ./fd.nix
     ./zsh.nix
     ./git.nix
@@ -13,7 +14,6 @@
     ./kitty.nix
     ./ranger.nix
     ./keepass.nix
-    (lib.optional swayEnabled ./sway)
   ];
   programs = {
     home-manager.enable = true;
