@@ -28,8 +28,6 @@
     inputs.nix-index-database.nixosModules.default
   ];
 
-  environment.systemPackages = [inputs.simplebacky.packages.${system}.simplebacky];
-
   sway.enable = true;
 
   kybe.lib.hostName = "knx";
