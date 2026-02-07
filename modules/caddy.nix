@@ -37,7 +37,7 @@ in {
     enable = true;
 
     virtualHosts = {
-      "${domain}" = createRawCaddyProxy ''respond "KNX"'';
+      "${domain}" = createRawCaddyProxy ''respond "${config.kybe.lib.hostName}"'';
     };
   };
 
