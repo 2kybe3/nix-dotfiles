@@ -54,7 +54,7 @@ in {
       dev = "nix develop ${nixosConfigPath}#rust -c $SHELL";
 
       os-update = "nix flake update --flake ${nixosConfigPath}; sudo nixos-rebuild switch --flake ${nixosConfigPath}#${nixosConfig.networking.hostName} --upgrade";
-      os-rebuild = "nixos-rebuild switch --flake ${nixosConfigPath}#${nixosConfig.networking.hostName}";
+      os-offline = "sudo nixos-rebuild switch --flake ${nixosConfigPath}#${nixosConfig.networking.hostName} --offline";
 
       cd = "z";
     };
