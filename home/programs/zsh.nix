@@ -29,8 +29,7 @@ in {
       _fzf_compgen_path = "fd --hidden --follow --exclude '.git' . '$1'";
 
       fcd = "local dir; dir=$(_select_dir); [ -n '$dir' ] && cd '$dir'";
-      fr = "local dir; dir=$(_select_dir); [ -n '$dir' ] && ranger '$dir'";
-      fnv = "local file; file=$(_select_file); [ -n '$file' ] && nvim '$file'";
+      fv = "local file; file=$(_select_file); [ -n '$file' ] && nvim '$file'";
 
       gpgrh =
         # @goodnighttea
@@ -57,18 +56,7 @@ in {
       os-offline = "sudo nixos-rebuild switch --flake ${nixosConfigPath}#${nixosConfig.networking.hostName} --offline";
 
       cd = "z";
+      v = "neovim";
     };
-    plugins = [
-      {
-        name = "zsh-nix-shell";
-        file = "nix-shell.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "chisui";
-          repo = "zsh-nix-shell";
-          rev = "v0.8.0";
-          sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
-        };
-      }
-    ];
   };
 }

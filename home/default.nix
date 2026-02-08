@@ -3,10 +3,17 @@
   config,
   ...
 }: {
+  imports = [
+    ./accounts.nix
+    ./services
+    ./programs
+    ./sops.nix
+  ];
+
   sops.secrets.access-token = {
     path = "${config.home.homeDirectory}/.config/nix/access-tokens.conf";
-    mode = "0400";
     sopsFile = "${self}/secrets/nix.conf.yaml";
+    mode = "0400";
   };
 
   home = {
@@ -21,13 +28,6 @@
   };
 
   nix.extraOptions = "!include ${config.sops.secrets.access-token.path}";
-
-  imports = [
-    ./accounts.nix
-    ./services
-    ./programs
-    ./sops.nix
-  ];
 
   fonts.fontconfig = {
     enable = true;
@@ -45,7 +45,5 @@
 
   xdg.enable = true;
 
-  home.file = {
-    ".config/wp.png".source = ./config/wp2.png;
-  };
+  home.file.".config/wp.png".source = ./config/wp2.png;
 }
