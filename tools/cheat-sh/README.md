@@ -19,9 +19,15 @@ A tiny wrapper for [cheat.sh](https://cheat.sh/)
 
 ## Examples
 
+### Simple usage
+```bashbash
+nix run github:2kybe3/nix-dotfiles\?dir=tools/cheat-sh
+```
+
 ### print result using bat
+
 ```bash
-CHEAT_SHEAT_VIEWER=bat cheat-sh
+CHEAT_SHEAT_VIEWER=bat nix run github:2kybe3/nix-dotfiles\?dir=tools/cheat-sh
 ```
 
 ![output](https://i.kybe.xyz/u/JRqnlUdueOJTTvy)
