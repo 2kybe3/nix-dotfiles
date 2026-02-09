@@ -24,8 +24,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # TOOLS
     rust-dev = {
       url = "path:./tools/rust-dev";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    screenshot-sway-zipline = {
+      url = "path:./tools/screenshot-sway-zipline";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    cheat-sh = {
+      url = "path:./tools/cheat-sh";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -34,6 +45,8 @@
     self,
     nixpkgs,
     rust-dev,
+    cheat-sh,
+    screenshot-sway-zipline,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -50,13 +63,13 @@
         inherit system pkgs;
 
         specialArgs = {
-          inherit self inputs system screenshot-sway-zipline;
+          inherit self inputs system;
+          screenshot-sway-zipline = screenshot-sway-zipline.packages.${system}.default;
+          cheat-sh = cheat-sh.packages.${system}.default;
         };
 
         modules = [hostModule];
       };
-
-    screenshot-sway-zipline = import ./scripts/screenshot-sway-zipline {inherit pkgs;};
   in {
     nixosConfigurations = {
       knx = makeSystem ./hosts/knx;

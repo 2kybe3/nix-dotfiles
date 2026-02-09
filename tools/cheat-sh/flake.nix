@@ -1,5 +1,5 @@
 {
-  description = "Generate random syncthing folder id (tho it doesn't have to follow this format)";
+  description = "Wrapper for ch.sh";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -14,8 +14,14 @@
     flake-utils.lib.eachDefaultSystem (
       system: let
         pkgs = import nixpkgs {inherit system;};
-        name = "syncthing-folder-id-gen";
-        deps = [pkgs.gnused pkgs.openssl pkgs.coreutils];
+        name = "cheat-sh";
+        deps = [
+          pkgs.bat
+          pkgs.fzf
+          pkgs.curl
+          pkgs.less
+          pkgs.coreutils
+        ];
       in {
         packages.default = pkgs.stdenv.mkDerivation {
           pname = name;
@@ -29,7 +35,7 @@
             mkdir -p $out/bin
             install -m755 ${./script.sh} $out/bin/${name}
 
-            wrapProgram $out/bin/${name} --set PATH "${pkgs.lib.makeBinPath deps}"
+            wrapProgram $out/bin/${name} --prefix PATH : "${pkgs.lib.makeBinPath deps}"
           '';
         };
 

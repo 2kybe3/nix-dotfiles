@@ -1,5 +1,5 @@
 {
-  description = "Generate random syncthing folder id (tho it doesn't have to follow this format)";
+  description = "Screenshot tool for sway with zipline upload";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -14,8 +14,15 @@
     flake-utils.lib.eachDefaultSystem (
       system: let
         pkgs = import nixpkgs {inherit system;};
-        name = "syncthing-folder-id-gen";
-        deps = [pkgs.gnused pkgs.openssl pkgs.coreutils];
+        name = "screenshot-sway-zipline";
+        deps = [
+          pkgs.jq
+          pkgs.curl
+          pkgs.grim
+          pkgs.slurp
+          pkgs.coreutils
+          pkgs.wl-clipboard-rs
+        ];
       in {
         packages.default = pkgs.stdenv.mkDerivation {
           pname = name;
