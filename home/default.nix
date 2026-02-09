@@ -33,14 +33,14 @@
     enable = true;
     antialiasing = true;
     defaultFonts = {
-      monospace = ["DepartureMono Nerd Font Mono"];
+      monospace = ["FiraCode Nerd Font"];
     };
   };
 
   gtk = {
     enable = true;
     colorScheme = "dark";
-    font.name = "DepartureMono Nerd Font Mono";
+    font.name = "FiraCode Nerd Font";
   };
 
   xdg.enable = true;
