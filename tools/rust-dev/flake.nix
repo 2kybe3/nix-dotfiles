@@ -31,7 +31,7 @@
           ];
         };
       in {
-        devShells.${system}.default = pkgs.mkShell {
+        devShells.default = pkgs.mkShell {
           strictDeps = true;
 
           nativeBuildInputs = [
