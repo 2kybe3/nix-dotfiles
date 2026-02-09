@@ -1,1 +1,3 @@
-# This shall be copied into my projects incase i don't wanna use ./toolchain.toml
+```
+small shell for copying into rust projects with a rust-toolchain.toml
+```
