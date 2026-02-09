@@ -16,7 +16,6 @@
         pkgs = import nixpkgs {inherit system;};
         name = "cheat-sh";
         deps = [
-          pkgs.bat
           pkgs.fzf
           pkgs.curl
           pkgs.less

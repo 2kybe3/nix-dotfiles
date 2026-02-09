@@ -59,5 +59,5 @@ while true; do
     fi
 done
 
-VIEWER="${CHEAT_VIEWER:-bat --paging=always}"
+VIEWER="${CHEAT_VIEWER:-less}"
 $VIEWER "$OPT_CACHE"
