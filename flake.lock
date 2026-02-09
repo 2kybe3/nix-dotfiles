@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1770664098,
-        "narHash": "sha256-joqpqebq4vUrLp1F8FfLuBC1cdyULIcuMh8+hsYeBDU=",
+        "lastModified": 1770665198,
+        "narHash": "sha256-kM0GZ6VUO1SlhpExmzqvc2IavXDdvue3skqeMdQPl4Y=",
         "owner": "2kybe3",
         "repo": "cheat-sh",
-        "rev": "17d6c2cb20bc47ba5efe62932e4c3f2b7372fcfd",
+        "rev": "ecfa19c7a72faba6d47f6bc2f3f24b927afd083a",
         "type": "github"
       },
       "original": {

@@ -22,7 +22,7 @@ in {
 
       ssh-add -l | grep -q ~/.ssh/kybe || ssh-add ~/.ssh/kybe >/dev/null 2>&1
 
-      ff() {
+      ff-compress() {
         ffmpeg -i "$1" -vcodec libx264 -crf 23 "comp-$1"
       }
     '';
@@ -51,10 +51,6 @@ in {
             -r 743BC859354C3E19BA44ED4720570E9CE5639D56 \
             -r 8ACF72AA6E17367D4EE49FAC94384F67FA501352
         '';
-
-      ff-compress = ''
-        ffmpeg -i "$0" -vcodec libx264 -crf 23 "comp-$0"
-      '';
 
       tm = "tmux attach || tmux new";
       dev = "nix develop ${nixosConfigPath}#rust -c $SHELL";
