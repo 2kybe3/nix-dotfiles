@@ -19,6 +19,7 @@ with pkgs; [
   pamixer # pulseaudio command line mixer
   ripgrep
   openssl
+  ffmpeg
   psmisc # killall etc.
   unzip
   delta
