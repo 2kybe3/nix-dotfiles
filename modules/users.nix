@@ -29,10 +29,11 @@
         isNormalUser = true;
         shell = pkgs.zsh;
         extraGroups = [
-          "wheel"
-          "networkmanager"
-          "docker"
           "acme"
+          "wheel"
+          "docker"
+          "wireshark"
+          "networkmanager"
         ];
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM7irWuDZwx7ZvPSiUwBbxUxKL/7aMQmy/8oxput1bID kybe@khost"

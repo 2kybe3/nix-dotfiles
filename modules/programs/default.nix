@@ -4,10 +4,10 @@
   ...
 }: {
   imports = [
-    ./firefox.nix
     ./zsh.nix
-    ./gnupg.nix
     ./obs.nix
+    ./gnupg.nix
+    ./firefox.nix
   ];
   environment.systemPackages =
     import ./packages.nix {inherit pkgs;}
@@ -17,6 +17,7 @@
   programs = {
     steam.enable = true;
     zoxide.enable = true;
+    wireshark.enable = true;
     fzf.fuzzyCompletion = true;
   };
 }

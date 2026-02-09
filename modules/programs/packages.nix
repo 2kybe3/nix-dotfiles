@@ -6,9 +6,11 @@ with pkgs; [
   mtr
 
   ## Apps
-  vesktop
+  jetbrains.datagrip
   element-desktop
   tor-browser
+  wireshark
+  vesktop
   spotify
   gimp
 
