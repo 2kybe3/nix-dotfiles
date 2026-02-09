@@ -23,6 +23,7 @@ with pkgs; [
   unzip
   delta
   file
+  glow
   fzf
   dig
   git

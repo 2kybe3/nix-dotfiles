@@ -1,7 +1,27 @@
-# cheat-sh for [cheat.sh](https://cheat.sh/)
+# cheat-sh
+A tiny wrapper for [cheat.sh](https://cheat.sh/)
 
-# ![showcase](https://i.kybe.xyz/u/DrUSTtip153AY1x.mp4)
+---
 
-# ENV
-- CHEAT_SHEAT_DEBUG=true|false
-- CHEAT_SHEAT_VIEWER=less
+## ![Demo](https://i.kybe.xyz/u/DrUSTtip153AY1x.mp4)
+
+---
+
+## ENV
+
+
+| Variable | Values | Description |
+| -------- | ------ | ----------- |
+| `CHEAT_SHEAT_DEBUG`  | `true` / `false` | Enables debug output |
+| `CHEAT_SHEAT_VIEWER` | `less`, `bat`, `...` | Pager used to display results |
+
+---
+
+## Examples
+
+### print result using bat
+```bash
+CHEAT_SHEAT_VIEWER=bat cheat-sh
+```
+
+![output](https://i.kybe.xyz/u/JRqnlUdueOJTTvy)
