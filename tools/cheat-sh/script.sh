@@ -2,7 +2,9 @@
 set -euo pipefail
 export LC_ALL=C
 
-DEBUG=${DEBUG:-false}
+DEBUG=${CHEAT_SHEAT_DEBUG:-false}
+VIEWER="${CHEAT_SHEAT_VIEWER:-less}"
+
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/cheatsh"
 mkdir -p "$CACHE_DIR"
 
@@ -59,5 +61,4 @@ while true; do
     fi
 done
 
-VIEWER="${CHEAT_VIEWER:-less}"
 $VIEWER "$OPT_CACHE"
