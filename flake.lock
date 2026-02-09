@@ -8,14 +8,18 @@
         ]
       },
       "locked": {
-        "path": "./tools/cheat-sh",
-        "type": "path"
+        "lastModified": 1770664098,
+        "narHash": "sha256-joqpqebq4vUrLp1F8FfLuBC1cdyULIcuMh8+hsYeBDU=",
+        "owner": "2kybe3",
+        "repo": "cheat-sh",
+        "rev": "17d6c2cb20bc47ba5efe62932e4c3f2b7372fcfd",
+        "type": "github"
       },
       "original": {
-        "path": "./tools/cheat-sh",
-        "type": "path"
-      },
-      "parent": []
+        "owner": "2kybe3",
+        "repo": "cheat-sh",
+        "type": "github"
+      }
     },
     "flake-parts": {
       "inputs": {

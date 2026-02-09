@@ -36,7 +36,7 @@
     };
 
     cheat-sh = {
-      url = "path:./tools/cheat-sh";
+      url = "github:2kybe3/cheat-sh";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
