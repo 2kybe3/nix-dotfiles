@@ -1,7 +1,6 @@
 {
   nixosConfig,
   config,
-  pkgs,
   ...
 }: let
   nixosConfigPath = "~/.dotfiles";

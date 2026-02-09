@@ -7,17 +7,12 @@
 }: {
   sops.secrets = {
     image-token.sopsFile = "${self}/secrets/i3status.yaml";
-    keepass = {
-      sopsFile = "${self}/secrets/keepass.yaml";
-      key = "key";
-    };
   };
 
   home.packages = with pkgs; [
     kitty
     swaybg
     bemenu
-    polkit_gnome
     wl-clipboard-rs
 
     # SS

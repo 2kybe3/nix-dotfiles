@@ -1,7 +1,11 @@
-{config, ...}: {
+{
+  pkgs,
+  nixosConfig,
+  config,
+  ...
+}: {
   programs.keepassxc = {
     enable = true;
-    autostart = true;
     settings = {
       General.LastActiveDatabase = "${config.home.homeDirectory}/syncthing/keepass/vault.kdbx";
       SSHAgent.Enabled = true;
@@ -25,7 +29,13 @@
     };
   };
 
-  wayland.windowManager.sway.config.startup = [
-    {command = "cat ${config.sops.secrets.keepass.path} | keepassxc --pw-stdin ~/syncthing/keepass/vault.kdbx";}
+  home.packages = [
+    (pkgs.writeShellApplication {
+      name = "keepass";
+      runtimeInputs = [pkgs.keepassxc];
+      text = ''
+        pkexec cat ${nixosConfig.sops.secrets.keepass.path} | keepassxc --pw-stdin "$HOME/syncthing/keepass/vault.kdbx"
+      '';
+    })
   ];
 }

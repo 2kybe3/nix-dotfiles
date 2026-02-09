@@ -12,5 +12,12 @@
     defaultSopsFormat = "yaml";
 
     age.keyFile = "/nix/persist/var/lib/sops-nix/key.txt";
+
+    secrets = {
+      keepass = {
+        sopsFile = "${self}/secrets/keepass.yaml";
+        key = "key";
+      };
+    };
   };
 }
