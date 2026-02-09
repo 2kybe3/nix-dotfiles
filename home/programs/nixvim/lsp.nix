@@ -65,13 +65,10 @@
       enable = true;
       servers = {
         nixd.enable = true;
-        sqls.enable = true;
+        just.enable = true;
         html.enable = true;
-        stylua.enable = true;
-        nil_ls.enable = true;
         yamlls.enable = true;
         bash_ls.enable = true;
-        superhtml.enable = true;
         systemd_lsp.enable = true;
         docker_language_service.enable = true;
         docker_compose_language_service.enable = true;
@@ -150,9 +147,7 @@
           {name = "buffer";}
         ];
         mapping = {
-          "<C-e>" = "cmp.mapping.close()";
           "<C-Space>" = "cmp.mapping.complete()";
-          "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
           "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
           "<CR>" = "cmp.mapping.confirm({ select = true })";
         };

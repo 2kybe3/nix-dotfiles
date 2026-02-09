@@ -27,7 +27,7 @@
     stateVersion = "25.11";
   };
 
-  nix.extraOptions = "!include ${config.sops.secrets.access-token.path}";
+  nix = {extraOptions = "!include ${config.sops.secrets.access-token.path}";};
 
   fonts.fontconfig = {
     enable = true;
