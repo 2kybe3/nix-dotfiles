@@ -3,7 +3,7 @@ A tiny wrapper for [cheat.sh](https://cheat.sh/)
 
 ---
 
-## ![Demo](https://i.kybe.xyz/u/DrUSTtip153AY1x.mp4)
+![Demo](https://i.kybe.xyz/u/DrUSTtip153AY1x.mp4)
 
 ---
 
