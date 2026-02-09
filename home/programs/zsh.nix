@@ -57,6 +57,8 @@ in {
 
       cd = "z";
       v = "neovim";
+
+      cs = "cheat-sh";
     };
   };
 }
