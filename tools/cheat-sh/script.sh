@@ -28,7 +28,7 @@ ROOT_CACHE="$CACHE_DIR/root"
 fetch_cache "https://cheat.sh/:list" "$ROOT_CACHE"
 
 # allow user to select a lang
-LANG="$(cat $ROOT_CACHE | fzf)"
+LANG="$(cat "$ROOT_CACHE" | fzf)"
 PATH_SO_FAR="$LANG"
 
 ENC_LIST_LANG=$(b64safe "$LANG/:list")
