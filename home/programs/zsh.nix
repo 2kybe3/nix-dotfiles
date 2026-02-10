@@ -53,13 +53,13 @@ in {
         '';
 
       tm = "tmux attach || tmux new";
-      dev = "nix develop ${nixosConfigPath}#rust -c $SHELL";
+      rdev = "nix develop ${nixosConfigPath}#rust -c $SHELL";
 
       os-update = "nix flake update --flake ${nixosConfigPath}; sudo nixos-rebuild switch --flake ${nixosConfigPath}#${nixosConfig.networking.hostName} --upgrade";
       os-offline = "sudo nixos-rebuild switch --flake ${nixosConfigPath}#${nixosConfig.networking.hostName} --offline";
 
       cd = "z";
-      v = "neovim";
+      v = "nvim";
 
       cs = "cheat-sh";
     };
