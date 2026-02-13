@@ -1,5 +1,6 @@
 {
   self,
+  lib,
   config,
   ...
 }: let
@@ -12,6 +13,18 @@
     (config.kybe.lib.caddy)
     createCaddyProxy
     ;
+
+  syncthingUser =
+    if hostName == "server"
+    then "root"
+    else "kybe";
+  homeDir =
+    if config.kybe.lib.hostName == "server"
+    then "/root"
+    else "/home/${syncthingUser}";
+  folderDir = "${homeDir}/syncthing";
+  dataDir = folderDir;
+
   knxDevice = "knx";
   serverDevice = "server";
   phoneDevice = "phone";
@@ -22,15 +35,47 @@
     phoneDevice
   ];
 
-  syncthingUser =
-    if hostName == "server"
-    then "root"
-    else "kybe";
-  folderDir =
-    if config.kybe.lib.hostName == "server"
-    then "/root/syncthing"
-    else "/home/${syncthingUser}/syncthing";
-  dataDir = folderDir;
+  base = {
+    devices = allDevices;
+  };
+
+  # Generate a folder ID (similar to Syncthing’s default format):
+  #   nix run ./tools/syncthing-folder-id-gen
+  folderDefs = {
+    "phone/documents" = {
+      id = "nbrf9-2w4wy";
+      path = "phone/Documents";
+    };
+    "pictures" = {
+      id = "labpe-fxw3q";
+      path = "phone/pictures";
+    };
+    "phone/dcim" = {
+      id = "d7tbq-371tj";
+      path = "phone/dcim";
+    };
+    "phone/aesis" = {
+      id = "c2vbp-mdgxw";
+      path = "phone/aesis";
+    };
+    "obsidian" = {
+      id = "erg2o-nnpy1";
+      path = "obsidian";
+    };
+    "documents" = {
+      id = "gqe7d-gqjr2";
+      path = "documents";
+    };
+
+    "keepass" = {
+      id = "zepjc-kbxe4";
+      path = "keepass";
+      versioning = {
+        type = "staggered";
+        params.maxAge = toString (60 * 60 * 24 * 7); # 7 days
+      };
+    };
+  };
 in {
   sops.secrets = {
     syncthingPass = {
@@ -46,6 +91,22 @@ in {
       format = "binary";
     };
   };
+
+  networking.firewall = {
+    allowedTCPPorts = [
+      22000
+    ];
+    allowedUDPPorts = [
+      22000
+      21027
+    ];
+  };
+
+  systemd.tmpfiles.rules = lib.mkIf (config.kybe.lib.hostName == "knx") [
+    "L+ ${homeDir}/Documents - - - - /home/kybe/syncthing/documents"
+  ];
+
+  services.caddy.virtualHosts."syncthing.${domain}" = createCaddyProxy 8384;
 
   services.syncthing = {
     enable = true;
@@ -83,59 +144,18 @@ in {
         };
       };
 
-      # Generate a folder ID (similar to Syncthing’s default format):
-      #   nix run ./tools/syncthing-folder-id-gen
-      folders = {
-        "phone/documents" = {
-          id = "nbrf9-2w4wy";
-          devices = allDevices;
-          path = "${folderDir}/phone/Documents";
-        };
-        "pictures" = {
-          id = "labpe-fxw3q";
-          devices = allDevices;
-          path = "${folderDir}/phone/pictures";
-        };
-        "phone/dcim" = {
-          id = "d7tbq-371tj";
-          devices = allDevices;
-          path = "${folderDir}/phone/dcim";
-        };
-        "phone/aesis" = {
-          id = "c2vbp-mdgxw";
-          devices = allDevices;
-          path = "${folderDir}/phone/aesis";
-        };
-        "obsidian" = {
-          id = "erg2o-nnpy1";
-          devices = allDevices;
-          path = "${folderDir}/obsidian";
-        };
-        "keepass" = {
-          id = "zepjc-kbxe4";
-          devices = allDevices;
-          path = "${folderDir}/keepass";
-          versioning = {
-            type = "staggered";
-            params = {
-              # 7 days
-              maxAge = toString (60 * 60 * 24 * 7);
-            };
-          };
-        };
-      };
+      folders =
+        lib.mapAttrs
+        (_: v:
+          base
+          // {
+            id = v.id;
+            path = "${folderDir}/${v.path}";
+          }
+          // lib.optionalAttrs (v ? versioning) {
+            versioning = v.versioning;
+          })
+        folderDefs;
     };
   };
-
-  networking.firewall = {
-    allowedTCPPorts = [
-      22000
-    ];
-    allowedUDPPorts = [
-      22000
-      21027
-    ];
-  };
-
-  services.caddy.virtualHosts."syncthing.${domain}" = createCaddyProxy 8384;
 }
