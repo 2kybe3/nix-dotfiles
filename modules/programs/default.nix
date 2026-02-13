@@ -1,19 +1,15 @@
-{
-  pkgs,
-  cheat-sh,
-  ...
-}: {
+{cheat-sh, ...}: {
   imports = [
     ./zsh.nix
     ./obs.nix
     ./gnupg.nix
     ./firefox.nix
+    ./packages.nix
+    ./libreoffice.nix
   ];
-  environment.systemPackages =
-    import ./packages.nix {inherit pkgs;}
-    ++ [
-      cheat-sh
-    ];
+  environment.systemPackages = [
+    cheat-sh
+  ];
   programs = {
     steam.enable = true;
     zoxide.enable = true;
