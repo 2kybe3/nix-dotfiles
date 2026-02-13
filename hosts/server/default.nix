@@ -14,9 +14,9 @@
     "${self}/modules/caddy.nix"
     "${self}/modules/networking"
     "${self}/modules/torrents.nix"
+    "${self}/modules/journald.nix"
     "${self}/modules/syncthing.nix"
     "${self}/modules/programs/zsh.nix"
-    "${self}/modules/journal-clear.nix"
 
     inputs.sops-nix.nixosModules.sops
   ];
