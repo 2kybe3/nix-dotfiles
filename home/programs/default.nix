@@ -10,6 +10,7 @@
     ./kitty.nix
     ./ranger.nix
     ./keepass.nix
+    ./obsidian.nix
   ];
   programs = {
     home-manager.enable = true;

@@ -12,7 +12,6 @@
     (config.kybe.lib.caddy)
     createCaddyProxy
     ;
-
   knxDevice = "knx";
   serverDevice = "server";
   phoneDevice = "phone";
@@ -107,6 +106,11 @@ in {
           devices = allDevices;
           path = "${folderDir}/phone/aesis";
         };
+        "obsidian" = {
+          id = "erg2o-nnpy1";
+          devices = allDevices;
+          path = "${folderDir}/obsidian";
+        };
         "keepass" = {
           id = "zepjc-kbxe4";
           devices = allDevices;
@@ -114,6 +118,7 @@ in {
           versioning = {
             type = "staggered";
             params = {
+              # 7 days
               maxAge = toString (60 * 60 * 24 * 7);
             };
           };
