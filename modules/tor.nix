@@ -5,7 +5,7 @@
       enable = true;
       dns.enable = true;
       socksListenAddress = {
-        IsolateDestAddr = true;
+        IsolateSOCKSAuth = true;
         addr = "127.0.0.1";
         port = 9050;
       };
