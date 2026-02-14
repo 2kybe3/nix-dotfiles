@@ -40,9 +40,7 @@ in {
   services.caddy = {
     enable = true;
 
-    virtualHosts = {
-      "${domain}" = createRawCaddyProxy ''respond "${config.kybe.lib.hostName}"'';
-    };
+    virtualHosts."${domain}" = createRawCaddyProxy ''respond "${config.kybe.lib.hostName}"'';
   };
 
   users.groups.acme.members = [
