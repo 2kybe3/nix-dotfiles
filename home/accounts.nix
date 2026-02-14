@@ -3,9 +3,7 @@
   config,
   ...
 }: {
-  sops.secrets = {
-    "kybe.xyz".sopsFile = "${self}/secrets/mail.yaml";
-  };
+  sops.secrets."kybe.xyz".sopsFile = "${self}/secrets/mail.yaml";
 
   programs.himalaya.enable = true;
 

@@ -5,9 +5,7 @@
   screenshot-sway-zipline,
   ...
 }: {
-  sops.secrets = {
-    image-token.sopsFile = "${self}/secrets/i3status.yaml";
-  };
+  sops.secrets.image-token.sopsFile = "${self}/secrets/i3status.yaml";
 
   home.packages = with pkgs; [
     kitty

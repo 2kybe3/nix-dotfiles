@@ -101,10 +101,8 @@ in {
     };
   };
 
-  sops.secrets = {
-    "mullvad-key" = {
-      sopsFile = "${self}/secrets/mullvad.yaml";
-    };
+  sops.secrets."mullvad-key" = {
+    sopsFile = "${self}/secrets/mullvad.yaml";
   };
 
   networking.wireguard = {
