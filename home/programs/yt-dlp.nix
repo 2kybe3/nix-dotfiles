@@ -3,7 +3,8 @@
     enable = true;
     settings = {
       downloader = "aria2c";
-      downloader-args = "aria2c:'-c -x8 -s8 -k1M'";
+      remux-video = "mp4";
+      downloader-args = "aria2c:'-c -x16 -s16 -k4M --file-allocation=falloc'";
       output = "~/YouTube/%(title)s.%(ext)s";
     };
   };
