@@ -34,6 +34,9 @@
     antialiasing = true;
     defaultFonts = {
       monospace = ["FiraCode Nerd Font"];
+      sansSerif = ["Inter"];
+      serif = ["Noto Serif"];
+      emoji = ["Noto Color Emoji"];
     };
   };
 

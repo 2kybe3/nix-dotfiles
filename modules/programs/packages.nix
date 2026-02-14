@@ -57,7 +57,6 @@
     })
 
     jdk21
-    pinentry-curses
 
     # Nixvim
     tree-sitter

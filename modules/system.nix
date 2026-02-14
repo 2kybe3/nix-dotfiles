@@ -4,6 +4,8 @@
   hardware.bluetooth.enable = true;
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
-    nerd-fonts.noto
+    inter
+    noto-fonts
+    noto-fonts-color-emoji
   ];
 }
