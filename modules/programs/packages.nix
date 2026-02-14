@@ -27,6 +27,7 @@
     delta
     file
     glow
+    tldr
     fzf
     dig
     git

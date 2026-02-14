@@ -6,5 +6,8 @@
     pulse.enable = true;
     wireplumber.enable = true;
   };
-  environment.systemPackages = with pkgs; [qpwgraph];
+  environment.systemPackages = with pkgs; [
+    qpwgraph
+    pulseaudio
+  ];
 }
