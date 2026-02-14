@@ -9,6 +9,8 @@
     ./nvidia.nix
 
     "${self}/modules/lib"
+    "${self}/modules/tor.nix"
+    "${self}/modules/ssh.nix"
     "${self}/modules/nix.nix"
     "${self}/modules/sops.nix"
     "${self}/modules/sway.nix"
@@ -16,8 +18,11 @@
     "${self}/modules/programs"
     "${self}/modules/caddy.nix"
     "${self}/modules/users.nix"
+    "${self}/modules/getty.nix"
     "${self}/modules/networking"
     "${self}/modules/system.nix"
+    "${self}/modules/printer.nix"
+    "${self}/modules/pipewire.nix"
     "${self}/modules/services.nix"
     "${self}/modules/journald.nix"
     "${self}/modules/syncthing.nix"
