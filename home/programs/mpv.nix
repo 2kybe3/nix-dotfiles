@@ -14,7 +14,7 @@
     config = {
       profile = "high-quality";
       ytdl-format = "bestvideo+bestaudio";
-      save-position-on-quit = "true";
+      save-position-on-quit = "yes";
     };
   };
 }
