@@ -1,4 +1,10 @@
-{lib, ...}: {
+{
+  self,
+  lib,
+  system,
+  config,
+  ...
+}: {
   imports = lib.flatten [
     ./sway
     ./fd.nix
@@ -18,6 +24,12 @@
   programs = {
     home-manager.enable = true;
 
-    nixvim.imports = [./nixvim];
+    nixvim = {
+      imports = [./nixvim];
+      _module.args = {
+        inherit self system;
+        home = config.home;
+      };
+    };
   };
 }

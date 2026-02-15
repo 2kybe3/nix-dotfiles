@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  self,
+  lib,
+  ...
+}: {
   lsp = {
     inlayHints.enable = true;
     keymaps = [
@@ -64,8 +68,22 @@
     lsp = {
       enable = true;
       servers = {
-        nixd.enable = true;
-        just.enable = true;
+        nixd = {
+          # Nix LS
+          enable = true;
+          settings = let
+            flake = ''(builtins.getFlake "${self}")'';
+          in {
+            nixpkgs.expr = "import ${flake}.inputs.nixpkgs { }";
+            formatting.command = "nix fmt -- .";
+            options = rec {
+              nixos.expr = "${flake}.nixosConfigurations.knx.options";
+              hm.expr = "${flake}.nixosConfigurations.knx.options.home-manager.users.type.getSubOptions []";
+              nixvim.expr = "${hm.expr}.programs.nixvim";
+            };
+          };
+        };
+        jus.enable = true;
         html.enable = true;
         yamlls.enable = true;
         bash_ls.enable = true;
