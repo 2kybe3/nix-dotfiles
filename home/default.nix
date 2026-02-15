@@ -46,7 +46,10 @@
     font.name = "FiraCode Nerd Font";
   };
 
-  xdg.enable = true;
+  xdg = {
+    enable = true;
+    userDirs.enable = true;
+  };
 
   home.file = {
     ".config/wp.png".source = ./config/wp2.png;

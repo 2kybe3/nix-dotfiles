@@ -7,6 +7,7 @@
     ./git.nix
     ./ssh.nix
     ./tmux.nix
+    ./rmpc.nix
     ./btop.nix
     ./kitty.nix
     ./yt-dlp.nix
