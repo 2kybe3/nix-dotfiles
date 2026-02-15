@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  aria2-unlimited,
   ...
 }: let
   firefoxVersion = pkgs.lib.concatStringsSep "." (pkgs.lib.take 2 (pkgs.lib.splitString "." pkgs.firefox.version));
@@ -11,14 +12,13 @@ in {
     settings = {
       downloader = "aria2c";
       remux-video = "mp4";
-      downloader-args = "aria2c:'-c -x16 -s16 -k4M --file-allocation=falloc'";
+      downloader-args = "aria2c:'-c -x32 -s32 -k4M --file-allocation=falloc'";
       output = "${config.xdg.userDirs.videos}/youtube/%(title)s.%(ext)s";
       cookies-from-browser = "firefox";
     };
     extraConfig = ''
-      --save-position-on-quit
       --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:${firefoxVersion}) Gecko/20100101 Firefox/${firefoxVersion}";
     '';
   };
-  home.packages = with pkgs; [aria2];
+  home.packages = [aria2-unlimited];
 }
