@@ -22,7 +22,7 @@
       export I3RS_GITHUB_TOKEN="$(cat ${config.sops.secrets.github-notifications.path})"
       export OPENWEATHERMAP_API_KEY="$(cat ${config.sops.secrets."openweathermap/key".path})"
       export OPENWEATHERMAP_ZIP="$(cat ${config.sops.secrets."openweathermap/zip".path})"
-      exec ${pkgs.i3status-rust}/bin/i3status-rs "$@"
+      exec ${i3status-rust}/bin/i3status-rs "$@"
     '')
   ];
   programs.i3status-rust = {
@@ -39,11 +39,7 @@
         }
         {
           block = "memory";
-          interval = 1;
-        }
-        {
-          block = "disk_iostats";
-          device = "sdc";
+          format = " $icon $mem_used.eng(prefix:Mi)/$mem_total.eng(prefix:Mi) ";
           interval = 1;
         }
         {
@@ -62,10 +58,21 @@
           mac = "2C:BE:EE:4A:5B:32";
         }
         {
+          block = "music";
+          player = ["mpd"];
+          format = "{ $play $combo.str(max_w:25,rot_interval:0.1)  | }";
+        }
+        {
+          block = "music";
+          player = ["firefox.instance_1_22"];
+          format = "{ $play $combo.str(max_w:20,rot_interval:0.1)  | }";
+        }
+        {
           block = "weather";
           service = {
             name = "openweathermap";
           };
+          format = " $icon  $weather $temp ";
         }
         {
           block = "time";
