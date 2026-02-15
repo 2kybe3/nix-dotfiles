@@ -86,6 +86,8 @@
         titlebar = false;
       };
 
+      output.HDMI-A-1.mode = "1920x1080@75Hz";
+
       keybindings = let
         inherit
           (config.wayland.windowManager.sway.config)
