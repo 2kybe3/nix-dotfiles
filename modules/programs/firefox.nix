@@ -58,8 +58,10 @@
       Preferences = {
         "browser.search.suggest.enabled" = false;
         "browser.search.suggest.enabled.private" = false;
+
         "browser.urlbar.suggest.searches" = false;
         "browser.urlbar.showSearchSuggestionsFirst" = false;
+
         "browser.newtabpage.activity-stream.feeds.snippets" = false;
         "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
         "browser.newtabpage.activity-stream.showSponsored" = false;
@@ -70,7 +72,16 @@
         "browser.newtabpage.activity-stream.section.highlights.includeBookmarks" = false;
         "browser.newtabpage.activity-stream.section.highlights.includeDownloads" = false;
 
-        # Tweak to make keepasses PassKeys work work
+        "network.http.sendRefererHeader" = "1";
+
+        "privacy.resistFingerprinting" = true;
+        "privacy.resistFingerprinting.exemptedDomains" = "*.youtube.com";
+
+        "geo.enabled" = false;
+        "dom.battery.enabled" = false;
+        "device.sensors.enabled" = false;
+
+        # Tweak to make keepasses PassKeys work
         "security.webauth.webauthn_enable_usbtoken" = false;
       };
 
