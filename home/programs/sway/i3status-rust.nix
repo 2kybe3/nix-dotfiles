@@ -31,11 +31,11 @@
       blocks = [
         {
           block = "disk_space";
-          path = "/";
+          info_type = "available";
           interval = 60;
           warning = 20.0;
           alert = 10.0;
-          info_type = "available";
+          path = "/";
         }
         {
           block = "memory";

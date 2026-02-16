@@ -38,26 +38,21 @@
 
       bars = [
         {
-          mode = "dock";
-          hiddenState = "hide";
           position = "top";
+          statusPadding = 0;
           workspaceButtons = false;
           workspaceNumbers = false;
           statusCommand = "i3status-rs-wrapper config-default.toml";
+          trayOutput = "none";
+
           fonts = {
             names = ["monospace"];
             size = 8.0;
           };
-          trayOutput = "primary";
+
           colors = {
+            statusline = "#00ff00";
             background = "#000000";
-            statusline = "#ffffff";
-            separator = "#666666";
-            bindingMode = {
-              border = "#000000";
-              background = "#900000";
-              text = "#ffffff";
-            };
           };
         }
       ];
