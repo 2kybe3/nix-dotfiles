@@ -60,19 +60,19 @@
         {
           block = "music";
           player = ["mpd"];
-          format = "{ $play $combo.str(max_w:25,rot_interval:0.1)  | }";
+          format = "{ $play $combo.str(max_w:25,rot_interval:0.1) |}";
         }
         {
           block = "music";
           player = ["firefox.instance_1_22"];
-          format = "{ $play $combo.str(max_w:20,rot_interval:0.1)  | }";
+          format = "{ $play $combo.str(max_w:20,rot_interval:0.1) |}";
         }
         {
           block = "weather";
           service = {
             name = "openweathermap";
           };
-          format = " $icon  $weather $temp ";
+          format = " $icon $weather $temp ";
         }
         {
           block = "time";
