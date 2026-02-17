@@ -35,12 +35,13 @@ in {
       fv = "local file; file=$(_select_file); [ -n '$file' ] && nvim '$file'";
 
       gpgrh =
-        # @goodnighttea
-        # @koteyka32k
-        # @2kybe3
-        # @marni_
-        # @tillay8
-        # @lokfid
+        # @ goodnighttea
+        # @ koteyka32k
+        # @ 2kybe3
+        # @ marni_
+        # @ tillay8
+        # @ lokfid
+        # @ magpie_luv_02266
         ''
           gpg -e -a \
             -r 7292A69DAE47A4CBEF94F3F983592EB1EFCA1F70 \
@@ -49,7 +50,8 @@ in {
             -r 4B2067C3BD6D410F13E536A343CE43938A3C7A8F \
             -r C68D18E129AA29F98A967A3A00588427560CD36F \
             -r 743BC859354C3E19BA44ED4720570E9CE5639D56 \
-            -r 8ACF72AA6E17367D4EE49FAC94384F67FA501352
+            -r 8ACF72AA6E17367D4EE49FAC94384F67FA501352 \
+            -r 297B0D8F57D38FC37888D1ACE90BD864D5D78FFD
         '';
 
       tm = "tmux attach || tmux new";
