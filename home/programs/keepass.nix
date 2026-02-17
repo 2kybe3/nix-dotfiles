@@ -34,7 +34,7 @@
       name = "keepass";
       runtimeInputs = [pkgs.keepassxc];
       text = ''
-        pkexec cat /run/secret/keepass | keepassxc --pw-stdin "$HOME/syncthing/keepass/vault.kdbx"
+        pkexec cat /run/secrets/keepass | keepassxc --pw-stdin "$HOME/syncthing/keepass/vault.kdbx"
       '';
     })
   ];

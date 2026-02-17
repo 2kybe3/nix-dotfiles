@@ -1,11 +1,8 @@
 {
   self,
   pkgs,
-  cpkgs,
   inputs,
   config,
-  system,
-  screenshot-sway-zipline,
   ...
 }: {
   imports = [inputs.home-manager.nixosModules.home-manager];
