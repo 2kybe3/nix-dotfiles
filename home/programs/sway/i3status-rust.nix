@@ -31,11 +31,21 @@
       blocks = [
         {
           block = "disk_space";
+          format = " F: $available ";
           info_type = "available";
+          alert_unit = "GB";
           interval = 60;
-          warning = 20.0;
-          alert = 10.0;
-          path = "/";
+          warning = 200;
+          alert = 100;
+        }
+        {
+          block = "disk_space";
+          format = " U: $used ";
+          info_type = "used";
+          alert_unit = "GB";
+          interval = 60;
+          warning = 800;
+          alert = 900;
         }
         {
           block = "memory";
@@ -44,6 +54,7 @@
         }
         {
           block = "cpu";
+          format = " $icon $utilization ";
           interval = 1;
         }
         {

@@ -37,6 +37,7 @@
     gh
 
     ## TUI
+    vim
     (btop.override {
       cudaSupport = true;
     })
