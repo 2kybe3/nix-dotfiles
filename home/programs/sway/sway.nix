@@ -39,7 +39,6 @@
       bars = [
         {
           position = "top";
-          statusPadding = 0;
           workspaceButtons = false;
           workspaceNumbers = false;
           statusCommand = "i3status-rs-wrapper config-default.toml";

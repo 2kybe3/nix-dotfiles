@@ -1,11 +1,24 @@
 {
   self,
+  pkgs,
   config,
   ...
 }: {
   sops.secrets."kybe.xyz".sopsFile = "${self}/secrets/mail.yaml";
 
-  programs.himalaya.enable = true;
+  programs = {
+    himalaya.enable = true;
+    thunderbird = {
+      enable = true;
+      profiles."kybe" = {
+        isDefault = true;
+      };
+      settings = {
+        "general.useragent.override" = ":-)";
+        "extensions.autoDisableScopes" = 0; # automatically enable extensions
+      };
+    };
+  };
 
   accounts.email.accounts."kybe@kybe.xyz" = {
     enable = true;
@@ -14,6 +27,7 @@
     address = "kybe@kybe.xyz";
     userName = "kybe@kybe.xyz";
     himalaya.enable = true;
+    thunderbird.enable = true;
     imap = {
       host = "mail.kybe.xyz";
       port = 993;
