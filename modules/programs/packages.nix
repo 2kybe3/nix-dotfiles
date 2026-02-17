@@ -23,8 +23,9 @@
     openssl
     ffmpeg
     psmisc # killall etc.
-    unzip
     delta
+    unzip
+    socat
     file
     glow
     tldr

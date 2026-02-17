@@ -5,15 +5,12 @@
 }: {
   sops.secrets."kybe.xyz".sopsFile = "${self}/secrets/mail.yaml";
 
-  programs = {
-    himalaya.enable = true;
-    thunderbird = {
-      enable = true;
-      profiles."kybe".isDefault = true;
-      settings = {
-        "general.useragent.override" = ":-)";
-        "extensions.autoDisableScopes" = 0; # automatically enable extensions
-      };
+  programs.thunderbird = {
+    enable = true;
+    profiles."kybe".isDefault = true;
+    settings = {
+      "general.useragent.override" = ":-)";
+      "extensions.autoDisableScopes" = 0; # automatically enable extensions
     };
   };
 

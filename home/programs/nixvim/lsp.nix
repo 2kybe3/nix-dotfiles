@@ -78,7 +78,7 @@
             formatting.command = "nix fmt -- .";
             options = rec {
               nixos.expr = "${flake}.nixosConfigurations.knx.options";
-              hm.expr = "${flake}.nixosConfigurations.knx.options.home-manager.users.type.getSubOptions []";
+              hm.expr = "${flake}.homeConfigurations.kybe.options";
               nixvim.expr = "${hm.expr}.programs.nixvim";
             };
           };
