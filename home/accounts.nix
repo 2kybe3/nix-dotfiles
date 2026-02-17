@@ -1,6 +1,5 @@
 {
   self,
-  pkgs,
   config,
   ...
 }: {
@@ -10,9 +9,7 @@
     himalaya.enable = true;
     thunderbird = {
       enable = true;
-      profiles."kybe" = {
-        isDefault = true;
-      };
+      profiles."kybe".isDefault = true;
       settings = {
         "general.useragent.override" = ":-)";
         "extensions.autoDisableScopes" = 0; # automatically enable extensions
@@ -26,8 +23,6 @@
     realName = "kybe";
     address = "kybe@kybe.xyz";
     userName = "kybe@kybe.xyz";
-    himalaya.enable = true;
-    thunderbird.enable = true;
     imap = {
       host = "mail.kybe.xyz";
       port = 993;
@@ -39,5 +34,8 @@
       tls.enable = true;
     };
     passwordCommand = "cat ${config.sops.secrets."kybe.xyz".path}";
+
+    himalaya.enable = true;
+    thunderbird.enable = true;
   };
 }

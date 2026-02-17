@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    pinentry-curses
     pinentry-qt
   ];
 

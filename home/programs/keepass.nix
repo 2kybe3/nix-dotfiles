@@ -29,6 +29,7 @@
     };
   };
 
+  # Asks for sudo to read the password which is only acessible with sudo
   home.packages = [
     (pkgs.writeShellApplication {
       name = "keepass";

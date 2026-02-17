@@ -56,14 +56,12 @@
         }
       ];
 
-      colors = {
-        focused = {
-          background = "#1c1c1c";
-          border = "#1c1c1c";
-          childBorder = "#1c1c1c";
-          indicator = "#1c1c1c";
-          text = "#ff5757";
-        };
+      colors.focused = {
+        background = "#1c1c1c";
+        border = "#1c1c1c";
+        childBorder = "#1c1c1c";
+        indicator = "#1c1c1c";
+        text = "#ff5757";
       };
 
       defaultWorkspace = "workspace number 1";
