@@ -1,4 +1,4 @@
-{cheat-sh, ...}: {
+{cpkgs, ...}: {
   imports = [
     ./zsh.nix
     ./obs.nix
@@ -8,7 +8,7 @@
     ./libreoffice.nix
   ];
   environment.systemPackages = [
-    cheat-sh
+    cpkgs.cheat-sh
   ];
   programs = {
     steam.enable = true;

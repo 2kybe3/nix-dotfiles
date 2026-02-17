@@ -66,14 +66,18 @@
         ];
     });
 
+    cpkgs = {
+      inherit aria2-unlimited;
+      screenshot-sway-zipline = screenshot-sway-zipline.packages.${system}.default;
+      cheat-sh = cheat-sh.packages.${system}.default;
+    };
+
     makeSystem = hostModule:
       nixpkgs.lib.nixosSystem {
         inherit system pkgs;
 
         specialArgs = {
-          inherit self inputs system aria2-unlimited;
-          screenshot-sway-zipline = screenshot-sway-zipline.packages.${system}.default;
-          cheat-sh = cheat-sh.packages.${system}.default;
+          inherit self inputs system cpkgs;
         };
 
         modules = [hostModule];

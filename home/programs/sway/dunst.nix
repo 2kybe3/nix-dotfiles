@@ -1,50 +1,52 @@
 {
   services.dunst = {
     enable = true;
-    settings.global = {
-      monitor = 0;
-      width = "(100, 300)";
-      height = "(50, 300)";
-      origin = "top-left";
+    settings = {
+      global = {
+        monitor = 0;
+        width = "(100, 300)";
+        height = "(50, 300)";
+        origin = "top-left";
 
-      offset = "(0, 0)";
+        offset = "(0, 0)";
 
-      # dunstify -h int:value:12
-      progress_bar = true;
-      progress_bar_height = 10;
-      progress_bar_frame_width = 1;
-      progress_bar_min_width = 100;
-      progress_bar_max_width = 200;
-      frame_width = 1;
-      frame_color = "#1C1F26";
-      separator_color = "frame";
+        # dunstify -h int:value:12
+        progress_bar = true;
+        progress_bar_height = 10;
+        progress_bar_frame_width = 1;
+        progress_bar_min_width = 100;
+        progress_bar_max_width = 200;
+        frame_width = 1;
+        frame_color = "#1C1F26";
+        separator_color = "frame";
 
-      font = "Monospace 9";
-      line_height = 0;
-      alignment = "center";
+        font = "Monospace 9";
+        line_height = 0;
+        alignment = "center";
 
-      dmenu = "tofi";
-      browser = "xdg-open";
-    };
+        dmenu = "tofi";
+        browser = "xdg-open";
+      };
 
-    urgency_low = {
-      background = "#1D212B";
-      foreground = "#888888";
-      timeout = 10;
-    };
+      urgency_low = {
+        background = "#1D212B";
+        foreground = "#888888";
+        timeout = 10;
+      };
 
-    urgency_normal = {
-      background = "#1D212B";
-      foreground = "#ffffff";
-      timeout = 10;
-      override_pause_level = 30;
-    };
+      urgency_normal = {
+        background = "#1D212B";
+        foreground = "#ffffff";
+        timeout = 10;
+        override_pause_level = 30;
+      };
 
-    urgency_critical = {
-      background = "#1D212B";
-      foreground = "#ffffff";
-      frame_color = "#ff0000";
-      timeout = 0;
+      urgency_critical = {
+        background = "#1D212B";
+        foreground = "#ffffff";
+        frame_color = "#ff0000";
+        timeout = 0;
+      };
     };
   };
 }

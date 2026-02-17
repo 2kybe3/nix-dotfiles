@@ -1,7 +1,7 @@
 {
   pkgs,
+  cpkgs,
   config,
-  aria2-unlimited,
   ...
 }: let
   # Get the firefox version trimming so the only 2 first version blocks are used
@@ -27,5 +27,5 @@ in {
       --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:${firefoxVersion}) Gecko/20100101 Firefox/${firefoxVersion}";
     '';
   };
-  home.packages = [aria2-unlimited];
+  home.packages = [cpkgs.aria2-unlimited];
 }

@@ -1,10 +1,10 @@
 {
   self,
   pkgs,
+  cpkgs,
   inputs,
   config,
   system,
-  aria2-unlimited,
   screenshot-sway-zipline,
   ...
 }: {
@@ -54,7 +54,7 @@
     ];
     extraSpecialArgs = {
       nixConfig = config;
-      inherit self system screenshot-sway-zipline aria2-unlimited;
+      inherit self system screenshot-sway-zipline cpkgs;
     };
     users.kybe = import "${self}/home";
   };
