@@ -1,5 +1,5 @@
 {
-  nixosConfig,
+  self,
   config,
   ...
 }: let
@@ -55,10 +55,10 @@ in {
         '';
 
       tm = "tmux attach || tmux new";
-      rdev = "nix develop ${nixosConfigPath}#rust -c $SHELL";
+      rdev = "nix develop ${self}#rust -c $SHELL";
 
-      os-update = "nix flake update --flake ${nixosConfigPath}; sudo nixos-rebuild switch --flake ${nixosConfigPath}#${nixosConfig.networking.hostName} --upgrade";
-      os-offline = "sudo nixos-rebuild switch --flake ${nixosConfigPath}#${nixosConfig.networking.hostName} --offline";
+      os-update = "nix flake update --flake ${nixosConfigPath}; sudo nixos-rebuild switch --flake ${nixosConfigPath}#knx --upgrade; home-manager switch --flake . --show-trace";
+      os-offline = "sudo nixos-rebuild switch --flake ${nixosConfigPath}#knx --offline";
 
       cd = "z";
       v = "nvim";

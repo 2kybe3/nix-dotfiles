@@ -44,18 +44,4 @@
       };
     };
   };
-
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    sharedModules = [
-      inputs.nixvim.homeModules.nixvim
-      inputs.sops-nix.homeManagerModules.sops
-    ];
-    extraSpecialArgs = {
-      nixConfig = config;
-      inherit self system screenshot-sway-zipline cpkgs;
-    };
-    users.kybe = import "${self}/home";
-  };
 }

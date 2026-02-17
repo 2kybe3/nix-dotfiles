@@ -46,6 +46,7 @@
     nixpkgs,
     rust-dev,
     cheat-sh,
+    home-manager,
     screenshot-sway-zipline,
     ...
   } @ inputs: let
@@ -86,6 +87,19 @@
     nixosConfigurations = {
       knx = makeSystem ./hosts/knx;
       server = makeSystem ./hosts/server;
+    };
+    homeConfigurations."kybe" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+
+      extraSpecialArgs = {
+        inherit self inputs system cpkgs;
+      };
+
+      modules = [
+        inputs.nixvim.homeModules.nixvim
+        inputs.sops-nix.homeManagerModules.sops
+        ./home
+      ];
     };
 
     formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;

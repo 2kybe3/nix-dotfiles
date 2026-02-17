@@ -1,6 +1,5 @@
 {
   pkgs,
-  nixosConfig,
   config,
   ...
 }: {
@@ -35,7 +34,7 @@
       name = "keepass";
       runtimeInputs = [pkgs.keepassxc];
       text = ''
-        pkexec cat ${nixosConfig.sops.secrets.keepass.path} | keepassxc --pw-stdin "$HOME/syncthing/keepass/vault.kdbx"
+        pkexec cat /run/secret/keepass | keepassxc --pw-stdin "$HOME/syncthing/keepass/vault.kdbx"
       '';
     })
   ];

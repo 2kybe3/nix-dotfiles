@@ -62,5 +62,7 @@
     # Nixvim
     tree-sitter
     gcc
+
+    home-manager
   ];
 }
