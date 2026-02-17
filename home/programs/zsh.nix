@@ -58,7 +58,6 @@ in {
       rdev = "nix develop ${self}#rust -c $SHELL";
 
       os-update = "nix flake update --flake ${nixosConfigPath}; sudo nixos-rebuild switch --flake ${nixosConfigPath}#knx --upgrade; home-manager switch --flake . --show-trace";
-      os-offline = "sudo nixos-rebuild switch --flake ${nixosConfigPath}#knx --offline";
 
       cd = "z";
       v = "nvim";
