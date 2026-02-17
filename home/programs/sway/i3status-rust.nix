@@ -47,13 +47,6 @@
           interval = 1;
         }
         {
-          block = "github";
-          hide_if_total_is_zero = true;
-        }
-        {
-          block = "sound";
-        }
-        {
           block = "bluetooth";
           mac = "2C:BE:EE:4A:5B:32";
         }
@@ -68,6 +61,10 @@
           format = "{ $play $combo.str(max_w:20,rot_interval:0.1) |}";
         }
         {
+          block = "sound";
+          format = " {$volume.eng(w:2) |}";
+        }
+        {
           block = "weather";
           service = {
             name = "openweathermap";
@@ -76,8 +73,12 @@
         }
         {
           block = "time";
-          format = " $timestamp.datetime(f:'%R %a %d') ";
+          format = " $timestamp.datetime(f:'%d.%m %H:%M') ";
           interval = 1;
+        }
+        {
+          block = "github";
+          hide_if_total_is_zero = true;
         }
       ];
       icons = "awesome6";
