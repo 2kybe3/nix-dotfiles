@@ -96,20 +96,28 @@
           PreventInstalls = true;
           Add = [
             {
-              Alias = "@np";
-              Description = "Search in NixOS Packages";
+              Alias = "@nix";
+              Description = "Search MyNixOS";
               IconURL = "https://nixos.org/favicon.png";
               Method = "GET";
-              Name = "NixOS Packages";
-              URLTemplate = "https://search.nixos.org/packages?from=0&size=200&sort=relevance&type=packages&query={searchTerms}";
+              Name = "MyNixOS";
+              URLTemplate = "https://mynixos.com/search?q={searchTerms}";
             }
             {
-              Alias = "@no";
-              Description = "Search in NixOS Options";
-              IconURL = "https://nixos.org/favicon.png";
+              Alias = "@ym";
+              Description = "Search Youtube Music";
+              IconURL = "https://music.youtube.com/favicon.ico";
               Method = "GET";
-              Name = "NixOS Options";
-              URLTemplate = "https://search.nixos.org/options?from=0&size=200&sort=relevance&type=packages&query={searchTerms}";
+              Name = "Youtube Music";
+              URLTemplate = "https://music.youtube.com/search?q={searchTerms}";
+            }
+            {
+              Alias = "@yt";
+              Description = "Search YouTube";
+              IconURL = "https://www.youtube.com/favicon.ico";
+              Method = "GET";
+              Name = "Youtube";
+              URLTemplate = "https://www.youtube.com/results?search_query={searchTerms}";
             }
           ];
           Remove = [

@@ -5,6 +5,13 @@
     curl
     mtr
 
+    cisco-packet-tracer_9
+    element-desktop
+    jetbrains.datagrip
+    vesktop
+    wireshark
+    gimp
+
     ## CLI
     speedtest-cli
     ripgrep-all
@@ -14,8 +21,12 @@
     openssl
     ffmpeg
     psmisc # killall etc.
+    ranger
     unzip
     socat
+    delta
+    jdk21
+    glow
     file
     tldr
     fzf
@@ -23,6 +34,7 @@
     git
     bat
     fd
+    gh
 
     ## TUI
     vim
@@ -39,7 +51,12 @@
     ## Bash
     shellcheck
 
-    jdk21
+    ## Games
+    (prismlauncher.override {
+      jdks = [
+        jdk21
+      ];
+    })
 
     # Nixvim
     tree-sitter

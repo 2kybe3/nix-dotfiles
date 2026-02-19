@@ -1,11 +1,7 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.firejail.wrappedBinaries = {
     packettracer9 = {
-      executable = lib.getExe pkgs.cisco-packet-tracer_9;
+      executable = "${pkgs.cisco-packet-tracer_9}/bin/packettracer9";
       extraArgs = [
         "--private"
         "--net=none"

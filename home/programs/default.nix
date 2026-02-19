@@ -1,9 +1,8 @@
 {
   lib,
   self,
-  pkgs,
-  system,
   config,
+  system,
   ...
 }: {
   imports = lib.flatten [
@@ -21,30 +20,6 @@
     ./ranger.nix
     ./keepass.nix
     ./obsidian.nix
-  ];
-  home.packages = with pkgs; [
-    cisco-packet-tracer_9
-
-    ## Apps
-    jetbrains.datagrip
-    element-desktop
-    wireshark
-    vesktop
-    spotify
-    gimp
-
-    delta
-    glow
-    gh
-
-    ranger
-
-    ## Games
-    (prismlauncher.override {
-      jdks = [
-        jdk21
-      ];
-    })
   ];
   programs = {
     home-manager.enable = true;
