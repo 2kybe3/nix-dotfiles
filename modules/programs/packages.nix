@@ -5,15 +5,6 @@
     curl
     mtr
 
-    ## Apps
-    jetbrains.datagrip
-    element-desktop
-    tor-browser
-    wireshark
-    vesktop
-    spotify
-    gimp
-
     ## CLI
     speedtest-cli
     ripgrep-all
@@ -23,25 +14,21 @@
     openssl
     ffmpeg
     psmisc # killall etc.
-    delta
     unzip
     socat
     file
-    glow
     tldr
     fzf
     dig
     git
     bat
     fd
-    gh
 
     ## TUI
     vim
     (btop.override {
       cudaSupport = true;
     })
-    ranger
     ncdu
     feh # Image Viewer
 
@@ -51,13 +38,6 @@
 
     ## Bash
     shellcheck
-
-    ## Games
-    (prismlauncher.override {
-      jdks = [
-        jdk21
-      ];
-    })
 
     jdk21
 

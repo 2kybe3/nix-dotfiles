@@ -5,7 +5,6 @@
     ./gnupg.nix
     ./firefox.nix
     ./packages.nix
-    ./firejail.nix
     ./libreoffice.nix
     ./cisco-packet-tracer.nix
   ];
@@ -15,6 +14,7 @@
   programs = {
     steam.enable = true;
     zoxide.enable = true;
+    firefox.enable = true;
     wireshark.enable = true;
     fzf.fuzzyCompletion = true;
   };

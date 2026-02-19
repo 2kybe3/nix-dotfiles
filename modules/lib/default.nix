@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: {
@@ -7,5 +8,5 @@
     type = lib.types.attrs;
     default = {};
   };
-  config.kybe.lib = import ./lib.nix {inherit config;};
+  config.kybe.lib = import ./lib.nix {inherit config pkgs;};
 }
