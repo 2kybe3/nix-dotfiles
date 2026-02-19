@@ -1,6 +1,7 @@
 {
-  self,
   lib,
+  self,
+  pkgs,
   system,
   config,
   ...
@@ -20,6 +21,9 @@
     ./ranger.nix
     ./keepass.nix
     ./obsidian.nix
+  ];
+  home.packages = with pkgs; [
+    cisco-packet-tracer_9
   ];
   programs = {
     home-manager.enable = true;
