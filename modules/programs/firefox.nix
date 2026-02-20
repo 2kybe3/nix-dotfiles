@@ -2,10 +2,11 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  sonarrDomain = "sonarr.server.${config.kybe.lib.baseDomain}";
+  radarrDomain = "radarr.server.${config.kybe.lib.baseDomain}";
+in {
   programs = {
-    firejail.wrappedBinaries = config.kybe.lib.firejail.make pkgs.firefox "firefox" ["firefox"];
-
     firefox = {
       enable = true;
       nativeMessagingHosts.packages = [
@@ -118,6 +119,22 @@
               Method = "GET";
               Name = "Youtube";
               URLTemplate = "https://www.youtube.com/results?search_query={searchTerms}";
+            }
+            {
+              Alias = "@rr";
+              Description = "Search Radarr for Movies";
+              IconURL = "https://${radarrDomain}/favicon.ico";
+              Method = "GET";
+              Name = "Radarr";
+              URLTemplate = "https://${radarrDomain}/add/new?term={searchTerms}";
+            }
+            {
+              Alias = "@sr";
+              Description = "Search Sonarr for Movies";
+              IconURL = "https://${sonarrDomain}/favicon.ico";
+              Method = "GET";
+              Name = "Sonarr";
+              URLTemplate = "https://${sonarrDomain}/add/new?term={searchTerms}";
             }
           ];
           Remove = [
