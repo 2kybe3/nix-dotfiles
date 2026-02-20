@@ -24,6 +24,7 @@
     ranger
     unzip
     socat
+    p7zip
     delta
     jdk21
     glow
@@ -57,6 +58,9 @@
         jdk21
       ];
     })
+
+    jetbrains.idea
+    recaf-launcher
 
     # Nixvim
     tree-sitter
