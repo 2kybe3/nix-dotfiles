@@ -17,11 +17,13 @@ in {
     };
     initContent = ''
       if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-        eval "$(ssh-agent -s)" >/dev/null
+          eval "$(ssh-agent -s)"
       fi
 
-      ssh-add -l | grep -q ~/.ssh/kybe || ssh-add ~/.ssh/kybe >/dev/null 2>&1
-
+      if ! ssh-add -l | grep -q "SHA256:bc7E9tLPDWpad1A9/XBswtUUskgN7m5xdbWH1omZ71I"; then
+          ssh-add ~/.ssh/kybe
+      fi
+ 
       ff-compress() {
         ffmpeg -i "$1" -vcodec libx264 -crf 23 "comp-$1"
       }
@@ -57,7 +59,7 @@ in {
       tm = "tmux attach || tmux new";
       rdev = "nix develop ${self}#rust -c $SHELL";
 
-      os-update = "nix flake update --flake ${nixosConfigPath}; sudo nixos-rebuild switch --flake ${nixosConfigPath}#knx --upgrade; home-manager switch --flake . --show-trace";
+      os-update = "nix flake update --flake ${nixosConfigPath}; sudo nixos-rebuild switch --flake ${nixosConfigPath}#knx --upgrade; home-manager switch --flake ${nixosConfigPath} --show-trace";
 
       cd = "z";
       v = "nvim";
