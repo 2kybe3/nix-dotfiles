@@ -11,7 +11,6 @@
         }
       '';
     };
-    mpd-mpris.enable = true;
   };
   home.packages = [pkgs.playerctl];
 }

@@ -23,7 +23,7 @@ in {
       if ! ssh-add -l | grep -q "SHA256:bc7E9tLPDWpad1A9/XBswtUUskgN7m5xdbWH1omZ71I"; then
           ssh-add ~/.ssh/kybe
       fi
- 
+
       ff-compress() {
         ffmpeg -i "$1" -vcodec libx264 -crf 23 "comp-$1"
       }

@@ -95,11 +95,21 @@ in {
 
         SearchEngines = {
           PreventInstalls = true;
+          Default = "searxng";
           Add = [
+            {
+              Alias = "@s";
+              Description = "Search";
+              IconURL = "https://search.kybe.xyz/favicon.ico";
+              Method = "POST";
+              Name = "searxng";
+              URLTemplate = "https://search.kybe.xyz/search";
+              PostData = "q={searchTerms}";
+            }
             {
               Alias = "@nix";
               Description = "Search MyNixOS";
-              IconURL = "https://nixos.org/favicon.png";
+              IconURL = "https://nixos.org/favicon.ico";
               Method = "GET";
               Name = "MyNixOS";
               URLTemplate = "https://mynixos.com/search?q={searchTerms}";

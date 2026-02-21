@@ -6,10 +6,10 @@
     mtr
 
     cisco-packet-tracer_9
-    element-desktop
     jetbrains.datagrip
-    vesktop
+    element-desktop
     wireshark
+    vesktop
     gimp
 
     ## CLI
