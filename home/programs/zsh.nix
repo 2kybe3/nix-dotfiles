@@ -27,6 +27,17 @@ in {
       ff-compress() {
         ffmpeg -i "$1" -vcodec libx264 -crf 23 "comp-$1"
       }
+
+      realize() {
+        for link in "$@"; do
+        if [[ -L "$link" ]]; then
+          cp --remove-destination "$(readlink -f "$link")" "$link"
+          echo "'$link' replaced with target"
+        else
+          echo "'$link' is not a symlink"
+        fi
+      done
+      }
     '';
     shellAliases = {
       _select_dir = "fd --hidden -t d . | fzf --preview 'ls -lah {}'";

@@ -13,10 +13,18 @@
       enable = true;
       extraArgs = ["--verbose"];
       network.startWhenNeeded = true;
+      # fifo is for rmpc cava
       extraConfig = ''
         audio_output {
           type "pulse"
           name "PulseAudio"
+        }
+
+        audio_output {
+          type "fifo"
+          name "rmpc_fifo"
+          path "/tmp/rmpc.fifo"
+          format "44100:16:2"
         }
       '';
     };
