@@ -30,6 +30,8 @@
     "${self}/modules/networking/kybe-vpn.nix"
     "${self}/modules/networking/networkmanager.nix"
 
+    "${self}/containers/i2pd.nix"
+
     inputs.sops-nix.nixosModules.sops
     inputs.nix-index-database.nixosModules.default
   ];

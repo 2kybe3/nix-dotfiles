@@ -20,6 +20,7 @@
     ./ranger.nix
     ./keepass.nix
     ./obsidian.nix
+    ./librewolf.nix
   ];
   programs = {
     home-manager.enable = true;

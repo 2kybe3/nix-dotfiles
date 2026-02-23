@@ -3,7 +3,6 @@
     ./zsh.nix
     ./obs.nix
     ./gnupg.nix
-    ./firefox.nix
     ./packages.nix
     ./firejail.nix
     ./libreoffice.nix
@@ -15,7 +14,6 @@
   programs = {
     steam.enable = true;
     zoxide.enable = true;
-    firefox.enable = true;
     wireshark.enable = true;
     fzf.fuzzyCompletion = true;
   };

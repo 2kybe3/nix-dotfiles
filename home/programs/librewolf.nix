@@ -1,48 +1,21 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
-  sonarrDomain = "sonarr.server.${config.kybe.lib.baseDomain}";
-  radarrDomain = "radarr.server.${config.kybe.lib.baseDomain}";
+{pkgs,...}:
+let
+  sonarrDomain = "sonarr.server.kybe.xyz";
+  radarrDomain = "radarr.server.kybe.xyz";
 in {
-  programs = {
-    firefox = {
-      enable = true;
-      nativeMessagingHosts.packages = [
-        pkgs.keepassxc
-      ];
+  programs.librewolf = {
+    enable = true;
+    nativeMessagingHosts= [
+      pkgs.keepassxc
+    ];
 
-      languagePacks = [
-        "de"
-        "en-US"
-      ];
+    languagePacks = [
+      "de"
+      "en-US"
+    ];
 
-      policies = {
-        AppAutoUpdate = false;
-        BackgroundAppUpdate = false;
-        DisablePocket = true;
-        DisableAccounts = true;
-        DisableTelemetry = true;
-        DisableFirefoxStudies = true;
-        DisableFirefoxAccounts = true;
-        DontCheckDefaultBrowser = true;
-        DisableFormHistory = true;
-        DisableProfileImport = true;
-        DisableProfileRefresh = true;
-        DisableSetDesktopBackground = true;
-        DisableFirefoxScreenshots = true;
+    policies = {
         DisplayBookmarksToolbar = "never";
-        OfferToSaveLogins = false;
-        EnableTrackingProtection = {
-          Value = true;
-          Locked = true;
-          Cryptomining = true;
-          Fingerprinting = true;
-          EmailTracking = true;
-        };
-        OverrideFirstRunPage = "";
-        OverridePostUpdatePage = "";
 
         ExtensionSettings = {
           "*".installation_mode = "blocked";
@@ -58,33 +31,12 @@ in {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi";
             installation_mode = "force_installed";
           };
-          # "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
-          #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-          #   installation_mode = "force_installed";
-          # };
+          "@testpilot-containers" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/multi-account-containers/latest.xpi";
+            installation_mode = "force_installed";
+          };
         };
         Preferences = {
-          "browser.search.suggest.enabled" = false;
-          "browser.search.suggest.enabled.private" = false;
-
-          "browser.urlbar.suggest.searches" = false;
-          "browser.urlbar.showSearchSuggestionsFirst" = false;
-
-          "browser.newtabpage.activity-stream.feeds.snippets" = false;
-          "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
-          "browser.newtabpage.activity-stream.showSponsored" = false;
-          "browser.newtabpage.activity-stream.system.showSponsored" = false;
-          "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
-          "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
-          "browser.newtabpage.activity-stream.section.highlights.includeVisited" = false;
-          "browser.newtabpage.activity-stream.section.highlights.includeBookmarks" = false;
-          "browser.newtabpage.activity-stream.section.highlights.includeDownloads" = false;
-
-          "network.http.sendRefererHeader" = "1";
-
-          "privacy.resistFingerprinting" = true;
-          "privacy.resistFingerprinting.exemptedDomains" = "*.youtube.com";
-
           "geo.enabled" = false;
           "dom.battery.enabled" = false;
           "device.sensors.enabled" = false;
@@ -155,7 +107,18 @@ in {
             "Wikipedia (en)"
           ];
         };
-      };
+    };
+
+    settings = {
+      "network.http.referer.XOriginPolicy" = 2;
+      "media.autoplay.blocking_policy" = 2;
+
+      "privacy.fingerprintingProtection" = true;
+      "privacy.fingerprintingProtection.overrides" = "+AllTargets,-CSSPrefersColorScheme";
+
+      "privacy.clearOnShutdown.history" = false;
+      "privacy.clearOnShutdown.cookies" = false;
+      "network.cookie.lifetimePolicy" = 0;
     };
   };
 }
