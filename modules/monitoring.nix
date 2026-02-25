@@ -1,4 +1,4 @@
-{self,pkgs,config,...}:
+{self,lib,pkgs,config,...}:
 let
   inherit
     (config.kybe.lib)
@@ -11,6 +11,9 @@ let
     ;
 
   grafanaDomain = "grafana.${domain}";
+
+  secret_key = "$__file{${config.sops.secrets.grafana.path}}";
+  secret_key_traced = lib.trace secret_key secret_key;
 in {
   sops.secrets.grafana = {
     sopsFile = "${self}/secrets/monitoring.yaml";
@@ -23,7 +26,7 @@ in {
     port = 2342;
 
     domain = grafanaDomain;
-    settings.server.security.secret_key = "$__file{${config.sops.secrets.grafana.path}}";
+    settings.server.security.secret_key = secret_key_traced;
   };
 
   services.caddy.virtualHosts = {
