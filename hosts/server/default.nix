@@ -16,6 +16,7 @@
     "${self}/modules/torrents.nix"
     "${self}/modules/journald.nix"
     "${self}/modules/syncthing.nix"
+    "${self}/modules/monitoring.nix"
     "${self}/modules/programs/zsh.nix"
 
     inputs.sops-nix.nixosModules.sops

@@ -25,7 +25,6 @@
     "${self}/modules/services.nix"
     "${self}/modules/journald.nix"
     "${self}/modules/syncthing.nix"
-    "${self}/modules/monitoring.nix"
     "${self}/modules/virtualisation.nix"
     "${self}/modules/networking/kybe-vpn.nix"
     "${self}/modules/networking/networkmanager.nix"

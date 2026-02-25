@@ -13,6 +13,10 @@ creation_rules:
     key_groups:
     - age:
       - *root-knx
+  - path_regex: secrets/monitoring\.yaml$
+    key_groups:
+    - age:
+      - *server-knx
   - path_regex: secrets/(i3status|zipline|mail|nix\.conf|last\.fm)\.yaml$
     key_groups:
     - age:
