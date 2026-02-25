@@ -12,6 +12,8 @@
     vesktop
     gimp
 
+    gparted
+
     ## CLI
     speedtest-cli
     ripgrep-all

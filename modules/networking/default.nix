@@ -1,5 +1,6 @@
 {config, ...}: {
   networking = {
+    nftables.enable = true;
     firewall = {
       enable = true;
       allowedTCPPorts = [22];
