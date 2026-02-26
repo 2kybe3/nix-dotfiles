@@ -1,21 +1,14 @@
 {
   self,
-  lib,
-  pkgs,
   config,
   ...
 }: let
-  inherit
-    (config.kybe.lib)
-    domain
-    hostName
-    ;
   inherit
     (config.kybe.lib.caddy)
     createCaddyProxy
     ;
 
-  grafanaDomain = "grafana.${domain}";
+  domain = "grafana.${config.kybe.lib.domain}";
 in {
   sops.secrets = {
     grafana-key = {
@@ -39,7 +32,7 @@ in {
 
     settings = {
       server = {
-        domain = grafanaDomain;
+        domain = domain;
         http_port = 2342;
         http_addr = "127.0.0.1";
       };
@@ -60,7 +53,5 @@ in {
     };
   };
 
-  services.caddy.virtualHosts = {
-    ${grafanaDomain} = createCaddyProxy 2342;
-  };
+  services.caddy.virtualHosts.${domain} = createCaddyProxy 2342;
 }

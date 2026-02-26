@@ -16,14 +16,12 @@
 
   systemd.services."kybe-wg-resolv" = {
     description = "Set resolvectl for kybe.xyz after wg interface is up";
-    after = [
-      "network-online.target"
-      "wireguard-kybe.xyz-peer-Dumq\x2bQBDIAmAzTC1lo\x2bnjEh5v1ZJ\x2bepGfxCheGWOsxc\x3d.service"
-    ];
-    wants = [
-      "network-online.target"
-      "wireguard-kybe.xyz-peer-Dumq\x2bQBDIAmAzTC1lo\x2bnjEh5v1ZJ\x2bepGfxCheGWOsxc\x3d.service"
-    ];
+
+    after = ["network-online.target"];
+    requires = ["wireguard-kybe.xyz.service"];
+    partOf = ["wireguard-kybe.xyz.service"];
+    wantedBy = ["wireguard-kybe.xyz.service"];
+
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "/bin/sh -c 'resolvectl dnsovertls kybe.xyz no; resolvectl dnssec kybe.xyz no; resolvectl domain kybe.xyz ~kybe.xyz; resolvectl dns kybe.xyz 10.0.6.1;'";
