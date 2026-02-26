@@ -9,9 +9,11 @@
     ./nvidia.nix
 
     "${self}/modules/lib"
+    "${self}/modules/nix.nix"
     "${self}/modules/tor.nix"
     "${self}/modules/ssh.nix"
-    "${self}/modules/nix.nix"
+    "${self}/modules/sops.nix"
+    "${self}/modules/sops.nix"
     "${self}/modules/sway.nix"
     "${self}/modules/boot.nix"
     "${self}/modules/programs"
