@@ -17,7 +17,6 @@
   systemd.services."kybe-wg-resolv" = {
     description = "Set resolvectl for kybe.xyz after wg interface is up";
 
-    depends = ["network-online.targe"];
     after = ["network-online.target"];
     requires = ["wireguard-kybe.xyz.service"];
     partOf = ["wireguard-kybe.xyz.service"];
