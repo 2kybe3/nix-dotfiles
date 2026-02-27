@@ -1,4 +1,9 @@
-{config, ...}: let
+{
+  pkgs,
+  stable,
+  config,
+  ...
+}: let
   inherit
     (config.kybe.lib)
     domain
@@ -32,23 +37,19 @@ in {
     };
     prowlarr.enable = true;
 
-    bazarr = {
-      enable = true;
-      group = "media";
-    };
+    flaresolverr.enable = true;
     jackett = {
       enable = true;
       group = "media";
     };
 
-    flaresolverr.enable = true;
-
-    readarr = {
-      enable = false; # TODO
-      user =
-        if config.services.calibre-server.enable
-        then config.calibre-server.user
-        else "readarr";
+    calibre-server = {
+      enable = true;
+      group = "media";
+      libraries = ["/books"];
+      package = stable.calibre;
+      auth.enable = true;
+      extraFlags = ["--userdb /srv/calibre/users.sqlite"];
     };
 
     caddy.virtualHosts = {
@@ -58,12 +59,12 @@ in {
       "radarr.${domain}" = createCaddyProxy 7878;
       "prowlarr.${domain}" = createCaddyProxy 9696;
 
-      "bazarr.${domain}" = createCaddyProxy 6767;
       "jackett.${domain}" = createCaddyProxy 9117;
 
       "flaresolverr.${domain}" = createCaddyProxy 8191;
 
-      "readarr.${domain}" = createCaddyProxy 8787;
+      "calibre.${domain}" = createCaddyProxy 8080;
+      "calibre-web.${domain}" = createCaddyProxy 8083;
     };
   };
 }

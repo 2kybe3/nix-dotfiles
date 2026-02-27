@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -43,6 +44,7 @@
 
   outputs = {
     self,
+    nixpkgs-stable,
     nixpkgs,
     rust-dev,
     cheat-sh,
@@ -60,6 +62,9 @@
           "cisco-packet-tracer-8.2.2"
         ];
       };
+    };
+    stable = import nixpkgs-stable {
+      inherit system;
     };
 
     aria2 = pkgs.aria2.overrideAttrs (old: {
@@ -81,7 +86,7 @@
         inherit system pkgs;
 
         specialArgs = {
-          inherit self inputs system cpkgs;
+          inherit self inputs system cpkgs stable;
         };
 
         modules = [hostModule];

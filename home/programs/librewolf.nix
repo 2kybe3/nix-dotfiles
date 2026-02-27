@@ -66,6 +66,13 @@ in {
             URLTemplate = "https://mynixos.com/search?q={searchTerms}";
           }
           {
+            Alias = "@nm";
+            Description = "Search Nix Merge";
+            Method = "GET";
+            Name = "NixMerge";
+            URLTemplate = "https://nixpk.gs/pr-tracker.html?pr={searchTerms}";
+          }
+          {
             Alias = "@ym";
             Description = "Search Youtube Music";
             IconURL = "https://music.youtube.com/favicon.ico";

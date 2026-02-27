@@ -18,8 +18,9 @@
     description = "Set resolvectl for kybe.xyz after wg interface is up";
 
     after = ["network-online.target"];
-    requires = ["wireguard-kybe.xyz.service"];
+    wants = ["network-online.target"];
     partOf = ["wireguard-kybe.xyz.service"];
+    requires = ["wireguard-kybe.xyz.service"];
     wantedBy = ["wireguard-kybe.xyz.service"];
 
     serviceConfig = {
