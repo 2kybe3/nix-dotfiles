@@ -13,7 +13,7 @@ creation_rules:
     key_groups:
     - age:
       - *root-knx
-  - path_regex: secrets/(influxdb|monitoring|mail-system)\.yaml$
+  - path_regex: secrets/(kybe-backend|influxdb|monitoring|mail-system)\.yaml$
     key_groups:
     - age:
       - *server-knx

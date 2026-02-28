@@ -21,6 +21,11 @@ in {
       owner = "prometheus";
       key = "knx";
     };
+    kybe-backend-api = {
+      sopsFile = "${self}/secrets/kybe-backend.yaml";
+      owner = "prometheus";
+      key = "key";
+    };
   };
   services.prometheus = {
     enable = true;
@@ -31,7 +36,7 @@ in {
     scrapeConfigs = [
       {
         job_name = "proxmox-node";
-        scrape_interval = "5s";
+        scrape_interval = "2s";
         static_configs = [
           {
             targets = ["10.0.5.1:9100"];
@@ -40,7 +45,7 @@ in {
       }
       {
         job_name = "caddy";
-        scrape_interval = "5s";
+        scrape_interval = "1s";
         static_configs = [
           {
             targets = ["10.0.4.2:2019"];
@@ -49,7 +54,7 @@ in {
       }
       {
         job_name = "caddy-internal";
-        scrape_interval = "5s";
+        scrape_interval = "1s";
         static_configs = [
           {
             targets = ["10.0.5.2:2019"];
@@ -58,7 +63,7 @@ in {
       }
       {
         job_name = "syncthing-server";
-        scrape_interval = "5s";
+        scrape_interval = "1s";
         scheme = "https";
         static_configs = [
           {
@@ -69,7 +74,7 @@ in {
       }
       {
         job_name = "syncthing-knx";
-        scrape_interval = "5s";
+        scrape_interval = "1s";
         scheme = "https";
         static_configs = [
           {
@@ -77,6 +82,17 @@ in {
           }
         ];
         authorization.credentials_file = config.sops.secrets.syncthing-api-knx.path;
+      }
+      {
+        job_name = "kybe-backend";
+        scrape_interval = "1s";
+        scheme = "https";
+        static_configs = [
+          {
+            targets = ["kybe.xyz"];
+          }
+        ];
+        authorization.credentials_file = config.sops.secrets.kybe-backend-api.path;
       }
     ];
   };
