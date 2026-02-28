@@ -4,7 +4,7 @@ keys:
   - &hm-knx age1tcsye90nmzdntlkzq58ml0t2tuye6t2unt9fyccy0yxn2ctmtfrq6dnq3t
 
 creation_rules:
-  - path_regex: secrets/(wireguard|users|syncthing|mullvad)\.yaml$
+  - path_regex: secrets/(wireguard|users|syncthing(-api)?|mullvad)\.yaml$
     key_groups:
     - age:
       - *server-knx
@@ -13,7 +13,7 @@ creation_rules:
     key_groups:
     - age:
       - *root-knx
-  - path_regex: secrets/(influxdb|syncthing-api|monitoring|mail-system)\.yaml$
+  - path_regex: secrets/(influxdb|monitoring|mail-system)\.yaml$
     key_groups:
     - age:
       - *server-knx

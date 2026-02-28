@@ -25,7 +25,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # TOOLS
+    # TOOL
     rust-dev = {
       url = "path:./tools/rust-dev";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,11 +44,11 @@
 
   outputs = {
     self,
-    nixpkgs-stable,
     nixpkgs,
     rust-dev,
     cheat-sh,
     home-manager,
+    nixpkgs-stable,
     screenshot-sway-zipline,
     ...
   } @ inputs: let
@@ -89,7 +89,9 @@
           inherit self inputs system cpkgs stable;
         };
 
-        modules = [hostModule];
+        modules = [
+          hostModule
+        ];
       };
   in {
     nixosConfigurations = {

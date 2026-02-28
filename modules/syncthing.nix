@@ -124,6 +124,7 @@ in {
         user = "kybe";
         insecureAdminAccess = false;
         insecureSkipHostcheck = true;
+        metricsWithoutAuth = true;
         theme = "black";
       };
       options = {
