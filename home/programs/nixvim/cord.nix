@@ -1,6 +1,7 @@
 {
   plugins.cord = {
-    enable = true;
+    # TODO: upsteam broken too lazy to fix
+    enable = false;
     settings = {
       display = {
         theme = "default";

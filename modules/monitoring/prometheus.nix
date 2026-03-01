@@ -26,6 +26,11 @@ in {
       owner = "prometheus";
       key = "key";
     };
+    uptime-kuma-api = {
+      sopsFile = "${self}/secrets/uptime-kuma.yaml";
+      owner = "prometheus";
+      key = "key";
+    };
   };
   services.prometheus = {
     enable = true;
@@ -93,6 +98,20 @@ in {
           }
         ];
         authorization.credentials_file = config.sops.secrets.kybe-backend-api.path;
+      }
+      {
+        job_name = "uptime_kuma";
+        scrape_interval = "1s";
+        scheme = "https";
+        static_configs = [
+          {
+            targets = ["status.kybe.xyz"];
+          }
+        ];
+        basic_auth = {
+          username = "";
+          password_file = config.sops.secrets.uptime-kuma-api.path;
+        };
       }
     ];
   };

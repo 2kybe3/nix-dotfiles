@@ -1,5 +1,6 @@
 {
   pkgs,
+  stable,
   config,
   ...
 }: {
@@ -14,7 +15,8 @@
     "swriter"
     "unopkg"
   ];
-  environment.systemPackages = with pkgs; [
+  # TODO: https://nixpk.gs/pr-tracker.html?pr=494721
+  environment.systemPackages = with stable; [
     libreoffice-qt
 
     # Spellcheck

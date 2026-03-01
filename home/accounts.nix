@@ -33,6 +33,5 @@
     passwordCommand = "cat ${config.sops.secrets."kybe.xyz".path}";
 
     himalaya.enable = true;
-    thunderbird.enable = true;
   };
 }
