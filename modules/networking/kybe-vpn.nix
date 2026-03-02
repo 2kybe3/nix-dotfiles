@@ -32,7 +32,7 @@
 
   networking.wireguard.interfaces = {
     "kybe.xyz" = {
-      ips = ["10.0.6.5/32"];
+      ips = ["10.0.6.5/32" "fd00:b00b:1234::5/128"];
       privateKeyFile = config.sops.secrets."wg-key".path;
 
       peers = [
@@ -43,6 +43,8 @@
           allowedIPs = [
             "10.0.4.0/23"
             "10.0.6.0/24"
+            "fd00:b00b:b00b::/64"
+            "fd00:b00b:1234::/64"
           ];
           persistentKeepalive = 25;
         }
