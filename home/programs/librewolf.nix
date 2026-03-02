@@ -124,6 +124,9 @@ in {
 
       "privacy.clearOnShutdown.history" = false;
       "privacy.clearOnShutdown.cookies" = false;
+      "privacy.clearOnShutdown.sessions" = false;
+      "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
+
       "network.cookie.lifetimePolicy" = 0;
     };
   };

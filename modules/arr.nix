@@ -43,15 +43,6 @@ in {
       group = "media";
     };
 
-    calibre-server = {
-      enable = true;
-      group = "media";
-      libraries = ["/books"];
-      package = stable.calibre;
-      auth.enable = true;
-      extraFlags = ["--userdb /srv/calibre/users.sqlite"];
-    };
-
     caddy.virtualHosts = {
       "jellyfin.${domain}" = createCaddyProxy 8096;
 
@@ -62,9 +53,6 @@ in {
       "jackett.${domain}" = createCaddyProxy 9117;
 
       "flaresolverr.${domain}" = createCaddyProxy 8191;
-
-      "calibre.${domain}" = createCaddyProxy 8080;
-      "calibre-web.${domain}" = createCaddyProxy 8083;
     };
   };
 }

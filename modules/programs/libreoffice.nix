@@ -15,8 +15,7 @@
     "swriter"
     "unopkg"
   ];
-  # TODO: https://nixpk.gs/pr-tracker.html?pr=494721
-  environment.systemPackages = with stable; [
+  environment.systemPackages = with pkgs; [
     libreoffice-qt
 
     # Spellcheck

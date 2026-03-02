@@ -56,7 +56,7 @@
   };
 
   home.file = {
-    ".config/wp.png".source = ./config/wp2.png;
+    ".config/wp.png".source = ./config/wp3.png;
     ".config/vesktop/themes/amoled-cord.theme.css".source = ./config/amoled-cord.theme.css;
   };
 }
