@@ -1,9 +1,7 @@
-{
-  pkgs,
-  stable,
-  ...
-}: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    playerctl
+
     ## Netowrking
     wget
     curl

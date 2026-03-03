@@ -28,6 +28,7 @@
         }
       '';
     };
+    mpd-mpris.enable = true;
     mpdscribble = {
       enable = true;
       endpoints = {
