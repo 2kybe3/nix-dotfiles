@@ -3,7 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+
+    # nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-unstable-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -48,7 +52,10 @@
     rust-dev,
     cheat-sh,
     home-manager,
-    nixpkgs-stable,
+    # nixpkgs-stable,
+    # nixpkgs-master,
+    # nixpkgs-unstable,
+    nixpkgs-unstable-small,
     screenshot-sway-zipline,
     ...
   } @ inputs: let
@@ -60,9 +67,13 @@
         nvidia.acceptLicense = true;
       };
     };
-    stable = import nixpkgs-stable {
-      inherit system;
-    };
+    # stable = import nixpkgs-stable {
+    #   inherit system;
+    # };
+
+    # master = import nixpkgs-master { inherit system; };
+    # unstable = import nixpkgs-unstable { inherit system; };
+    unstable-small = import nixpkgs-unstable-small {inherit system;};
 
     aria2 = pkgs.aria2.overrideAttrs (old: {
       patches =
@@ -83,7 +94,7 @@
         inherit system pkgs;
 
         specialArgs = {
-          inherit self inputs system cpkgs stable;
+          inherit self inputs system cpkgs;
         };
 
         modules = [
@@ -99,7 +110,7 @@
       inherit pkgs;
 
       extraSpecialArgs = {
-        inherit self inputs system cpkgs;
+        inherit self inputs system cpkgs unstable-small;
       };
 
       modules = [

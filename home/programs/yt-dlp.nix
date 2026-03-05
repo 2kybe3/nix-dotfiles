@@ -2,6 +2,7 @@
   pkgs,
   cpkgs,
   config,
+  unstable-small,
   ...
 }: let
   # Get the firefox version trimming so the only 2 first version blocks are used
@@ -11,6 +12,7 @@ in {
   programs.zsh.shellAliases.yt-audio = ''yt-dlp -x --audio-format flac --audio-quality 0 -f bestaudio --embed-metadata --embed-thumbnail --output "%(title)s - %(artist)s.%(ext)s" -P ~/Music'';
   programs.yt-dlp = {
     enable = true;
+    package = unstable-small.yt-dlp;
     settings = {
       downloader = "aria2c";
       downloader-args = "aria2c:'-c -x32 -s32 -k4M --file-allocation=falloc'"; # requires patched aria2c (/patches/aria2-unlimited.patch)
