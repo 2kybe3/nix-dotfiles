@@ -7,7 +7,6 @@
     curl
     mtr
 
-    cisco-packet-tracer_9
     jetbrains.datagrip
     element-desktop
     wireshark
@@ -19,7 +18,7 @@
     ## CLI
     speedtest-cli
     ripgrep-all
-    neofetch
+    fastfetch
     pamixer # pulseaudio command line mixer
     ripgrep
     openssl

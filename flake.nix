@@ -58,9 +58,6 @@
       config = {
         allowUnfree = true;
         nvidia.acceptLicense = true;
-        permittedInsecurePackages = [
-          "cisco-packet-tracer-8.2.2"
-        ];
       };
     };
     stable = import nixpkgs-stable {

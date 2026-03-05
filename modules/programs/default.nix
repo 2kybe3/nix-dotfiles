@@ -6,7 +6,6 @@
     ./packages.nix
     ./firejail.nix
     ./libreoffice.nix
-    ./cisco-packet-tracer.nix
   ];
   environment.systemPackages = [
     cpkgs.cheat-sh
