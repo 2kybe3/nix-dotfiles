@@ -14,7 +14,7 @@ in {
     ];
 
     policies = {
-      DisplayBookmarksToolbar = "never";
+      DisplayBookmarksToolbar = "newtab";
 
       ExtensionSettings = {
         "*".installation_mode = "blocked";
