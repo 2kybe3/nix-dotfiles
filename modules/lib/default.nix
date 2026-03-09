@@ -8,5 +8,5 @@
     type = lib.types.attrs;
     default = {};
   };
-  config.kybe.lib = import ./lib.nix {inherit config pkgs;};
+  config.kybe.lib = import ./lib.nix {inherit config;};
 }

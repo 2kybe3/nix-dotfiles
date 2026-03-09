@@ -4,7 +4,6 @@
     ./obs.nix
     ./gnupg.nix
     ./packages.nix
-    ./firejail.nix
     ./libreoffice.nix
   ];
   environment.systemPackages = [
