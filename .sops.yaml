@@ -9,7 +9,7 @@ creation_rules:
     - age:
       - *server-knx
       - *root-knx
-  - path_regex: secrets/keepass\.yaml$
+  - path_regex: secrets/(keepass|wifi)\.yaml$
     key_groups:
     - age:
       - *root-knx

@@ -4,35 +4,43 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [22];
-      interfaces."kybe.xyz".allowedTCPPorts =
-        if config.kybe.lib.hostName == "knx"
-        then [3000]
-        else [];
     };
     hosts."127.0.0.1" = [
       "*.${config.kybe.lib.domain}"
       "${config.kybe.lib.domain}"
     ];
+    nameservers =
+      if config.kybe.lib.hostName == "server"
+      then [
+        "10.0.4.1"
+      ]
+      else [
+        # quad9 "unsecure"
+        "9.9.9.10"
+        "149.112.112.10"
+        "2620:fe::10"
+        "2620:fe::fe:10"
+
+        # cloudflare
+        "1.1.1.1"
+        "1.0.0.1"
+        "2606:4700:4700::1111"
+        "2606:4700:4700::1001"
+
+        # google
+        "8.8.8.8"
+        "8.8.4.4"
+        "2001:4860:4860::8888"
+        "2001:4860:4860::8844"
+      ];
   };
 
   services.resolved = {
     enable = true;
     settings.Resolve = {
-      DNSSEC =
-        if config.kybe.lib.hostName == "server"
-        then "false"
-        else "true";
       Domains = ["~."];
-      DNSOverTLS = "false";
-      DNS =
-        if config.kybe.lib.hostName == "server"
-        then [
-          "10.0.4.1"
-        ]
-        else [
-          "1.1.1.1"
-          "1.0.0.1"
-        ];
+      DNSOverTLS = "true";
+      DNSSEC = "false";
     };
   };
 }
