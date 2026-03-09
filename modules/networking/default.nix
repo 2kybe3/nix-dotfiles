@@ -39,7 +39,10 @@
     enable = true;
     settings.Resolve = {
       Domains = ["~."];
-      DNSOverTLS = "true";
+      DNSOverTLS =
+        if config.kybe.lib.hostName == "server"
+        then "false"
+        else "true";
       DNSSEC = "false";
     };
   };
