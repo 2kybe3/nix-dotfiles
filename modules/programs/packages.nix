@@ -18,6 +18,7 @@
     ## CLI
     speedtest-cli
     ripgrep-all
+    cifs-utils
     fastfetch
     pamixer # pulseaudio command line mixer
     ripgrep
