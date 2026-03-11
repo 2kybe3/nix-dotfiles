@@ -15,11 +15,11 @@
     ensureProfiles = {
       secrets.entries = [
         {
-          file = config.sops.secrets.wifi.path;
           key = "psk";
+          trim = true;
           matchId = "FRITZ!Box 6660 Cable QB";
           matchSetting = "wifi-security";
-          matchType = "wifi";
+          file = config.sops.secrets.wifi.path;
         }
       ];
       profiles."FRITZ!Box 6660 Cable QB" = {
