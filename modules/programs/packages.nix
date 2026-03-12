@@ -3,6 +3,9 @@
     playerctl
 
     ## Netowrking
+    traceroute
+    tcpdump
+    dig
     wget
     curl
     mtr

@@ -4,8 +4,8 @@
   ...
 }: {
   sops.secrets.wifi = {
-    sopsFile = "${self}/secrets/wifi.yaml";
-    key = "key";
+    sopsFile = "${self}/secrets/wifi.env.bin";
+    format = "binary";
   };
 
   networking.networkmanager = {
@@ -13,15 +13,7 @@
     dns = "systemd-resolved";
     wifi.macAddress = "7A:3F:C2:91:4D:19";
     ensureProfiles = {
-      secrets.entries = [
-        {
-          key = "psk";
-          trim = true;
-          matchId = "FRITZ!Box 6660 Cable QB";
-          matchSetting = "wifi-security";
-          file = config.sops.secrets.wifi.path;
-        }
-      ];
+      environmentFiles = [config.sops.secrets.wifi.path];
       profiles."FRITZ!Box 6660 Cable QB" = {
         connection = {
           id = "FRITZ!Box 6660 Cable QB";
@@ -46,6 +38,7 @@
         wifi-security = {
           auth-alg = "open";
           key-mgmt = "wpa-psk";
+          psk = "$WIFI_KEY";
         };
       };
     };
