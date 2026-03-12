@@ -12,6 +12,7 @@
     ./zsh.nix
     ./git.nix
     ./ssh.nix
+    ./fish.nix
     ./tmux.nix
     ./rmpc.nix
     ./btop.nix

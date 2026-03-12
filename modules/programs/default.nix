@@ -10,6 +10,7 @@
     cpkgs.cheat-sh
   ];
   programs = {
+    fish.enable = true;
     steam.enable = true;
     zoxide.enable = true;
     wireshark.enable = true;
