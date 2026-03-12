@@ -4,7 +4,7 @@
 
     matchBlocks = {
       "ip.kybe.xyz" = {
-        user = "root";
+        user = "kybe";
         identityFile = "${config.home.homeDirectory}/.ssh/kybe";
         identitiesOnly = true;
       };
