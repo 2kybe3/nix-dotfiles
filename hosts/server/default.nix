@@ -17,7 +17,6 @@
     "${self}/modules/torrents.nix"
     "${self}/modules/journald.nix"
     "${self}/modules/syncthing.nix"
-    "${self}/modules/programs/zsh.nix"
 
     inputs.sops-nix.nixosModules.sops
   ];
@@ -37,7 +36,7 @@
 
   kybe.lib.hostName = "server";
   networking.hostId = "e2775ce5";
-  users.users.root.shell = pkgs.zsh;
+  users.users.root.shell = pkgs.bash;
 
   environment.systemPackages = with pkgs; [
     vim

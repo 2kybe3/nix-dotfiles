@@ -1,6 +1,5 @@
 {cpkgs, ...}: {
   imports = [
-    ./zsh.nix
     ./obs.nix
     ./gnupg.nix
     ./packages.nix

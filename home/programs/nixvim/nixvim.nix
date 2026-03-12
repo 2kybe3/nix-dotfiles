@@ -44,13 +44,6 @@
     vim.keymap.set("n", "<Space>", "<Nop>", { silent = true })
     vim.keymap.set("v", "<Space>", "<Nop>", { silent = true })
 
-    -- Zsh
-    vim.filetype.add({
-      filename = {
-        ["zshrc"] = "zsh",
-        [".zshrc"] = "zsh",
-      },
-    })
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "nix",
       callback = function()

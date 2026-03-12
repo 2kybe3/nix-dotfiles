@@ -9,7 +9,6 @@
     ./sway
     ./fd.nix
     ./mpv.nix
-    ./zsh.nix
     ./git.nix
     ./ssh.nix
     ./fish.nix

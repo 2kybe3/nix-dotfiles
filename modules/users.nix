@@ -19,7 +19,7 @@
   };
   users = {
     mutableUsers = false;
-    defaultUserShell = pkgs.zsh;
+    defaultUserShell = pkgs.fish;
 
     users = {
       root.hashedPasswordFile = config.sops.secrets.root-pass.path;
