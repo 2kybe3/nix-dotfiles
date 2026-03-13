@@ -45,10 +45,11 @@
     gh
 
     ## TUI
-    vim
     (btop.override {
       cudaSupport = true;
     })
+    vim
+    weechat
     ncdu
     feh # Image Viewer
 

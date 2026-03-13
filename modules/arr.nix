@@ -1,9 +1,4 @@
-{
-  pkgs,
-  stable,
-  config,
-  ...
-}: let
+{config, ...}: let
   inherit
     (config.kybe.lib)
     domain
