@@ -154,8 +154,8 @@
 
       blur enable
       blur_xray disable
-      blur_passes 5
-      blur_radius 5
+      blur_passes 3
+      blur_radius 3
 
       shadows enable
 
