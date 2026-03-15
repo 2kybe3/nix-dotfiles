@@ -27,9 +27,7 @@ fi
 if [[ $CHANGES -eq 1 ]]; then
   echo "Testing NixOS rebuild..."
   if nix flake check; then
-    git push github
-    git push --mirror codeberg
-    git push --mirror gitc
+    git push
     echo "Changes pushed!"
   else
     echo "NixOS rebuild failed, not pushing changes!" >&2

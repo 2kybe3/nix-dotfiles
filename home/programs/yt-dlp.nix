@@ -9,7 +9,7 @@
   firefoxVersion = pkgs.lib.concatStringsSep "." (pkgs.lib.take 2 (pkgs.lib.splitString "." pkgs.firefox.version));
 in {
   # Little alias usefull for downloading songs from yt-music for rmpc
-  programs.fish.shellAliases.yt-audio = ''yt-dlp -x --audio-format flac --audio-quality 0 -f bestaudio --embed-metadata --embed-thumbnail --output "%(title)s - %(artist)s.%(ext)s" -P ~/Music'';
+  programs.fish.shellAliases.yt-audio = ''yt-dlp -x --audio-format mp3 --audio-quality 0 -f bestaudio --embed-metadata --embed-thumbnail --output "%(title)s - %(artist)s.%(ext)s" -P ~/Music'';
   programs.yt-dlp = {
     enable = true;
     package = unstable-small.yt-dlp;

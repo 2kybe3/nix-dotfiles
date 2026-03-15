@@ -9,6 +9,7 @@
     ./services
     ./programs
     ./sops.nix
+    ./virt.nix
   ];
 
   sops.secrets.access-token = {

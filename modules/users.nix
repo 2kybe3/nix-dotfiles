@@ -31,6 +31,7 @@
           "acme"
           "wheel"
           "docker"
+          "libvirtd"
           "wireshark"
           "networkmanager"
         ];
