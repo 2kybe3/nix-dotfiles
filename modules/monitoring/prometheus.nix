@@ -41,10 +41,10 @@ in {
     scrapeConfigs = [
       {
         job_name = "proxmox-node";
-        scrape_interval = "2s";
+        scrape_interval = "1s";
         static_configs = [
           {
-            targets = ["10.0.5.1:9100"];
+            targets = ["proxmox.internal.kybe.xyz:9100"];
           }
         ];
       }
@@ -53,7 +53,7 @@ in {
         scrape_interval = "1s";
         static_configs = [
           {
-            targets = ["10.0.4.2:2019"];
+            targets = ["caddy-public.internal.kybe.xyz:2019"];
           }
         ];
       }
@@ -62,7 +62,7 @@ in {
         scrape_interval = "1s";
         static_configs = [
           {
-            targets = ["10.0.5.2:2019"];
+            targets = ["caddy-internal.internal.kybe.xyz:2019"];
           }
         ];
       }
@@ -91,10 +91,9 @@ in {
       {
         job_name = "kybe-backend";
         scrape_interval = "1s";
-        scheme = "https";
         static_configs = [
           {
-            targets = ["kybe.xyz"];
+            targets = ["backend.internal.kybe.xyz:3000"];
           }
         ];
         authorization.credentials_file = config.sops.secrets.kybe-backend-api.path;
@@ -102,10 +101,9 @@ in {
       {
         job_name = "uptime_kuma";
         scrape_interval = "1s";
-        scheme = "https";
         static_configs = [
           {
-            targets = ["status.kybe.xyz"];
+            targets = ["uptime-kuma.internal.kybe.xyz"];
           }
         ];
         basic_auth = {
