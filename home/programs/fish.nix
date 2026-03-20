@@ -13,10 +13,10 @@
     host,
     path,
     build-user ? "root",
-    build-host,
+    build-host ? infraBuilderHost,
     target-user ? "root",
     target-host,
-  }: "sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${path}#${host} --target-host ${target-user}@${target-host} --build-host ${build-user}@${build-host} --upgrade";
+  }: "sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${path}#${host} --target-host ${target-user}@${target-host} --build-host ${build-user}@${build-host} --upgrade  &| nom";
 in {
   programs.fish = {
     enable = true;
@@ -39,14 +39,12 @@ in {
       server-build = mkNixRebuild {
         host = "server";
         path = nixosConfigPath; # TODO: split server into a diff config
-        build-host = serverHost;
         target-host = serverHost;
       };
 
       infra-nix-builder-build = mkNixRebuild {
         host = "nix-builder";
         path = infraBuilderPath;
-        build-host = infraBuilderHost;
         target-host = infraBuilderHost;
       };
 
@@ -54,14 +52,12 @@ in {
         mkNixRebuild {
           host = "caddy-internal";
           path = infraCaddyPath;
-          build-host = infraCaddyHostInternal;
           target-host = infraCaddyHostInternal;
         }
         + ";"
         + mkNixRebuild {
           host = "caddy-public";
           path = infraCaddyPath;
-          build-host = infraCaddyHostPublic;
           target-host = infraCaddyHostPublic;
         };
     };
