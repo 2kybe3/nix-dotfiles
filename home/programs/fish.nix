@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  serverSSH = "root@10.0.5.6";
+  serverHost = "10.0.5.6";
   nixosConfigPath = "~/.dotfiles";
 
   infraFolder = "~/infra";
@@ -8,6 +8,15 @@
   infraCaddyHostInternal = "10.0.5.2";
   infraBuilderPath = "${infraFolder}/infra-nix-builder";
   infraBuilderHost = "10.0.5.3";
+
+  mkNixRebuild = {
+    host,
+    path,
+    build-user ? "root",
+    build-host,
+    target-user ? "root",
+    target-host,
+  }: "sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${path}#${host} --target-host ${target-user}@${target-host} --build-host ${build-user}@${build-host} --upgrade";
 in {
   programs.fish = {
     enable = true;
@@ -26,13 +35,35 @@ in {
       knx-full = "knx-build; knx-hm";
       knx-build = "sudo nixos-rebuild switch --flake ${nixosConfigPath}#knx --upgrade";
       knx-hm = "home-manager switch --flake ${nixosConfigPath} --show-trace";
-      server-build = "sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${nixosConfigPath}#server --target-host ${serverSSH}";
 
-      infra-nix-builder-build = "sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${infraBuilderPath}#caddy-internal --target-host root@${infraBuilderHost} --build-host root@${infraBuilderHost}";
-      infra-caddy-build = ''
-        sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${infraCaddyPath}#caddy-internal --target-host root@${infraCaddyHostInternal} --build-host root@${infraCaddyHostInternal};
-        sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${infraCaddyPath}#caddy-public   --target-host root@${infraCaddyHostPublic} --build-host root@${infraCaddyHostPublic}
-      '';
+      server-build = mkNixRebuild {
+        host = "server";
+        path = nixosConfigPath; # TODO: split server into a diff config
+        build-host = serverHost;
+        target-host = serverHost;
+      };
+
+      infra-nix-builder-build = mkNixRebuild {
+        host = "nix-builder";
+        path = infraBuilderPath;
+        build-host = infraBuilderHost;
+        target-host = infraBuilderHost;
+      };
+
+      infra-caddy-build =
+        mkNixRebuild {
+          host = "caddy-internal";
+          path = infraCaddyPath;
+          build-host = infraCaddyHostInternal;
+          target-host = infraCaddyHostInternal;
+        }
+        + ";"
+        + mkNixRebuild {
+          host = "caddy-public";
+          path = infraCaddyPath;
+          build-host = infraCaddyHostPublic;
+          target-host = infraCaddyHostPublic;
+        };
     };
   };
 }
