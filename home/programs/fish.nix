@@ -1,13 +1,13 @@
 {pkgs, ...}: let
-  serverHost = "10.0.5.6";
+  serverHost = "nixos.internal.kybe.xyz";
   nixosConfigPath = "~/.dotfiles";
 
   infraFolder = "~/infra";
   infraCaddyPath = "${infraFolder}/infra-caddy";
-  infraCaddyHostPublic = "10.0.4.2";
-  infraCaddyHostInternal = "10.0.5.2";
+  infraCaddyHostPublic = "caddy-public.internal.kybe.xyz";
+  infraCaddyHostInternal = "caddy-internal.internal.kybe.xyz";
   infraBuilderPath = "${infraFolder}/infra-nix-builder";
-  infraBuilderHost = "10.0.5.3";
+  infraBuilderHost = "nix-builder.internal.kybe.xyz";
 
   mkNixRebuild = {
     host,
@@ -33,7 +33,7 @@ in {
       flake-update = "nix flake update --flake .";
       collect-garbage = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
       knx-full = "knx-build; knx-hm";
-      knx-build = "sudo nixos-rebuild switch --flake ${nixosConfigPath}#knx --upgrade";
+      knx-build = "sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${nixosConfigPath}#knx --build-host root@${infraBuilderHost} --upgrade &| nom";
       knx-hm = "home-manager switch --flake ${nixosConfigPath} --show-trace";
 
       server-build = mkNixRebuild {
