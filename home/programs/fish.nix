@@ -16,7 +16,7 @@
     build-host ? infraBuilderHost,
     target-user ? "root",
     target-host,
-  }: "sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${path}#${host} --target-host ${target-user}@${target-host} --build-host ${build-user}@${build-host} --upgrade  &| nom";
+  }: "sudo -v && NIX_SSHOPTS='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${path}#${host} --target-host ${target-user}@${target-host} --build-host ${build-user}@${build-host} --upgrade --sudo --verbose &| nom";
 in {
   programs.fish = {
     enable = true;
@@ -33,7 +33,7 @@ in {
       flake-update = "nix flake update --flake .";
       collect-garbage = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
       knx-full = "knx-build; knx-hm";
-      knx-build = "sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${nixosConfigPath}#knx --build-host root@${infraBuilderHost} --upgrade &| nom";
+      knx-build = "sudo -v && nixos-rebuild switch --flake ${nixosConfigPath}#knx --upgrade --sudo --verbose &| nom";
       knx-hm = "home-manager switch --flake ${nixosConfigPath} --show-trace";
 
       server-build = mkNixRebuild {
