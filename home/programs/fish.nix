@@ -1,6 +1,13 @@
 {pkgs, ...}: let
   serverSSH = "root@10.0.5.6";
   nixosConfigPath = "~/.dotfiles";
+
+  infraFolder = "~/infra";
+  infraCaddyPath = "${infraFolder}/infra-caddy";
+  infraCaddyHostPublic = "10.0.4.2";
+  infraCaddyHostInternal = "10.0.5.2";
+  infraBuilderPath = "${infraFolder}/infra-nix-builder";
+  infraBuilderHost = "10.0.5.3";
 in {
   programs.fish = {
     enable = true;
@@ -20,6 +27,12 @@ in {
       knx-build = "sudo nixos-rebuild switch --flake ${nixosConfigPath}#knx --upgrade";
       knx-hm = "home-manager switch --flake ${nixosConfigPath} --show-trace";
       server-build = "sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${nixosConfigPath}#server --target-host ${serverSSH}";
+
+      infra-nix-builder-build = "sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${infraBuilderPath}#caddy-internal --target-host root@${infraBuilderHost} --build-host root@${infraBuilderHost}";
+      infra-caddy-build = ''
+        sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${infraCaddyPath}#caddy-internal --target-host root@${infraCaddyHostInternal} --build-host root@${infraCaddyHostInternal};
+        sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${infraCaddyPath}#caddy-public   --target-host root@${infraCaddyHostPublic} --build-host root@${infraCaddyHostPublic}
+      '';
     };
   };
 }
