@@ -4,6 +4,7 @@
     ./gnupg.nix
     ./packages.nix
     ./libreoffice.nix
+    ./nix-dev.nix
   ];
   environment.systemPackages = [
     cpkgs.cheat-sh
