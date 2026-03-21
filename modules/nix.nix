@@ -1,6 +1,12 @@
 {
   nix = {
     settings = {
+      substituters = [
+        "https://attic.kybe.xyz/main"
+      ];
+      trusted-public-keys = [
+        "main:cb7V485kGP0lG7LtQ/suOgKOgtVxNXrnD6i5yCtnaMQ="
+      ];
       auto-optimise-store = true;
       trusted-users = [
         "root"
