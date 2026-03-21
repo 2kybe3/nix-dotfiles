@@ -1,5 +1,4 @@
 {pkgs, ...}: let
-  serverHost = "nixos.internal.kybe.xyz";
   nixosConfigPath = "~/.dotfiles";
 
   infraFolder = "~/infra";
@@ -8,6 +7,8 @@
   infraCaddyHostInternal = "caddy-internal.internal.kybe.xyz";
   infraBuilderPath = "${infraFolder}/infra-nix-builder";
   infraBuilderHost = "nix-builder.internal.kybe.xyz";
+  infraMainPath = "${infraFolder}/infra-nix-main";
+  infraMainHost = "nix-main.internal.kybe.xyz";
 
   mkNixRebuild = {
     host,
@@ -37,9 +38,9 @@ in {
       knx-hm = "home-manager switch --flake ${nixosConfigPath} --show-trace";
 
       server-build = mkNixRebuild {
-        host = "server";
-        path = nixosConfigPath; # TODO: split server into a diff config
-        target-host = serverHost;
+        host = "nix-main";
+        path = infraMainPath;
+        target-host = infraMainHost;
       };
 
       infra-nix-builder-build = mkNixRebuild {

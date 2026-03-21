@@ -1,22 +1,16 @@
 keys:
   - &root-knx age1j5m502xft87rhgal0929h4urzspv3qd03mkrcek23rmm8dsuf5rq2465td
-  - &server-knx age198xuk8yt5aqywee4zg7968ecq0ve8shhumq6fytxq5qyyp5mqvtssy66z0
   - &hm-knx age1tcsye90nmzdntlkzq58ml0t2tuye6t2unt9fyccy0yxn2ctmtfrq6dnq3t
 
 creation_rules:
   - path_regex: secrets/(wireguard|users|syncthing(-api)?|mullvad)\.yaml$
     key_groups:
     - age:
-      - *server-knx
       - *root-knx
   - path_regex: secrets/keepass\.yaml$
     key_groups:
     - age:
       - *root-knx
-  - path_regex: secrets/(kybe-backend|influxdb|monitoring|mail-system|uptime-kuma)\.yaml$
-    key_groups:
-    - age:
-      - *server-knx
   - path_regex: secrets/(i3status|zipline|mail|nix\.conf|last\.fm)\.yaml$
     key_groups:
     - age:
@@ -26,10 +20,6 @@ creation_rules:
     key_groups:
     - age:
       - *root-knx
-  - path_regex: secrets/server-syncthing-(cert|key).pem$
-    key_groups:
-    - age:
-      - *server-knx
 
   - path_regex: secrets/wifi.env.bin$
     key_groups:
@@ -39,4 +29,3 @@ creation_rules:
     key_groups:
     - age:
       - *root-knx
-      - *server-knx

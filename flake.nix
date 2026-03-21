@@ -104,7 +104,6 @@
   in {
     nixosConfigurations = {
       knx = makeSystem ./hosts/knx;
-      server = makeSystem ./hosts/server;
     };
     homeConfigurations."kybe" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;

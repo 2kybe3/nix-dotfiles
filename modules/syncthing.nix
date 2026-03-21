@@ -7,21 +7,14 @@
   inherit
     (config.kybe.lib)
     domain
-    hostName
     ;
   inherit
     (config.kybe.lib.caddy)
     createCaddyProxy
     ;
 
-  syncthingUser =
-    if hostName == "server"
-    then "root"
-    else "kybe";
-  homeDir =
-    if config.kybe.lib.hostName == "server"
-    then "/root"
-    else "/home/${syncthingUser}";
+  syncthingUser = "kybe";
+  homeDir = "/home/${syncthingUser}";
   folderDir = "${homeDir}/syncthing";
   dataDir = folderDir;
 
