@@ -29,7 +29,7 @@
     "${self}/modules/services.nix"
     "${self}/modules/journald.nix"
     "${self}/modules/syncthing.nix"
-    "${self}/modules/networking/kybe-vpn.nix"
+    "${self}/modules/networking/vpn"
     "${self}/modules/networking/networkmanager.nix"
 
     inputs.sops-nix.nixosModules.sops

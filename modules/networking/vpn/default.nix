@@ -1,5 +1,6 @@
 {
   self,
+  pkgs,
   config,
   ...
 }: {
@@ -14,13 +15,14 @@
     };
   };
 
+  environment.systemPackages = import ./scripts {inherit pkgs;};
+
   systemd.services."kybe-wg-resolv" = {
     description = "Set resolvectl for kybe.xyz after wg interface is up";
 
-    after = ["network-online.target"];
-    wants = ["network-online.target"];
-    partOf = ["wireguard-kybe.xyz.service"];
-    requires = ["wireguard-kybe.xyz.service"];
+    after = ["wireguard-kybe.xyz.target" "network.target" "wireguard-kybe.xyz.service"];
+    wants = ["wireguard-kybe.xyz.service"];
+    bindsTo = ["wireguard-kybe.xyz.service"];
     wantedBy = ["wireguard-kybe.xyz.service"];
 
     serviceConfig = {

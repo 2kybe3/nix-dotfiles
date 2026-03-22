@@ -19,7 +19,6 @@
         "flakes"
       ];
     };
-    extraOptions = "netrc-file = /home/kybe/.config/nix/netrc";
     gc = {
       automatic = true;
       dates = "20:00";

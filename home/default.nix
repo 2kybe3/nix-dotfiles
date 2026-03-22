@@ -12,10 +12,18 @@
     ./virt.nix
   ];
 
-  sops.secrets.access-token = {
-    path = "${config.home.homeDirectory}/.config/nix/access-tokens.conf";
-    sopsFile = "${self}/secrets/nix.conf.yaml";
-    mode = "0400";
+  sops.secrets = {
+    access-token = {
+      path = "${config.home.homeDirectory}/.config/nix/access-tokens.conf";
+      sopsFile = "${self}/secrets/nix.conf.yaml";
+      mode = "0400";
+    };
+    netrc = {
+      path = "${config.home.homeDirectory}/.config/nix/netrc";
+      sopsFile = "${self}/secrets/netrc.txt";
+      format = "binary";
+      mode = "0400";
+    };
   };
 
   home = {
@@ -31,7 +39,10 @@
 
   nix = {
     package = pkgs.nix;
-    extraOptions = "!include ${config.sops.secrets.access-token.path}";
+    extraOptions = ''
+      netrc-file = ${config.sops.secrets.netrc.path}
+      !include ${config.sops.secrets.access-token.path}";
+    '';
   };
 
   fonts.fontconfig = {

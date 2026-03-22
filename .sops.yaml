@@ -21,6 +21,11 @@ creation_rules:
     - age:
       - *root-knx
 
+  - path_regex: secrets/netrc.txt$
+    key_groups:
+    - age:
+      - *root-knx
+
   - path_regex: secrets/wifi.env.bin$
     key_groups:
     - age:
