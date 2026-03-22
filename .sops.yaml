@@ -16,21 +16,21 @@ creation_rules:
     - age:
       - *hm-knx
 
-  - path_regex: secrets/knx-syncthing-(cert|key).pem$
+  - path_regex: secrets/knx-syncthing-(cert|key)]\.pem$
     key_groups:
     - age:
       - *root-knx
 
-  - path_regex: secrets/netrc.txt$
+  - path_regex: secrets/netrc\.txt$
     key_groups:
     - age:
       - *root-knx
 
-  - path_regex: secrets/wifi.env.bin$
+  - path_regex: secrets/(wifi|caddy)\.env\.bin$
     key_groups:
     - age:
       - *root-knx
-  - path_regex: secrets/acme.env.bin$
+  - path_regex: secrets/acme\.env\.bin$
     key_groups:
     - age:
       - *root-knx

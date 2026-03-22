@@ -1,5 +1,6 @@
 {
   self,
+  pkgs,
   config,
   ...
 }: let
@@ -16,42 +17,33 @@
   names = builtins.attrNames vhosts;
   links = builtins.concatStringsSep "\n" (map (name: "https://${name}") names);
 in {
-  sops.secrets.acme = {
-    sopsFile = "${self}/secrets/acme.env.bin";
+  sops.secrets.caddy = {
+    sopsFile = "${self}/secrets/caddy.env.bin";
     format = "binary";
-  };
-
-  security.acme = {
-    acceptTerms = true;
-    defaults = {
-      email = "kybe@kybe.xyz";
-      credentialsFile = config.sops.secrets.acme.path;
-      dnsProvider = "cloudflare";
-      dnsResolver = "1.1.1.1:53";
-      dnsPropagationCheck = true;
-      postRun = ''
-        chmod g+rwx .
-        chmod g+rwx key.pem cert.pem
-      '';
-    };
-
-    certs."${domain}" = {
-      domain = "${domain}";
-      extraDomainNames = ["*.${domain}"];
-    };
   };
 
   services.caddy = {
     enable = true;
+    package = pkgs.caddy.withPlugins {
+      plugins = ["github.com/caddy-dns/cloudflare@v0.2.3"];
+      hash = "sha256-bL1cpMvDogD/pdVxGA8CAMEXazWpFDBiGBxG83SmXLA=";
+    };
 
     virtualHosts."${domain}" = createRawCaddyProxy "respond \"${config.kybe.lib.hostName}\n\n${links}\"";
+    environmentFile = config.sops.secrets.caddy.path;
   };
 
   users.groups.acme.members = [
     "caddy"
   ];
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-  ];
+
+  networking.firewall = {
+    allowedUDPPorts = [
+      443
+    ];
+    allowedTCPPorts = [
+      80
+      443
+    ];
+  };
 }
