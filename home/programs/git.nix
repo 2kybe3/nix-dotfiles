@@ -6,20 +6,22 @@
       key = "A96D0830396F4327";
     };
     settings = {
-      core.pager = "delta";
       interactive.diffFilter = "delta --color-only";
+      merge.conflictStyle = "zdiff3";
+      push.autoSetupRemote = true;
+      init.defaultBranch = "main";
+      core.pager = "delta";
+      pull.rebase = true;
       delta = {
         line-numbers = true;
         navigate = true;
         dark = true;
       };
-      merge.conflictStyle = "zdiff3";
-      pull.rebase = true;
+
       user = {
         name = "2kybe3";
         email = "kybe@kybe.xyz";
       };
-      init.defaultBranch = "main";
     };
   };
 }
