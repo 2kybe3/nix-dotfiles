@@ -1,6 +1,6 @@
 {
   self,
-  pkgs,
+  master,
   config,
   ...
 }: let
@@ -24,9 +24,9 @@ in {
 
   services.caddy = {
     enable = true;
-    package = pkgs.caddy.withPlugins {
+    package = master.caddy.withPlugins {
       plugins = ["github.com/caddy-dns/cloudflare@v0.2.3"];
-      hash = "sha256-bL1cpMvDogD/pdVxGA8CAMEXazWpFDBiGBxG83SmXLA=";
+      hash = "sha256-20o+14cn/eeLuf1c8uGE1ODRZGC0oxocaIVlv4tFSvA=";
     };
 
     virtualHosts."${domain}" = createRawCaddyProxy "respond \"${config.kybe.lib.hostName}\n\n${links}\"";
