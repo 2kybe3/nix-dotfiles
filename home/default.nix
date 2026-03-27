@@ -58,6 +58,7 @@
 
   gtk = {
     enable = true;
+    gtk4.theme = null;
     colorScheme = "dark";
     font.name = "FiraCode Nerd Font";
   };

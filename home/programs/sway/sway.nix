@@ -20,7 +20,10 @@
     jq
   ];
 
-  xdg.autostart.enable = true;
+  xdg = {
+    userDirs.setSessionVariables = false;
+    autostart.enable = true;
+  };
 
   wayland.windowManager.sway = {
     enable = true;
