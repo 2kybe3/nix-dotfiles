@@ -2,6 +2,7 @@
   self,
   pkgs,
   config,
+  mpdscribble,
   ...
 }: {
   sops.secrets."last.fm" = {
@@ -31,6 +32,7 @@
     mpd-mpris.enable = true;
     mpdscribble = {
       enable = true;
+      package = mpdscribble.mpdscribble;
       endpoints = {
         "last.fm" = {
           passwordFile = config.sops.secrets."last.fm".path;

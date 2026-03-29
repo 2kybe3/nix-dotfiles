@@ -25,7 +25,9 @@ in {
     shellAliases = {
       cd = "z";
       ls = "${pkgs.eza}/bin/eza -al";
+
       tm = "tmux new-session -A -s main";
+      tmc = "tmux new-session -A -s ";
 
       # SSH stuff
       server = "ssh ip.kybe.xyz";
