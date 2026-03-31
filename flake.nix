@@ -6,6 +6,11 @@
     nixpkgs-mpscribble.url = "github:nixos/nixpkgs/?ref=pull/502095/head";
     master-nixpkgs.url = "github:nixos/nixpkgs/master";
 
+    gh-notify-daemon = {
+      url = "git+https://git.kybe.xyz/2kybe3/gh-notify-daemon";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -109,6 +114,7 @@
       modules = [
         inputs.nixvim.homeModules.nixvim
         inputs.sops-nix.homeManagerModules.sops
+        inputs.gh-notify-daemon.homeManagerModules.gh-notify-daemon
         ./home
       ];
     };

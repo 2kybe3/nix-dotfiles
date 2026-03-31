@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    ./gh-notify-daemon.nix
     ./accounts.nix
     ./services
     ./programs
@@ -41,7 +42,7 @@
     package = pkgs.nix;
     extraOptions = ''
       netrc-file = ${config.sops.secrets.netrc.path}
-      !include ${config.sops.secrets.access-token.path}";
+      !include ${config.sops.secrets.access-token.path};
     '';
   };
 
