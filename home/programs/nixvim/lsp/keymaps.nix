@@ -1,33 +1,31 @@
 {lib}: [
   {
+    action = lib.nixvim.mkRaw "require('telescope.builtin').lsp_definitions";
     key = "gd";
-    lspBufAction = "definition";
-    mode = "n";
   }
   {
+    action = lib.nixvim.mkRaw "require('telescope.builtin').lsp_references";
     key = "gD";
-    lspBufAction = "references";
-    mode = "n";
   }
   {
     key = "K";
     lspBufAction = "hover";
-    mode = "n";
   }
   {
-    key = "ha";
+    key = "<leader>ha";
     lspBufAction = "document_highlight";
-    mode = "n";
   }
   {
-    key = "hc";
+    key = "<leader>hc";
     lspBufAction = "clear_references";
-    mode = "n";
   }
   {
-    key = "ff";
+    key = "<leader>ft";
     lspBufAction = "format";
-    mode = "n";
+  }
+  {
+    key = "<leader>ca";
+    action = lib.nixvim.mkRaw "require('actions-preview').code_actions";
   }
   {
     action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=1, float=true }) end";
@@ -38,7 +36,19 @@
     key = "<leader>dk";
   }
   {
-    action = lib.nixvim.mkRaw "require('telescope.builtin').lsp_definitions";
-    key = "gd";
+    action = lib.nixvim.mkRaw "require('telescope.builtin').diagnostics";
+    key = "<leader>dd";
+  }
+  {
+    action = lib.nixvim.mkRaw "require('telescope.builtin').git_commits";
+    key = "<leader>gc";
+  }
+  {
+    action = lib.nixvim.mkRaw "require('telescope.builtin').git_branches";
+    key = "<leader>gb";
+  }
+  {
+    action = lib.nixvim.mkRaw "require('telescope.builtin').git_status";
+    key = "<leader>gs";
   }
 ]

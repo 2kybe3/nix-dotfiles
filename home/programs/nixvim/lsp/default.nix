@@ -1,4 +1,9 @@
 {lib, ...}: {
+  imports = [
+    ./plugins
+  ];
+
+  plugins.actions-preview.enable = true;
   lsp = {
     inlayHints.enable = true;
     keymaps = import ./keymaps.nix {inherit lib;};
@@ -11,5 +16,4 @@
         update_in_insert = true,
     })
   '';
-  plugins = import ./plugins;
 }
