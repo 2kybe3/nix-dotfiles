@@ -55,7 +55,6 @@
 
     ## Nix
     statix
-    nixd
 
     ## Bash
     shellcheck

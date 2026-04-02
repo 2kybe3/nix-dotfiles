@@ -25,18 +25,44 @@
     render-markdown.enable = true;
   };
 
-  ## Colorsheme Catppuccin - Mocha ##
   colorschemes.catppuccin.enable = true;
   extraConfigLua = ''
     require("catppuccin").setup({
-      flavour = "mocha",
+      flavour = "macchiato",
       transparent_background = true,
       float = {
         transparent = true,
         solid = false,
-      }
+      },
+      styles = {
+        comments = { "italic" },
+        conditionals = { "italic" },
+      },
+      lsp_styles = {
+        virtual_text = {
+            errors = { "italic" },
+            hints = { "italic" },
+            warnings = { "italic" },
+            information = { "italic" },
+            ok = { "italic" },
+        },
+        underlines = {
+            errors = { "underline" },
+            hints = { "underline" },
+            warnings = { "underline" },
+            information = { "underline" },
+            ok = { "underline" },
+        },
+        inlay_hints = {
+            background = true,
+        },
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+        },
+      },
     })
-    vim.cmd.colorscheme "catppuccin"
+    vim.cmd("colorscheme catppuccin-nvim")
 
     -- Leader
     vim.g.mapleader = " "
@@ -45,12 +71,12 @@
     vim.keymap.set("v", "<Space>", "<Nop>", { silent = true })
 
     vim.api.nvim_create_autocmd("FileType", {
-      pattern = "nix",
-      callback = function()
-        vim.opt_local.tabstop = 2
-        vim.opt_local.softtabstop = 2
-        vim.opt_local.shiftwidth = 2
-      end,
+        pattern = "nix",
+        callback = function()
+             vim.opt_local.tabstop = 2
+             vim.opt_local.softtabstop = 2
+             vim.opt_local.shiftwidth = 2
+        end,
     })
   '';
 }

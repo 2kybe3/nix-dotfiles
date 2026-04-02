@@ -27,7 +27,6 @@
   home.packages = with pkgs; [
     tree-sitter
   ];
-  home.sessionVariables.NIXD_FLAGS = "--semantic-tokens=true";
   programs = {
     home-manager.enable = true;
 
@@ -35,7 +34,7 @@
       imports = [./nixvim];
       _module.args = {
         inherit self system;
-        home = config.home;
+        inherit (config) home;
       };
     };
   };

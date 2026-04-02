@@ -9,6 +9,7 @@
     ./nvidia.nix
 
     "${self}/modules/lib"
+
     "${self}/modules/nix.nix"
     "${self}/modules/tor.nix"
     "${self}/modules/ssh.nix"

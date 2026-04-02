@@ -143,11 +143,11 @@ in {
         (_: v:
           base
           // {
-            id = v.id;
+            inherit (v) id;
             path = "${folderDir}/${v.path}";
           }
           // lib.optionalAttrs (v ? versioning) {
-            versioning = v.versioning;
+            inherit (v) versioning;
           })
         folderDefs;
     };

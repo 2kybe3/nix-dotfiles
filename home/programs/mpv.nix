@@ -2,14 +2,12 @@
   programs.mpv = {
     enable = true;
 
-    package = (
-      pkgs.mpv.override {
-        scripts = with pkgs.mpvScripts; [
-          uosc
-          sponsorblock
-        ];
-      }
-    );
+    package = pkgs.mpv.override {
+      scripts = with pkgs.mpvScripts; [
+        uosc
+        sponsorblock
+      ];
+    };
 
     config = {
       profile = "high-quality";

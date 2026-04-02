@@ -1,6 +1,6 @@
 {
   imports = [
-    ./lsp.nix
+    ./lsp
     ./cord.nix
     ./flash.nix
     ./treesj.nix
