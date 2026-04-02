@@ -85,8 +85,7 @@
     portal = {
       enable = true;
       config.common.default = "*";
-      extraPortals = [pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
-      xdgOpenUsePortal = true;
+      extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
     userDirs = {
       enable = true;

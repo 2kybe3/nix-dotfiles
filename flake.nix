@@ -74,16 +74,7 @@
       inherit system;
     };
 
-    aria2 = pkgs.aria2.overrideAttrs (old: {
-      patches =
-        (old.patches or [])
-        ++ [
-          ./patches/aria2-unlimited.patch
-        ];
-    });
-
     cpkgs = {
-      inherit aria2;
       screenshot-sway-zipline = screenshot-sway-zipline.packages.${system}.default;
       cheat-sh = cheat-sh.packages.${system}.default;
     };
