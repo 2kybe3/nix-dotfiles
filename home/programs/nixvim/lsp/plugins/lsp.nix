@@ -8,6 +8,7 @@
       yamlls.enable = true;
       statix.enable = true;
       nil_ls.enable = true;
+      jsonls.enable = true;
       bash_ls.enable = true;
       fish_lsp.enable = true;
       systemd_lsp.enable = true;
