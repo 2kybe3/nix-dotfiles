@@ -1,6 +1,7 @@
 {
   lib,
   self,
+  pkgs,
   config,
   system,
   ...
@@ -22,6 +23,11 @@
     ./obsidian.nix
     ./librewolf.nix
   ];
+
+  home.packages = with pkgs; [
+    tree-sitter
+  ];
+  home.sessionVariables.NIXD_FLAGS = "--semantic-tokens=true";
   programs = {
     home-manager.enable = true;
 

@@ -69,9 +69,6 @@
 
     jetbrains.idea
     recaf-launcher
-
-    # Nixvim
-    tree-sitter
     gcc
 
     home-manager

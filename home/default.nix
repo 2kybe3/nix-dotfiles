@@ -66,7 +66,32 @@
 
   xdg = {
     enable = true;
-    userDirs.enable = true;
+    autostart.enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplicationPackages = [
+        pkgs.librewolf
+        pkgs.thunderbird
+      ];
+      defaultApplications = {
+        "x-scheme-handler/http" = ["librewolf.desktop"];
+        "x-scheme-handler/https" = ["librewolf.desktop"];
+        "x-scheme-handler/about" = ["librewolf.desktop"];
+        "x-scheme-handler/unknown" = ["librewolf.desktop"];
+
+        "x-scheme-handler/discord" = ["vesktop.desktop"];
+      };
+    };
+    portal = {
+      enable = true;
+      config.common.default = "*";
+      extraPortals = [pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
+      xdgOpenUsePortal = true;
+    };
+    userDirs = {
+      enable = true;
+      setSessionVariables = false;
+    };
   };
 
   home.file = {

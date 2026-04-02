@@ -1,8 +1,4 @@
-{
-  self,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   lsp = {
     inlayHints.enable = true;
     keymaps = [
@@ -40,27 +36,8 @@
         key = "<leader>dk";
       }
       {
-        action = "<CMD>LspStop<CR>";
-        key = "<leader>lx";
-        mode = "n";
-      }
-      {
-        action = "<CMD>LspStart<CR>";
-        key = "<leader>ls";
-        mode = "n";
-      }
-      {
-        action = "<CMD>LspRestart<CR>";
-        key = "<leader>lr";
-        mode = "n";
-      }
-      {
         action = lib.nixvim.mkRaw "require('telescope.builtin').lsp_definitions";
         key = "gd";
-      }
-      {
-        action = "<CMD>Lspsaga hover_doc<Enter>";
-        key = "K";
       }
     ];
   };
@@ -68,24 +45,23 @@
     lsp = {
       enable = true;
       servers = {
+        jus.enable = true;
         nixd = {
-          # Nix LS
           enable = true;
-          settings = let
-            flake = ''(builtins.getFlake "${self}")'';
-          in {
-            nixpkgs.expr = "import ${flake}.inputs.nixpkgs { }";
-            formatting.command = "nix fmt -- .";
-            options = rec {
-              nixos.expr = "${flake}.nixosConfigurations.knx.options";
-              hm.expr = "${flake}.homeConfigurations.kybe.options";
-              nixvim.expr = "${hm.expr}.programs.nixvim";
+          config = {
+            nixpkgs = {
+              expr = "import <nixpkgs> { }";
+            };
+            options = {
+              nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.knx.options";
+              nixvim.expr = "(builtins.getFlake (builtins.toString ./.)).inputs.nixvim.nixvimConfigurations.${builtins.currentSystem}.default.options";
+              home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.kybe.options";
             };
           };
         };
-        jus.enable = true;
         html.enable = true;
         yamlls.enable = true;
+        nil_ls.enable = true;
         bash_ls.enable = true;
         fish_lsp.enable = true;
         systemd_lsp.enable = true;

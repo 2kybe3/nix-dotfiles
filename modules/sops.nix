@@ -2,8 +2,7 @@
   self,
   pkgs,
   ...
-}: let
-in {
+}: {
   environment.systemPackages = with pkgs; [
     age
     sops
