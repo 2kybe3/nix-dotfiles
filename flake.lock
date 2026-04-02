@@ -190,22 +190,6 @@
         "type": "github"
       }
     },
-    "master-nixpkgs": {
-      "locked": {
-        "lastModified": 1775111122,
-        "narHash": "sha256-dsun1xPXyXqFokDHcRsv+Ma6sMlCZ1+Cr/4RbldrtbM=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "5a6cb88fd76d8f2bf84d928e44a705fd8dbfb4e1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "master",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -301,7 +285,6 @@
         "cheat-sh": "cheat-sh",
         "gh-notify-daemon": "gh-notify-daemon",
         "home-manager": "home-manager",
-        "master-nixpkgs": "master-nixpkgs",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-mpscribble": "nixpkgs-mpscribble",

@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-mpscribble.url = "github:nixos/nixpkgs/?ref=pull/502095/head";
-    master-nixpkgs.url = "github:nixos/nixpkgs/master";
 
     gh-notify-daemon = {
       url = "git+https://git.kybe.xyz/2kybe3/gh-notify-daemon";
@@ -54,7 +53,6 @@
     rust-dev,
     cheat-sh,
     home-manager,
-    master-nixpkgs,
     nixpkgs-mpscribble,
     screenshot-sway-zipline,
     ...
@@ -66,9 +64,6 @@
         allowUnfree = true;
         nvidia.acceptLicense = true;
       };
-    };
-    master = import master-nixpkgs {
-      inherit system;
     };
     mpdscribble = import nixpkgs-mpscribble {
       inherit system;
@@ -84,7 +79,7 @@
         inherit system pkgs;
 
         specialArgs = {
-          inherit self inputs system cpkgs master;
+          inherit self inputs system cpkgs;
         };
 
         modules = [
