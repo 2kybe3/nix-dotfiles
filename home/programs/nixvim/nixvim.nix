@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   enable = true;
 
@@ -28,6 +28,8 @@
     render-markdown.enable = true;
     visual-whitespace.enable = true; # Visualize whitespaces in v mode
   };
+
+  keymaps = import ./keymaps.nix { inherit lib; };
 
   colorschemes.catppuccin.enable = true;
   extraConfigLua = ''

@@ -6,7 +6,7 @@ set -euo pipefail
 COMMIT_MSG="${1:-Config-change $(date '+%Y-%m-%d %H:%M:%S')}"
 
 echo "Formatting files"
-if nix fmt -- .; then
+if nix fmt; then
   echo "Files formatted successfully."
 else
   echo "File formatting failed!" >&2

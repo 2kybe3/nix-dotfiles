@@ -36,20 +36,4 @@
     action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=-1, float=true }) end";
     key = "<leader>dk";
   }
-  {
-    action = lib.nixvim.mkRaw "require('telescope.builtin').diagnostics";
-    key = "<leader>dd";
-  }
-  {
-    action = lib.nixvim.mkRaw "require('telescope.builtin').git_commits";
-    key = "<leader>gc";
-  }
-  {
-    action = lib.nixvim.mkRaw "require('telescope.builtin').git_branches";
-    key = "<leader>gb";
-  }
-  {
-    action = lib.nixvim.mkRaw "require('telescope.builtin').git_status";
-    key = "<leader>gs";
-  }
 ]
