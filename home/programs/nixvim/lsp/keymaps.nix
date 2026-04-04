@@ -1,4 +1,5 @@
-{lib}: [
+{ lib }:
+[
   {
     action = lib.nixvim.mkRaw "require('telescope.builtin').lsp_definitions";
     key = "gd";
@@ -20,7 +21,7 @@
     lspBufAction = "clear_references";
   }
   {
-    key = "<leader>ft";
+    key = "<leader>fm";
     lspBufAction = "format";
   }
   {

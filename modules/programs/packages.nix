@@ -1,8 +1,9 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   environment.systemPackages = with pkgs; [
     playerctl
 
-    ## Netowrking
+    ## Networking
     traceroute
     tcpdump
     dig
@@ -63,6 +64,7 @@
     (prismlauncher.override {
       jdks = [
         jdk21
+        jdk25
       ];
     })
 

@@ -1,3 +1,5 @@
+# Allows aligning by a char (very clean sometimes)
+
 {
   plugins.mini-align = {
     enable = true;

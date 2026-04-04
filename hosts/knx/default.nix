@@ -3,39 +3,52 @@
   config,
   inputs,
   ...
-}: {
+}:
+let
+  modules = [
+    "nix"
+    "tor"
+    "ssh"
+    "virt"
+    "sops"
+    "sway"
+    "boot"
+    "caddy"
+    "users"
+    "getty"
+    "docker"
+    "system"
+    "printer"
+    "pipewire"
+    "services"
+    "journald"
+    "syncthing"
+  ]
+  ++ [
+    "lib"
+    "programs"
+    "networking"
+    "networking/vpn"
+    "networking/networkmanager"
+  ];
+
+  moduleImports = map (
+    m:
+    let
+      path = "${self}/modules/${m}";
+    in
+    if builtins.pathExists (path + ".nix") then path + ".nix" else path
+  ) modules;
+in
+{
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix
 
-    "${self}/modules/lib"
-
-    "${self}/modules/nix.nix"
-    "${self}/modules/tor.nix"
-    "${self}/modules/ssh.nix"
-    "${self}/modules/virt.nix"
-    "${self}/modules/sops.nix"
-    "${self}/modules/sops.nix"
-    "${self}/modules/sway.nix"
-    "${self}/modules/boot.nix"
-    "${self}/modules/programs"
-    "${self}/modules/caddy.nix"
-    "${self}/modules/users.nix"
-    "${self}/modules/getty.nix"
-    "${self}/modules/networking"
-    "${self}/modules/docker.nix"
-    "${self}/modules/system.nix"
-    "${self}/modules/printer.nix"
-    "${self}/modules/pipewire.nix"
-    "${self}/modules/services.nix"
-    "${self}/modules/journald.nix"
-    "${self}/modules/syncthing.nix"
-    "${self}/modules/networking/vpn"
-    "${self}/modules/networking/networkmanager.nix"
-
     inputs.sops-nix.nixosModules.sops
     inputs.nix-index-database.nixosModules.default
-  ];
+  ]
+  ++ moduleImports;
 
   kybe.lib.hostName = "knx";
   networking.hostName = config.kybe.lib.hostName;

@@ -2,9 +2,10 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   programs = {
-    firejail.wrappedBinaries = config.kybe.lib.firejail.make pkgs.obs-studio "obs" ["obs"];
+    firejail.wrappedBinaries = config.kybe.lib.firejail.make pkgs.obs-studio "obs" [ "obs" ];
 
     obs-studio = {
       enable = true;

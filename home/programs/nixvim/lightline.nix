@@ -1,3 +1,5 @@
+# The status Bar
+
 {
   plugins.lightline = {
     enable = true;
@@ -17,8 +19,8 @@
           ]
         ];
         right = [
-          ["lineinfo"]
-          ["percent"]
+          [ "lineinfo" ]
+          [ "percent" ]
           [
             "fileformat"
             "fileencoding"

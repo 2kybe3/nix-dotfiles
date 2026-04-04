@@ -3,7 +3,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   sops.secrets = {
     "wg-key" = {
       sopsFile = "${self}/secrets/wireguard.yaml";
@@ -15,15 +16,19 @@
     };
   };
 
-  environment.systemPackages = import ./scripts {inherit pkgs;};
+  environment.systemPackages = import ./scripts { inherit pkgs; };
 
   systemd.services."kybe-wg-resolv" = {
     description = "Set resolvectl for kybe.xyz after wg interface is up";
 
-    after = ["wireguard-kybe.xyz.target" "network.target" "wireguard-kybe.xyz.service"];
-    wants = ["wireguard-kybe.xyz.service"];
-    bindsTo = ["wireguard-kybe.xyz.service"];
-    wantedBy = ["wireguard-kybe.xyz.service"];
+    after = [
+      "wireguard-kybe.xyz.target"
+      "network.target"
+      "wireguard-kybe.xyz.service"
+    ];
+    wants = [ "wireguard-kybe.xyz.service" ];
+    bindsTo = [ "wireguard-kybe.xyz.service" ];
+    wantedBy = [ "wireguard-kybe.xyz.service" ];
 
     serviceConfig = {
       Type = "oneshot";
@@ -34,7 +39,7 @@
 
   networking.wireguard.interfaces = {
     "kybe.xyz" = {
-      ips = ["10.0.6.5/32"];
+      ips = [ "10.0.6.5/32" ];
       privateKeyFile = config.sops.secrets."wg-key".path;
 
       peers = [

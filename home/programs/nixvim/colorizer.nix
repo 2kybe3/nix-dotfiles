@@ -1,3 +1,5 @@
+# Makes #FFFFFF etc. work
+
 {
   plugins.colorizer = {
     enable = true;

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   time.timeZone = "Europe/Berlin";
 
   hardware.bluetooth.enable = true;

@@ -3,7 +3,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./gh-notify-daemon.nix
     ./accounts.nix
@@ -50,10 +51,10 @@
     enable = true;
     antialiasing = true;
     defaultFonts = {
-      monospace = ["FiraCode Nerd Font"];
-      sansSerif = ["Inter"];
-      serif = ["Noto Serif"];
-      emoji = ["Noto Color Emoji"];
+      monospace = [ "FiraCode Nerd Font" ];
+      sansSerif = [ "Inter" ];
+      serif = [ "Noto Serif" ];
+      emoji = [ "Noto Color Emoji" ];
     };
   };
 
@@ -74,18 +75,18 @@
         pkgs.thunderbird
       ];
       defaultApplications = {
-        "x-scheme-handler/http" = ["librewolf.desktop"];
-        "x-scheme-handler/https" = ["librewolf.desktop"];
-        "x-scheme-handler/about" = ["librewolf.desktop"];
-        "x-scheme-handler/unknown" = ["librewolf.desktop"];
+        "x-scheme-handler/http" = [ "librewolf.desktop" ];
+        "x-scheme-handler/https" = [ "librewolf.desktop" ];
+        "x-scheme-handler/about" = [ "librewolf.desktop" ];
+        "x-scheme-handler/unknown" = [ "librewolf.desktop" ];
 
-        "x-scheme-handler/discord" = ["vesktop.desktop"];
+        "x-scheme-handler/discord" = [ "vesktop.desktop" ];
       };
     };
     portal = {
       enable = true;
       config.common.default = "*";
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
     userDirs = {
       enable = true;

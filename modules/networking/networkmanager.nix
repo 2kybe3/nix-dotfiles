@@ -2,7 +2,8 @@
   self,
   config,
   ...
-}: {
+}:
+{
   sops.secrets.wifi = {
     sopsFile = "${self}/secrets/wifi.env.bin";
     format = "binary";
@@ -13,7 +14,7 @@
     dns = "systemd-resolved";
     wifi.macAddress = "7A:3F:C2:91:4D:19";
     ensureProfiles = {
-      environmentFiles = [config.sops.secrets.wifi.path];
+      environmentFiles = [ config.sops.secrets.wifi.path ];
       profiles."FRITZ!Box 6660 Cable QB" = {
         connection = {
           id = "FRITZ!Box 6660 Cable QB";

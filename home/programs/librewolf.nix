@@ -1,7 +1,9 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   sonarrDomain = "sonarr.server.kybe.xyz";
   radarrDomain = "radarr.server.kybe.xyz";
-in {
+in
+{
   programs.librewolf = {
     enable = true;
     nativeMessagingHosts = [

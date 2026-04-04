@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   enable = true;
 
   extraPlugins = with pkgs.vimPlugins; [
@@ -20,9 +21,12 @@
 
   ## Plugins
   plugins = {
-    fidget.enable = true;
-    gitsigns.enable = true;
+    fidget.enable = true; # Show what's going on
+    vim-suda.enable = true; # :SudaRead / :SudaWrite
+    whitespace.enable = true; # Show trailing whitespaces
+    nix-develop.enable = true; # :NixDevelop / :NixShell
     render-markdown.enable = true;
+    visual-whitespace.enable = true; # Visualize whitespaces in v mode
   };
 
   colorschemes.catppuccin.enable = true;

@@ -18,11 +18,11 @@
               nixpkgs_flake_uri = "github:NixOS/nixpkgs/master";
             };
           }
-          {name = "async_path";}
-          {name = "nvim_lsp";}
-          {name = "luasnip";}
-          {name = "buffer";}
-          {name = "calc";}
+          { name = "async_path"; }
+          { name = "nvim_lsp"; }
+          { name = "luasnip"; }
+          { name = "buffer"; }
+          { name = "calc"; }
         ];
         mapping = {
           "<C-Space>" = "cmp.mapping.complete()";

@@ -1,4 +1,5 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   nixosConfigPath = "~/.dotfiles";
 
   infraFolder = "~/infra";
@@ -10,15 +11,18 @@
   infraMainPath = "${infraFolder}/infra-nix-main";
   infraMainHost = "nix-main.internal.kybe.xyz";
 
-  mkNixRebuild = {
-    host,
-    path,
-    build-user ? "root",
-    build-host ? infraBuilderHost,
-    target-user ? "root",
-    target-host,
-  }: "sudo -v && NIX_SSHOPTS='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${path}#${host} --target-host ${target-user}@${target-host} --build-host ${build-user}@${build-host} --upgrade --sudo --verbose &| nom";
-in {
+  mkNixRebuild =
+    {
+      host,
+      path,
+      build-user ? "root",
+      build-host ? infraBuilderHost,
+      target-user ? "root",
+      target-host,
+    }:
+    "sudo -v && NIX_SSHOPTS='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' SSH_AUTH_SOCK=$SSH_AUTH_SOCK nixos-rebuild switch --flake ${path}#${host} --target-host ${target-user}@${target-host} --build-host ${build-user}@${build-host} --upgrade --sudo --verbose &| nom";
+in
+{
   programs.fish = {
     enable = true;
     interactiveShellInit = builtins.readFile ../config/fish.fish;

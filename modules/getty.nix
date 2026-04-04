@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   services.getty = {
     autologinOnce = true;
     autologinUser = "kybe";

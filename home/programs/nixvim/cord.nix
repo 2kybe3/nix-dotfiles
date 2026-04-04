@@ -1,3 +1,5 @@
+# Discord integration
+
 {
   plugins.cord = {
     enable = true;

@@ -6,7 +6,7 @@
     ];
     settings = {
       PasswordAuthentication = true;
-      AllowUsers = ["kybe"];
+      AllowUsers = [ "kybe" ];
       UseDns = true;
       PermitRootLogin = "no";
     };

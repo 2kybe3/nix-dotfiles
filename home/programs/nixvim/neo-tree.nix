@@ -1,3 +1,5 @@
+# Goated file browser
+
 {
   plugins.neo-tree = {
     enable = true;

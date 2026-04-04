@@ -6,6 +6,7 @@
     ./treesj.nix
     ./nixvim.nix
     ./globals.nix
+    ./gitsigns.nix
     ./harpoon.nix
     ./neo-tree.nix
     ./telescope.nix

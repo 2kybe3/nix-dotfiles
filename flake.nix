@@ -3,20 +3,20 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-mpscribble.url = "github:nixos/nixpkgs/?ref=pull/502095/head";
+    flake-utils.url = "github:numtide/flake-utils";
 
-    gh-notify-daemon = {
-      url = "git+https://git.kybe.xyz/2kybe3/gh-notify-daemon";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -30,14 +30,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # TOOL
-    rust-dev = {
-      url = "path:./tools/rust-dev";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    screenshot-sway-zipline = {
-      url = "path:./tools/screenshot-sway-zipline";
+    gh-notify-daemon = {
+      url = "git+https://git.kybe.xyz/2kybe3/gh-notify-daemon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -47,65 +41,76 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    rust-dev,
-    cheat-sh,
-    home-manager,
-    nixpkgs-mpscribble,
-    screenshot-sway-zipline,
-    ...
-  } @ inputs: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
-        nvidia.acceptLicense = true;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      cheat-sh,
+      flake-utils,
+      treefmt-nix,
+      home-manager,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+          nvidia.acceptLicense = true;
+        };
       };
-    };
-    mpdscribble = import nixpkgs-mpscribble {
-      inherit system;
-    };
 
-    cpkgs = {
-      screenshot-sway-zipline = screenshot-sway-zipline.packages.${system}.default;
-      cheat-sh = cheat-sh.packages.${system}.default;
-    };
+      cpkgs = {
+        cheat-sh = cheat-sh.packages.${system}.default;
+      };
+    in
+    {
+      homeConfigurations."kybe" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
 
-    makeSystem = hostModule:
-      nixpkgs.lib.nixosSystem {
-        inherit system pkgs;
-
-        specialArgs = {
-          inherit self inputs system cpkgs;
+        extraSpecialArgs = {
+          inherit
+            self
+            inputs
+            system
+            cpkgs
+            ;
         };
 
         modules = [
-          hostModule
+          inputs.nixvim.homeModules.nixvim
+          inputs.sops-nix.homeManagerModules.sops
+          inputs.gh-notify-daemon.homeManagerModules.gh-notify-daemon
+          ./home
         ];
       };
-  in {
-    nixosConfigurations = {
-      knx = makeSystem ./hosts/knx;
-    };
-    homeConfigurations."kybe" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
+      nixosConfigurations.knx = nixpkgs.lib.nixosSystem {
+        inherit system pkgs;
 
-      extraSpecialArgs = {
-        inherit self inputs system cpkgs mpdscribble;
+        specialArgs = {
+          inherit
+            self
+            inputs
+            system
+            cpkgs
+            ;
+        };
+
+        modules = [
+          ./hosts/knx
+        ];
       };
-
-      modules = [
-        inputs.nixvim.homeModules.nixvim
-        inputs.sops-nix.homeManagerModules.sops
-        inputs.gh-notify-daemon.homeManagerModules.gh-notify-daemon
-        ./home
-      ];
-    };
-
-    formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
-    devShells.${system}.rust = rust-dev.devShells.${system}.default;
-  };
+    }
+    // flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+        treefmt-eval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
+      in
+      {
+        checks.formatting = treefmt-eval.config.build.check self;
+        formatter = treefmt-eval.config.build.wrapper;
+      }
+    );
 }

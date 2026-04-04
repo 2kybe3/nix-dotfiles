@@ -1,4 +1,5 @@
-{cpkgs, ...}: {
+{ cpkgs, ... }:
+{
   imports = [
     ./obs.nix
     ./gnupg.nix

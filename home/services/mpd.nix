@@ -4,7 +4,8 @@
   config,
   mpdscribble,
   ...
-}: {
+}:
+{
   sops.secrets."last.fm" = {
     sopsFile = "${self}/secrets/last.fm.yaml";
     mode = "0400";
@@ -12,7 +13,7 @@
   services = {
     mpd = {
       enable = true;
-      extraArgs = ["--verbose"];
+      extraArgs = [ "--verbose" ];
       network.startWhenNeeded = true;
       # fifo is for rmpc cava
       extraConfig = ''
@@ -32,7 +33,7 @@
     mpd-mpris.enable = true;
     mpdscribble = {
       enable = true;
-      package = mpdscribble.mpdscribble;
+      package = pkgs.mpdscribble;
       endpoints = {
         "last.fm" = {
           passwordFile = config.sops.secrets."last.fm".path;
@@ -41,5 +42,5 @@
       };
     };
   };
-  home.packages = [pkgs.playerctl];
+  home.packages = [ pkgs.playerctl ];
 }

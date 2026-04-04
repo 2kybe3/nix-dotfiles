@@ -1,9 +1,9 @@
 {
   pkgs,
-  stable,
   config,
   ...
-}: {
+}:
+{
   programs.firejail.wrappedBinaries = config.kybe.lib.firejail.make pkgs.firejail "libreoffice" [
     "libreoffice"
     "sbase"

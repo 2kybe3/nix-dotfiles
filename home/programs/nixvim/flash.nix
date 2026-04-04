@@ -1,3 +1,5 @@
+# Allows jumping to hard places fast
+
 {
   plugins.flash = {
     enable = true;

@@ -2,7 +2,8 @@
   self,
   config,
   ...
-}: {
+}:
+{
   sops.secrets."kybe.xyz".sopsFile = "${self}/secrets/mail.yaml";
 
   programs.thunderbird = {

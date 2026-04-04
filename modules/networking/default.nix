@@ -1,9 +1,10 @@
-{config, ...}: {
+{ config, ... }:
+{
   networking = {
     nftables.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [22];
+      allowedTCPPorts = [ 22 ];
     };
     hosts."127.0.0.1" = [
       "*.${config.kybe.lib.domain}"
@@ -33,7 +34,7 @@
   services.resolved = {
     enable = true;
     settings.Resolve = {
-      Domains = ["~."];
+      Domains = [ "~." ];
       DNSOverTLS = "true";
       DNSSEC = "false";
     };

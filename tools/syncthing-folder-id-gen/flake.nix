@@ -6,23 +6,30 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-  }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
     flake-utils.lib.eachDefaultSystem (
-      system: let
-        pkgs = import nixpkgs {inherit system;};
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
         name = "syncthing-folder-id-gen";
-        deps = [pkgs.gnused pkgs.openssl pkgs.coreutils];
-      in {
+        deps = [
+          pkgs.gnused
+          pkgs.openssl
+          pkgs.coreutils
+        ];
+      in
+      {
         packages.default = pkgs.stdenv.mkDerivation {
           pname = name;
           version = "1.0.0";
           src = ./.;
 
-          nativeBuildInputs = [pkgs.makeWrapper];
+          nativeBuildInputs = [ pkgs.makeWrapper ];
           buildInputs = deps;
 
           installPhase = ''
