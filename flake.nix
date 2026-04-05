@@ -71,6 +71,7 @@
       };
 
       cpkgs = {
+        git-local-only = import ./random-scripts/git-local-only { inherit pkgs; };
         home-manager = home-manager.packages.${system}.default;
         cheat-sh = cheat-sh.packages.${system}.default;
       };
