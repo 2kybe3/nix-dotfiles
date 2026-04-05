@@ -2,7 +2,6 @@
   self,
   pkgs,
   config,
-  mpdscribble,
   ...
 }:
 {
@@ -13,9 +12,7 @@
   services = {
     mpd = {
       enable = true;
-      extraArgs = [ "--verbose" ];
       network.startWhenNeeded = true;
-      # fifo is for rmpc cava
       extraConfig = ''
         audio_output {
           type "pulse"

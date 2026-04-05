@@ -25,11 +25,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     gh-notify-daemon = {
       url = "git+https://git.kybe.xyz/2kybe3/gh-notify-daemon";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -55,8 +50,22 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
+        overlays = import ./overlays;
         config = {
-          allowUnfree = true;
+          allowUnfreePredicate =
+            pkg:
+            builtins.elem (nixpkgs.lib.getName pkg) [
+              "nvidia-settings"
+              "nvidia-x11"
+
+              "steam-unwrapped"
+              "steam"
+
+              "obsidian"
+
+              "datagrip"
+              "idea"
+            ];
           nvidia.acceptLicense = true;
         };
       };
