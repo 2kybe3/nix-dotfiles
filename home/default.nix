@@ -34,6 +34,7 @@
 
     sessionVariables = {
       EDITOR = "nvim";
+      MANPAGER = "${pkgs.bat}/bin/bat -plman";
     };
 
     stateVersion = "25.11";

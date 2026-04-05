@@ -3,9 +3,9 @@
   imports = [
     ./obs.nix
     ./gnupg.nix
+    ./nix-dev.nix
     ./packages.nix
     ./libreoffice.nix
-    ./nix-dev.nix
   ];
   environment.systemPackages = [
     cpkgs.cheat-sh

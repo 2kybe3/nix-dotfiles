@@ -1,5 +1,4 @@
 {
-  lib,
   self,
   pkgs,
   config,
@@ -7,7 +6,7 @@
   ...
 }:
 {
-  imports = lib.flatten [
+  imports = [
     ./sway
     ./fd.nix
     ./mpv.nix
@@ -22,6 +21,7 @@
     ./ranger.nix
     ./keepass.nix
     ./obsidian.nix
+    ./packages.nix
     ./librewolf.nix
   ];
 

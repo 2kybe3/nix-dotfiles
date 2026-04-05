@@ -71,6 +71,7 @@
       };
 
       cpkgs = {
+        home-manager = home-manager.packages.${system}.default;
         cheat-sh = cheat-sh.packages.${system}.default;
       };
     in
@@ -81,9 +82,9 @@
         extraSpecialArgs = {
           inherit
             self
+            cpkgs
             inputs
             system
-            cpkgs
             ;
         };
 
@@ -100,9 +101,9 @@
         specialArgs = {
           inherit
             self
-            inputs
-            system
             cpkgs
+            system
+            inputs
             ;
         };
 
