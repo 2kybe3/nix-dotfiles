@@ -3,15 +3,12 @@
     settings = {
       substituters = [
         "https://attic.kybe.xyz/main"
-        "https://attic.kybe.xyz/nixpkgs-review-gha"
       ];
       trusted-substituters = [
         "https://attic.kybe.xyz/main"
-        "https://attic.kybe.xyz/nixpkgs-review-gha"
       ];
       trusted-public-keys = [
         "main:cb7V485kGP0lG7LtQ/suOgKOgtVxNXrnD6i5yCtnaMQ="
-        "nixpkgs-review-gha:HihD+g09Q285kmlfIticfykHnAyp3FqMqjOk3d1Qi6o="
       ];
       auto-optimise-store = true;
       trusted-users = [

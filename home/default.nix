@@ -72,7 +72,6 @@
       enable = true;
       defaultApplicationPackages = [
         pkgs.librewolf
-        pkgs.thunderbird
       ];
       defaultApplications = {
         "x-scheme-handler/http" = [ "librewolf.desktop" ];
@@ -82,11 +81,6 @@
 
         "x-scheme-handler/discord" = [ "vesktop.desktop" ];
       };
-    };
-    portal = {
-      enable = true;
-      config.common.default = "*";
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
     userDirs = {
       enable = true;
