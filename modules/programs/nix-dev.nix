@@ -1,9 +1,9 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+    lixPackageSets.latest.nixpkgs-review
     nix-output-monitor
     nix-prefetch-git
-    nixpkgs-review
     attic-client
     nix-update
     upterm

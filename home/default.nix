@@ -41,7 +41,7 @@
   };
 
   nix = {
-    package = pkgs.nix;
+    package = pkgs.lixPackageSets.latest.lix;
     extraOptions = ''
       netrc-file = ${config.sops.secrets.netrc.path}
       !include ${config.sops.secrets.access-token.path};

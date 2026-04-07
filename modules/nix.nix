@@ -1,5 +1,8 @@
+{ pkgs, ... }:
 {
+  environment.systemPackages = [ pkgs.lixPackageSets.latest.lix ];
   nix = {
+    package = pkgs.lixPackageSets.latest.lix;
     settings = {
       substituters = [
         "https://attic.kybe.xyz/main"
