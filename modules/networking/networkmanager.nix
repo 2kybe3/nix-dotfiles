@@ -15,6 +15,30 @@
     ensureProfiles = {
       environmentFiles = [ config.sops.secrets.wifi.path ];
       profiles = {
+        "home" = {
+          connection = {
+            id = "MagentaWLAN-QWZ1";
+            interface-name = "wlp0s20u2";
+            type = "wifi";
+            uuid = "bba60051-a524-493e-9089-3f3d7a88c5bc";
+          };
+          ipv4 = {
+            method = "auto";
+          };
+          ipv6 = {
+            addr-gen-mode = "default";
+            method = "auto";
+          };
+          wifi = {
+            mode = "infrastructure";
+            ssid = "MagentaWLAN-QWZ1";
+          };
+          wifi-security = {
+            auth-alg = "open";
+            key-mgmt = "wpa-psk";
+            psk = "$HOME_KEY";
+          };
+        };
         "kybe" = {
           connection = {
             id = "kybe";
@@ -36,33 +60,6 @@
           wifi-security = {
             key-mgmt = "sae";
             psk = "$KYBE_KEY";
-          };
-        };
-        "FRITZ!Box 6660 Cable QB" = {
-          connection = {
-            id = "FRITZ!Box 6660 Cable QB";
-            interface-name = "wlp0s20u2";
-            timestamp = "1773077219";
-            type = "wifi";
-            uuid = "6e318787-4e73-426c-87c2-51d0c5bb087d";
-          };
-          ipv4 = {
-            ignore-auto-dns = true;
-            method = "auto";
-          };
-          ipv6 = {
-            addr-gen-mode = "default";
-            ignore-auto-dns = true;
-            method = "auto";
-          };
-          wifi = {
-            mode = "infrastructure";
-            ssid = "FRITZ!Box 6660 Cable QB";
-          };
-          wifi-security = {
-            auth-alg = "open";
-            key-mgmt = "wpa-psk";
-            psk = "$HOME_KEY";
           };
         };
       };

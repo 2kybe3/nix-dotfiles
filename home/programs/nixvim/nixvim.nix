@@ -26,6 +26,7 @@
     whitespace.enable = true; # Show trailing whitespaces
     nix-develop.enable = true; # :NixDevelop / :NixShell
     render-markdown.enable = true;
+    markdown-preview.enable = true; # :MarkdownPreview
     visual-whitespace.enable = true; # Visualize whitespaces in v mode
   };
 

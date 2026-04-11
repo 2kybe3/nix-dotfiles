@@ -24,14 +24,15 @@
     ffmpeg
     unzip
     jdk21
-    glow
+    glow # Markdown viewer
+    lsof # allows seeing who has a file open
     file
-    fzf
+    fzf # Fuzzy finder
     dig
     bat
     git
-    fd
-    gh
+    fd # FIle Finder
+    gh # Github
 
     ## TUI
     (btop.override {
@@ -39,6 +40,5 @@
     })
     ncdu
     feh # Image Viewer
-
   ]);
 }
