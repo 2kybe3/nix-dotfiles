@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  environment.systemPackages = [ pkgs.lixPackageSets.latest.lix ];
+  environment.systemPackages = with pkgs; [ lixPackageSets.latest.lix ];
   nix = {
     package = pkgs.lixPackageSets.latest.lix;
     settings = {

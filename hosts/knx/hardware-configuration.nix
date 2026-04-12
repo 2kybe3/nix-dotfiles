@@ -65,6 +65,14 @@
         "dmask=0077"
       ];
     };
+
+    "/mnt/delta" = {
+      device = "/dev/disk/by-uuid/96a03ada-6302-40ef-847a-446d37b2ee7c";
+      fsType = "ext4";
+      options = [
+        "noatime"
+      ];
+    };
   };
 
   swapDevices = [

@@ -16,6 +16,7 @@ let
     "caddy"
     "users"
     "getty"
+    "monero"
     "docker"
     "system"
     "printer"
