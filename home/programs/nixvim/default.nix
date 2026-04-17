@@ -12,6 +12,7 @@
     ./telescope.nix
     ./colorizer.nix
     ./lightline.nix
+    ./autopairs.nix
     ./mini-align.nix
     ./treesitter.nix
     ./mini-surround.nix
