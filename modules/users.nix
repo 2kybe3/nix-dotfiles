@@ -18,6 +18,7 @@
       neededForUsers = true;
     };
   };
+
   users = {
     mutableUsers = false;
     defaultUserShell = pkgs.fish;

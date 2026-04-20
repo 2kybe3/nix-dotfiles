@@ -14,10 +14,7 @@
     };
   };
 
-  # for i3status-rs
-  fonts.packages = with pkgs; [
-    font-awesome_6
-  ];
+  fonts.packages = with pkgs; [ font-awesome_6 ]; # for i3status-rs
 
   programs.dconf.enable = true;
 

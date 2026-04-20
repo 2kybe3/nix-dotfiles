@@ -8,6 +8,7 @@
     age
     sops
   ];
+
   sops = {
     defaultSopsFile = "${self}/secrets/secrets.yaml";
     defaultSopsFormat = "yaml";
