@@ -46,10 +46,6 @@ let
       id = "d7tbq-371tj";
       path = "phone/dcim";
     };
-    "phone/aesis" = {
-      id = "c2vbp-mdgxw";
-      path = "phone/aesis";
-    };
     "obsidian" = {
       id = "erg2o-nnpy1";
       path = "obsidian";

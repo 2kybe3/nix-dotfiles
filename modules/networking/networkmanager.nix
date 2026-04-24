@@ -3,6 +3,9 @@
   config,
   ...
 }:
+let
+  interface-name = "wlp0s26u1u4";
+in
 {
   sops.secrets.wifi = {
     sopsFile = "${self}/secrets/wifi.env.bin";
@@ -18,7 +21,7 @@
         "home" = {
           connection = {
             id = "MagentaWLAN-QWZ1";
-            interface-name = "wlp0s20u2";
+            inherit interface-name;
             type = "wifi";
             uuid = "bba60051-a524-493e-9089-3f3d7a88c5bc";
           };
@@ -42,7 +45,7 @@
         "kybe" = {
           connection = {
             id = "kybe";
-            interface-name = "wlp0s20u2";
+            inherit interface-name;
             type = "wifi";
             uuid = "2e3b1f20-0c7d-4594-9234-a9427e3b8274";
           };

@@ -12,6 +12,8 @@
     ./mpv.nix
     ./git.nix
     ./ssh.nix
+    ./iamb.nix
+    ./yazi.nix
     ./fish.nix
     ./tmux.nix
     ./rmpc.nix

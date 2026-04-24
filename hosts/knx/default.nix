@@ -13,6 +13,7 @@ let
     "sops"
     "boot"
     "caddy"
+    "fwupd"
     "users"
     "getty"
     "monero"

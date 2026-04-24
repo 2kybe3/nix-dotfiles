@@ -2,12 +2,18 @@
   plugins.lsp = {
     enable = true;
     servers = {
+      nil_ls = {
+        enable = true;
+        settings.nix.flake = {
+          autoArchive = true;
+        };
+      };
+      zls.enable = true;
       just.enable = true;
       html.enable = true;
       pylsp.enable = true;
       yamlls.enable = true;
       statix.enable = true;
-      nil_ls.enable = true;
       jsonls.enable = true;
       bash_ls.enable = true;
       fish_lsp.enable = true;

@@ -9,16 +9,16 @@
     key = "gD";
   }
   {
+    key = "<leader>rr";
+    lspBufAction = "rename";
+  }
+  {
+    key = "<leader>ff";
+    lspBufAction = "format";
+  }
+  {
     key = "K";
     lspBufAction = "hover";
-  }
-  {
-    key = "<leader>ha";
-    lspBufAction = "document_highlight";
-  }
-  {
-    key = "<leader>hc";
-    lspBufAction = "clear_references";
   }
   {
     key = "<leader>fm";

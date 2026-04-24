@@ -1,0 +1,667 @@
+From 0cfbbbdd9617d704d29abcd660be6305c29e08b1 Mon Sep 17 00:00:00 2001
+From: vaw <git@nlih.de>
+Date: Fri, 27 Feb 2026 22:45:03 +0100
+Subject: [PATCH 1/4] Use sdk function to calculate unread count
+
+---
+ src/base.rs        | 50 ++++++++++++-------------------------------
+ src/windows/mod.rs | 53 +++++++++++++++++++++++++++++-----------------
+ 2 files changed, 47 insertions(+), 56 deletions(-)
+
+diff --git a/src/base.rs b/src/base.rs
+index d191b809..530c66b4 100644
+--- a/src/base.rs
++++ b/src/base.rs
+@@ -865,13 +865,15 @@ impl EventLocation {
+ 
+ #[derive(Clone, Debug, Default, Eq, PartialEq)]
+ pub struct UnreadInfo {
+-    pub(crate) unread: bool,
++    pub(crate) unread_messages: u64,
++    pub(crate) unread_notifications: u64,
++    pub(crate) unread_mentions: u64,
+     pub(crate) latest: Option<MessageTimeStamp>,
+ }
+ 
+ impl UnreadInfo {
+     pub fn is_unread(&self) -> bool {
+-        self.unread
++        self.unread_notifications > 0 || self.unread_mentions > 0
+     }
+ 
+     pub fn latest(&self) -> Option<&MessageTimeStamp> {
+@@ -1140,43 +1142,17 @@ impl RoomInfo {
+     }
+ 
+     /// Indicates whether this room has unread messages.
+-    pub fn unreads(&self, settings: &ApplicationSettings) -> UnreadInfo {
++    pub fn unreads(&self, room: &matrix_sdk::Room) -> UnreadInfo {
+         let last_message = self.messages.last_key_value();
+ 
+-        let last_receipt = self
+-            .user_receipts
+-            .get(&ReceiptThread::Main)
+-            .and_then(|receipts| receipts.get(&settings.profile.user_id));
+-        let last_receipt = last_receipt.as_ref().and_then(|event_id| {
+-            match &self.keys.get(*event_id)? {
+-                EventLocation::Message(_, key) | EventLocation::State(key) => Some(key),
+-                EventLocation::Reaction(_) => None,
+-            }
+-        });
+-
+-        let last_unthreaded = self
+-            .user_receipts
+-            .get(&ReceiptThread::Unthreaded)
+-            .and_then(|receipts| receipts.get(&settings.profile.user_id));
+-        let last_unthreaded = last_unthreaded.as_ref().and_then(|event_id| {
+-            match &self.keys.get(*event_id)? {
+-                EventLocation::Message(_, key) | EventLocation::State(key) => Some(key),
+-                EventLocation::Reaction(_) => None,
+-            }
+-        });
+-
+-        let last_receipt = std::cmp::max(last_receipt, last_unthreaded);
+-
+-        match (last_message, last_receipt) {
+-            (Some(((ts, _), _)), Some((read_ts, _))) => {
+-                UnreadInfo { unread: ts > read_ts, latest: Some(*ts) }
+-            },
+-            (Some(((ts, _), _)), None) => {
+-                // If we've never loaded/generated a room's receipt (example,
+-                // a newly joined but never viewed room), show it as unread.
+-                UnreadInfo { unread: true, latest: Some(*ts) }
+-            },
+-            (None, _) => UnreadInfo::default(),
++        // for some reason the two methods diverge in different directions for different rooms so
++        // get the higer one to be safe.
++        let counts = room.unread_notification_counts();
++        UnreadInfo {
++            unread_messages: room.num_unread_messages(),
++            unread_notifications: room.num_unread_notifications().max(counts.notification_count),
++            unread_mentions: room.num_unread_mentions().max(counts.highlight_count),
++            latest: last_message.map(|((ts, _), _)| ts.to_owned()),
+         }
+     }
+ 
+diff --git a/src/windows/mod.rs b/src/windows/mod.rs
+index bb10415b..a78ddce9 100644
+--- a/src/windows/mod.rs
++++ b/src/windows/mod.rs
+@@ -124,19 +124,27 @@ fn selected_text(s: &str, selected: bool) -> Text<'_> {
+     Text::from(selected_span(s, selected))
+ }
+ 
+-fn name_and_labels(name: &str, unread: bool, style: Style) -> (Span<'_>, Vec<Vec<Span<'_>>>) {
+-    let name_style = if unread {
++fn name_and_labels<'a>(
++    name: &'a str,
++    unread: &UnreadInfo,
++    style: Style,
++) -> (Span<'a>, Vec<Vec<Span<'static>>>) {
++    // TODO: use different colors for "mention", "notification", "muted room"
++    let name_style = if unread.is_unread() {
+         style.add_modifier(StyleModifier::BOLD)
+     } else {
+         style
+     };
+ 
+     let name = Span::styled(name, name_style);
+-    let labels = if unread {
+-        vec![vec![Span::styled("Unread", style)]]
+-    } else {
+-        vec![]
+-    };
++
++    let mut labels = vec![];
++
++    if unread.unread_mentions > 0 {
++        labels.push(vec![Span::styled("Unread Mention", style)]);
++    } else if unread.unread_notifications > 0 || unread.unread_messages > 0 {
++        labels.push(vec![Span::styled("Unread", style)]);
++    }
+ 
+     (name, labels)
+ }
+@@ -896,7 +904,7 @@ impl GenericChatItem {
+         let info = store.application.rooms.get_or_default(room_id.to_owned());
+         let name = info.name.clone().unwrap_or_default();
+         let alias = room.canonical_alias();
+-        let unread = info.unreads(&store.application.settings);
++        let unread = info.unreads(room);
+         info.tags.clone_from(&room_info.deref().1);
+ 
+         if let Some(alias) = &alias {
+@@ -964,9 +972,8 @@ impl ListItem<IambInfo> for GenericChatItem {
+         _: &ViewportContext<ListCursor>,
+         _: &mut ProgramStore,
+     ) -> Text<'_> {
+-        let unread = self.unread.is_unread();
+         let style = selected_style(selected);
+-        let (name, mut labels) = name_and_labels(&self.name, unread, style);
++        let (name, mut labels) = name_and_labels(&self.name, &self.unread, style);
+         let mut spans = vec![name];
+ 
+         labels.push(if self.is_dm {
+@@ -1015,7 +1022,7 @@ impl RoomItem {
+         let info = store.application.rooms.get_or_default(room_id.to_owned());
+         let name = info.name.clone().unwrap_or_default();
+         let alias = room.canonical_alias();
+-        let unread = info.unreads(&store.application.settings);
++        let unread = info.unreads(room);
+         info.tags.clone_from(&room_info.deref().1);
+ 
+         if let Some(alias) = &alias {
+@@ -1083,9 +1090,8 @@ impl ListItem<IambInfo> for RoomItem {
+         _: &ViewportContext<ListCursor>,
+         _: &mut ProgramStore,
+     ) -> Text<'_> {
+-        let unread = self.unread.is_unread();
+         let style = selected_style(selected);
+-        let (name, mut labels) = name_and_labels(&self.name, unread, style);
++        let (name, mut labels) = name_and_labels(&self.name, &self.unread, style);
+         let mut spans = vec![name];
+ 
+         if let Some(tags) = &self.tags() {
+@@ -1123,12 +1129,13 @@ pub struct DirectItem {
+ 
+ impl DirectItem {
+     fn new(room_info: MatrixRoomInfo, store: &mut ProgramStore) -> Self {
++        let room = &room_info.deref().0;
+         let room_id = room_info.0.room_id().to_owned();
+         let alias = room_info.0.canonical_alias();
+ 
+         let info = store.application.rooms.get_or_default(room_id);
+         let name = info.name.clone().unwrap_or_default();
+-        let unread = info.unreads(&store.application.settings);
++        let unread = info.unreads(room);
+         info.tags.clone_from(&room_info.deref().1);
+ 
+         DirectItem { room_info, name, alias, unread }
+@@ -1192,9 +1199,8 @@ impl ListItem<IambInfo> for DirectItem {
+         _: &ViewportContext<ListCursor>,
+         _: &mut ProgramStore,
+     ) -> Text<'_> {
+-        let unread = self.unread.is_unread();
+         let style = selected_style(selected);
+-        let (name, mut labels) = name_and_labels(&self.name, unread, style);
++        let (name, mut labels) = name_and_labels(&self.name, &self.unread, style);
+         let mut spans = vec![name];
+ 
+         if let Some(tags) = &self.tags() {
+@@ -1742,7 +1748,12 @@ mod tests {
+             tags: vec![],
+             alias: None,
+             name: "Room 1",
+-            unread: UnreadInfo { unread: false, latest: None },
++            unread: UnreadInfo {
++                latest: None,
++                unread_messages: 0,
++                unread_notifications: 0,
++                unread_mentions: 0,
++            },
+             invite: false,
+         };
+ 
+@@ -1752,8 +1763,10 @@ mod tests {
+             alias: None,
+             name: "Room 2",
+             unread: UnreadInfo {
+-                unread: false,
+                 latest: Some(MessageTimeStamp::OriginServer(40u32.into())),
++                unread_messages: 0,
++                unread_notifications: 0,
++                unread_mentions: 0,
+             },
+             invite: false,
+         };
+@@ -1764,8 +1777,10 @@ mod tests {
+             alias: None,
+             name: "Room 3",
+             unread: UnreadInfo {
+-                unread: false,
+                 latest: Some(MessageTimeStamp::OriginServer(20u32.into())),
++                unread_messages: 0,
++                unread_notifications: 0,
++                unread_mentions: 0,
+             },
+             invite: false,
+         };
+
+From 9b3604b410dbb37066ecee3558e536b870c72b34 Mon Sep 17 00:00:00 2001
+From: vaw <git@nlih.de>
+Date: Fri, 27 Feb 2026 22:47:00 +0100
+Subject: [PATCH 2/4] Align read receipts to other clients
+
+---
+ src/base.rs                    | 45 ++++++++++++++++++++++------------
+ src/main.rs                    |  2 +-
+ src/windows/room/scrollback.rs |  4 +--
+ 3 files changed, 32 insertions(+), 19 deletions(-)
+
+diff --git a/src/base.rs b/src/base.rs
+index 530c66b4..86f54172 100644
+--- a/src/base.rs
++++ b/src/base.rs
+@@ -1278,27 +1278,42 @@ impl RoomInfo {
+         self.user_receipts.entry(thread).or_default().insert(user_id, event_id);
+     }
+ 
+-    pub fn fully_read(&mut self, user_id: &UserId) {
+-        let Some(((_, event_id), _)) = self.messages.last_key_value() else {
++    pub fn fully_read(&mut self, user_id: OwnedUserId, thread: ReceiptThread) {
++        let Some(messages) = (match &thread {
++            ReceiptThread::Main => self.get_thread(None),
++            ReceiptThread::Thread(root) => self.get_thread(Some(root)),
++            _ => None,
++        }) else {
+             return;
+         };
+ 
+-        self.set_receipt(ReceiptThread::Main, user_id.to_owned(), event_id.clone());
+-
+-        let newest = self
+-            .threads
++        let event_id = messages
+             .iter()
+-            .filter_map(|(thread_id, messages)| {
+-                let thread = ReceiptThread::Thread(thread_id.to_owned());
+-
+-                messages
+-                    .last_key_value()
+-                    .map(|((_, event_id), _)| (thread, event_id.to_owned()))
++            .filter(|(_, msg)| msg.sender != user_id)
++            .filter(|(_, msg)| {
++                matches!(
++                    msg.event,
++                    MessageEvent::EncryptedOriginal(_) |
++                        MessageEvent::EncryptedRedacted(_) |
++                        MessageEvent::Original(_) |
++                        MessageEvent::Redacted(_)
++                )
+             })
+-            .collect::<Vec<_>>();
++            .map(|(_, msg)| msg.event.event_id().to_owned())
++            .next_back();
++
++        if let Some(event_id) = event_id {
++            self.set_receipt(thread, user_id, event_id);
++        }
++    }
++
++    pub fn fully_read_all(&mut self, user_id: &UserId) {
++        self.fully_read(user_id.to_owned(), ReceiptThread::Main);
++
++        let threads: Vec<_> = self.threads.keys().map(|root| root.to_owned()).collect();
+ 
+-        for (thread, event_id) in newest.into_iter() {
+-            self.set_receipt(thread, user_id.to_owned(), event_id.clone());
++        for thread in threads {
++            self.fully_read(user_id.to_owned(), ReceiptThread::Thread(thread));
+         }
+     }
+ 
+diff --git a/src/main.rs b/src/main.rs
+index 0a316c76..3346126f 100644
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -566,7 +566,6 @@ impl Application {
+ 
+                 for room_id in store.application.sync_info.chats() {
+                     if let Some(room) = store.application.rooms.get_mut(room_id) {
+-                        room.fully_read(user_id);
+                     }
+                 }
+ 
+diff --git a/src/windows/room/scrollback.rs b/src/windows/room/scrollback.rs
+index 02340573..11dbcc43 100644
+--- a/src/windows/room/scrollback.rs
++++ b/src/windows/room/scrollback.rs
+@@ -1423,9 +1423,9 @@ impl StatefulWidget for Scrollback<'_> {
+             state.cursor.timestamp.is_none()
+         {
+             // If the cursor is at the last message, then update the read marker.
+             if let Some((k, _)) = thread.last_key_value() {
+-                info.set_receipt(thread.1.clone(), settings.profile.user_id.clone(), k.1.clone());
++                info.fully_read(settings.profile.user_id.clone(), thread.1.clone());
+             }
+         }
+ 
+         // Check whether we should load older messages for this room.
+
+From 632dc941e94eba3508edd77eaeb82e305972033a Mon Sep 17 00:00:00 2001
+From: vaw <git@nlih.de>
+Date: Fri, 27 Feb 2026 21:55:04 +0100
+Subject: [PATCH 3/4] Send private receipts if `read_receipt_send = false`
+
+---
+ docs/iamb.5                    |  2 +-
+ src/windows/room/scrollback.rs |  5 +----
+ src/worker.rs                  | 12 +++++++++---
+ 3 files changed, 11 insertions(+), 8 deletions(-)
+
+diff --git a/docs/iamb.5 b/docs/iamb.5
+index 8357f965..badced56 100644
+--- a/docs/iamb.5
++++ b/docs/iamb.5
+@@ -194,7 +194,7 @@ Defines whether or not reactions should be shown.
+ Defines whether or not reactions should be shown as their respective shortcode.
+ 
+ .It Sy read_receipt_send
+-Defines whether or not read confirmations are sent.
++Defines whether or not public read confirmations are sent.
+ 
+ .It Sy read_receipt_display
+ Defines whether or not read confirmations are displayed.
+diff --git a/src/windows/room/scrollback.rs b/src/windows/room/scrollback.rs
+index 11dbcc43..f8072c05 100644
+--- a/src/windows/room/scrollback.rs
++++ b/src/windows/room/scrollback.rs
+@@ -1418,10 +1418,7 @@ impl StatefulWidget for Scrollback<'_> {
+             }
+         }
+ 
+-        if self.room_focused &&
+-            settings.tunables.read_receipt_send &&
+-            state.cursor.timestamp.is_none()
+-        {
++        if self.room_focused && state.cursor.timestamp.is_none() {
+             // If the cursor is at the last message, then update the read marker.
+             info.fully_read(settings.profile.user_id.clone(), thread.1.clone());
+         }
+diff --git a/src/worker.rs b/src/worker.rs
+index f3c9791a..3ff5b59d 100644
+--- a/src/worker.rs
++++ b/src/worker.rs
+@@ -508,6 +508,8 @@ async fn refresh_rooms_forever(client: &Client, store: &AsyncProgramStore) {
+ }
+ 
+ async fn send_receipts_forever(client: &Client, store: &AsyncProgramStore) {
++    use matrix_sdk::ruma::api::client::receipt::create_receipt::v3::ReceiptType;
++
+     let mut interval = tokio::time::interval(Duration::from_secs(2));
+     let mut sent: HashMap<OwnedRoomId, HashMap<ReceiptThread, OwnedEventId>> = Default::default();
+ 
+@@ -536,17 +538,21 @@ async fn send_receipts_forever(client: &Client, store: &AsyncProgramStore) {
+ 
+             updates.extend(changed);
+         }
++
++        let receipt_type = if locked.application.settings.tunables.read_receipt_send {
++            ReceiptType::Read
++        } else {
++            ReceiptType::ReadPrivate
++        };
+         drop(locked);
+ 
+         for (room_id, thread, new_receipt) in updates {
+-            use matrix_sdk::ruma::api::client::receipt::create_receipt::v3::ReceiptType;
+-
+             let Some(room) = client.get_room(&room_id) else {
+                 continue;
+             };
+ 
+             match room
+-                .send_single_receipt(ReceiptType::Read, thread.to_owned(), new_receipt.clone())
++                .send_single_receipt(receipt_type.clone(), thread.to_owned(), new_receipt.clone())
+                 .await
+             {
+                 Ok(()) => {
+
+From 87a702d4a520d2c0ae54f9d76178f9f54e09b56e Mon Sep 17 00:00:00 2001
+From: vaw <git@nlih.de>
+Date: Sat, 28 Feb 2026 17:46:29 +0100
+Subject: [PATCH 4/4] Add `:mentions` list
+
+---
+ docs/iamb.1        |  2 ++
+ src/base.rs        | 20 ++++++++++++++++++
+ src/commands.rs    | 16 +++++++++++++++
+ src/windows/mod.rs | 51 ++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 89 insertions(+)
+
+diff --git a/docs/iamb.1 b/docs/iamb.1
+index e7036e37..3169b64e 100644
+--- a/docs/iamb.1
++++ b/docs/iamb.1
+@@ -65,6 +65,8 @@ View a list of joined spaces.
+ View a list of unread rooms.
+ .It Sy ":unreads clear"
+ Mark all rooms as read.
++.It Sy ":mentions"
++View a list of rooms with mentions of the current user.
+ .It Sy ":welcome"
+ View the startup Welcome window.
+ .It Sy ":forget"
+diff --git a/src/base.rs b/src/base.rs
+index 86f54172..ed3ee33d 100644
+--- a/src/base.rs
++++ b/src/base.rs
+@@ -876,6 +876,10 @@ impl UnreadInfo {
+         self.unread_notifications > 0 || self.unread_mentions > 0
+     }
+ 
++    pub fn has_mention(&self) -> bool {
++        self.unread_mentions > 0
++    }
++
+     pub fn latest(&self) -> Option<&MessageTimeStamp> {
+         self.latest.as_ref()
+     }
+@@ -1706,6 +1710,9 @@ pub enum IambId {
+ 
+     /// The `:unreads` window.
+     UnreadList,
++
++    /// The `:mentions` window.
++    MentionsList,
+ }
+ 
+ impl Display for IambId {
+@@ -1727,6 +1734,7 @@ impl Display for IambId {
+             IambId::Welcome => f.write_str("iamb://welcome"),
+             IambId::ChatList => f.write_str("iamb://chats"),
+             IambId::UnreadList => f.write_str("iamb://unreads"),
++            IambId::MentionsList => f.write_str("iamb://mentions"),
+         }
+     }
+ }
+@@ -1865,6 +1873,13 @@ impl Visitor<'_> for IambIdVisitor {
+ 
+                 Ok(IambId::UnreadList)
+             },
++            Some("mentions") => {
++                if url.path() != "" {
++                    return Err(E::custom("iamb://message takes no path"));
++                }
++
++                Ok(IambId::UnreadList)
++            },
+             Some(s) => Err(E::custom(format!("{s:?} is not a valid window"))),
+             None => Err(E::custom("Invalid iamb window URL")),
+         }
+@@ -1935,6 +1950,9 @@ pub enum IambBufferId {
+ 
+     /// The `:unreads` window.
+     UnreadList,
++
++    /// The `:mentions` window.
++    MentionsList,
+ }
+ 
+ impl IambBufferId {
+@@ -1951,6 +1969,7 @@ impl IambBufferId {
+             IambBufferId::Welcome => IambId::Welcome,
+             IambBufferId::ChatList => IambId::ChatList,
+             IambBufferId::UnreadList => IambId::UnreadList,
++            IambBufferId::MentionsList => IambId::MentionsList,
+         };
+ 
+         Some(id)
+@@ -1995,6 +2014,7 @@ impl Completer<IambInfo> for IambCompleter {
+             IambBufferId::Welcome => vec![],
+             IambBufferId::ChatList => vec![],
+             IambBufferId::UnreadList => vec![],
++            IambBufferId::MentionsList => vec![],
+         }
+     }
+ }
+diff --git a/src/commands.rs b/src/commands.rs
+index d355aca4..49eafeb6 100644
+--- a/src/commands.rs
++++ b/src/commands.rs
+@@ -354,6 +354,17 @@ fn iamb_unreads(desc: CommandDescription, ctx: &mut ProgContext) -> ProgResult {
+     }
+ }
+ 
++fn iamb_mentions(desc: CommandDescription, ctx: &mut ProgContext) -> ProgResult {
++    if !desc.arg.text.is_empty() {
++        return Result::Err(CommandError::InvalidArgument);
++    }
++
++    let open = ctx.switch(OpenTarget::Application(IambId::MentionsList));
++    let step = CommandStep::Continue(open, ctx.context.clone());
++
++    return Ok(step);
++}
++
+ fn iamb_spaces(desc: CommandDescription, ctx: &mut ProgContext) -> ProgResult {
+     if !desc.arg.text.is_empty() {
+         return Result::Err(CommandError::InvalidArgument);
+@@ -804,6 +815,11 @@ fn add_iamb_commands(cmds: &mut ProgramCommands) {
+         aliases: vec![],
+         f: iamb_unreads,
+     });
++    cmds.add_command(ProgramCommand {
++        name: "mentions".into(),
++        aliases: vec![],
++        f: iamb_mentions,
++    });
+     cmds.add_command(ProgramCommand {
+         name: "unreact".into(),
+         aliases: vec![],
+diff --git a/src/windows/mod.rs b/src/windows/mod.rs
+index a78ddce9..758ff50b 100644
+--- a/src/windows/mod.rs
++++ b/src/windows/mod.rs
+@@ -337,6 +337,7 @@ macro_rules! delegate {
+             IambWindow::Welcome($id) => $e,
+             IambWindow::ChatList($id) => $e,
+             IambWindow::UnreadList($id) => $e,
++            IambWindow::MentionsList($id) => $e,
+         }
+     };
+ }
+@@ -351,6 +352,7 @@ pub enum IambWindow {
+     Welcome(WelcomeState),
+     ChatList(ChatListState),
+     UnreadList(UnreadListState),
++    MentionsList(MentionsListState),
+ }
+ 
+ impl IambWindow {
+@@ -420,6 +422,7 @@ pub type MemberListState = ListState<MemberItem, IambInfo>;
+ pub type RoomListState = ListState<RoomItem, IambInfo>;
+ pub type ChatListState = ListState<GenericChatItem, IambInfo>;
+ pub type UnreadListState = ListState<GenericChatItem, IambInfo>;
++pub type MentionsListState = ListState<GenericChatItem, IambInfo>;
+ pub type SpaceListState = ListState<SpaceItem, IambInfo>;
+ pub type VerifyListState = ListState<VerifyItem, IambInfo>;
+ 
+@@ -653,6 +656,40 @@ impl WindowOps<IambInfo> for IambWindow {
+                     .focus(focused)
+                     .render(area, buf, state);
+             },
++            IambWindow::MentionsList(state) => {
++                let mut items = store
++                    .application
++                    .sync_info
++                    .rooms
++                    .clone()
++                    .into_iter()
++                    .map(|room_info| GenericChatItem::new(room_info, store, false))
++                    .filter(GenericChatItem::has_mention)
++                    .collect::<Vec<_>>();
++
++                let dms = store
++                    .application
++                    .sync_info
++                    .dms
++                    .clone()
++                    .into_iter()
++                    .map(|room_info| GenericChatItem::new(room_info, store, true))
++                    .filter(GenericChatItem::has_mention);
++
++                items.extend(dms);
++
++                let fields = &store.application.settings.tunables.sort.chats;
++                let collator = &mut store.application.collator;
++                items.sort_by(|a, b| room_fields_cmp(a, b, fields, collator));
++
++                state.set(items);
++
++                List::new(store)
++                    .empty_message("You do not have any unread mentions yet")
++                    .empty_alignment(Alignment::Center)
++                    .focus(focused)
++                    .render(area, buf, state);
++            },
+             IambWindow::SpaceList(state) => {
+                 let mut items = store
+                     .application
+@@ -706,6 +743,7 @@ impl WindowOps<IambInfo> for IambWindow {
+             IambWindow::Welcome(w) => w.dup(store).into(),
+             IambWindow::ChatList(w) => w.dup(store).into(),
+             IambWindow::UnreadList(w) => w.dup(store).into(),
++            IambWindow::MentionsList(w) => w.dup(store).into(),
+         }
+     }
+ 
+@@ -747,6 +785,7 @@ impl Window<IambInfo> for IambWindow {
+             IambWindow::Welcome(_) => IambId::Welcome,
+             IambWindow::ChatList(_) => IambId::ChatList,
+             IambWindow::UnreadList(_) => IambId::UnreadList,
++            IambWindow::MentionsList(_) => IambId::MentionsList,
+         }
+     }
+ 
+@@ -759,6 +798,7 @@ impl Window<IambInfo> for IambWindow {
+             IambWindow::Welcome(_) => bold_spans("Welcome to iamb"),
+             IambWindow::ChatList(_) => bold_spans("DMs & Rooms"),
+             IambWindow::UnreadList(_) => bold_spans("Unread Messages"),
++            IambWindow::MentionsList(_) => bold_spans("Unread Mentions"),
+ 
+             IambWindow::Room(w) => {
+                 let title = store.application.get_room_title(w.id());
+@@ -787,6 +827,7 @@ impl Window<IambInfo> for IambWindow {
+             IambWindow::Welcome(_) => bold_spans("Welcome to iamb"),
+             IambWindow::ChatList(_) => bold_spans("DMs & Rooms"),
+             IambWindow::UnreadList(_) => bold_spans("Unread Messages"),
++            IambWindow::MentionsList(_) => bold_spans("Unread Mentions"),
+ 
+             IambWindow::Room(w) => w.get_title(store),
+             IambWindow::MemberList(state, room_id, _) => {
+@@ -853,6 +894,11 @@ impl Window<IambInfo> for IambWindow {
+ 
+                 Ok(IambWindow::UnreadList(list))
+             },
++            IambId::MentionsList => {
++                let list = MentionsListState::new(IambBufferId::MentionsList, vec![]);
++
++                Ok(IambWindow::MentionsList(list))
++            },
+         }
+     }
+ 
+@@ -923,6 +969,11 @@ impl GenericChatItem {
+     fn tags(&self) -> &Option<Tags> {
+         &self.room_info.deref().1
+     }
++
++    #[inline]
++    fn has_mention(&self) -> bool {
++        self.unread.has_mention()
++    }
+ }
+ 
+ impl RoomLikeItem for GenericChatItem {
+

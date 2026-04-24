@@ -11,9 +11,9 @@
     ## Networking
     traceroute
     tcpdump
-    dig
-    wget
     curl
+    wget
+    dig
     mtr
 
     ## CLI
@@ -24,6 +24,7 @@
     ffmpeg
     unzip
     jdk21
+    fwupd
     glow # Markdown viewer
     lsof # allows seeing who has a file open
     file
@@ -39,6 +40,6 @@
       cudaSupport = true;
     })
     ncdu
-    feh # Image Viewer
+    imv # Image Viewer
   ]);
 }

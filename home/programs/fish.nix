@@ -41,6 +41,7 @@ in
       collect-garbage = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
       knx-full = "knx-build; knx-hm";
       knx-build = "sudo -v && nixos-rebuild switch --flake ${nixosConfigPath}#knx --upgrade --sudo --verbose &| nom";
+      knx-build-boot = "sudo -v && nixos-rebuild boot --flake ${nixosConfigPath}#knx --upgrade --sudo --verbose &| nom";
       knx-hm = "home-manager switch --flake ${nixosConfigPath} --show-trace";
 
       server-build = mkNixRebuild {
