@@ -10,13 +10,15 @@
       };
       zls.enable = true;
       just.enable = true;
-      html.enable = true;
-      pylsp.enable = true;
+      ts_ls.enable = true;
+      svelte.enable = true;
       yamlls.enable = true;
       statix.enable = true;
       jsonls.enable = true;
       bash_ls.enable = true;
       fish_lsp.enable = true;
+      superhtml.enable = true;
+      tailwindcss.enable = true;
       systemd_lsp.enable = true;
       postgres_lsp.enable = true;
       docker_language_service.enable = true;

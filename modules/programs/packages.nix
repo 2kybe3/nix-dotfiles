@@ -21,7 +21,6 @@
     fastfetch
     ripgrep
     openssl
-    ffmpeg
     unzip
     jdk21
     fwupd
@@ -36,9 +35,7 @@
     gh # Github
 
     ## TUI
-    (btop.override {
-      cudaSupport = true;
-    })
+    btop-cuda
     ncdu
     imv # Image Viewer
   ]);

@@ -2,7 +2,8 @@
   description = "Kybe's NixOS config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     flake-utils.url = "github:numtide/flake-utils";
 
     treefmt-nix = {
@@ -55,6 +56,7 @@
           allowUnfreePredicate =
             pkg:
             builtins.elem (nixpkgs.lib.getName pkg) [
+              "nvidia-kernel-modules"
               "nvidia-settings"
               "nvidia-x11"
 
@@ -65,6 +67,10 @@
 
               "datagrip"
               "idea"
+
+              # neovim
+              "cmp-calc"
+              "whitespace.nvim"
             ];
           nvidia.acceptLicense = true;
         };
@@ -116,7 +122,6 @@
     // flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = import nixpkgs { inherit system; };
         treefmt-eval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
       in
       {

@@ -1,4 +1,5 @@
 {
+  lib,
   self,
   pkgs,
   config,
@@ -35,6 +36,8 @@
 
     nixvim = {
       imports = [ ./nixvim ];
+      nixpkgs.useGlobalPackages = true;
+
       _module.args = {
         inherit self system;
         inherit (config) home;

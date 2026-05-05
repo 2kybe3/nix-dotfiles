@@ -75,6 +75,13 @@ in
             URLTemplate = "https://nixpk.gs/pr-tracker.html?pr={searchTerms}";
           }
           {
+            Alias = "@hp"; # Hydra Package
+            Description = "Search Hydra Package";
+            Method = "GET";
+            Name = "HydraPackage";
+            URLTemplate = "https://hydra.nixos.org/job/nixpkgs/unstable/{searchTerms}.x86_64-linux";
+          }
+          {
             Alias = "@ym";
             Description = "Search Youtube Music";
             IconURL = "https://music.youtube.com/favicon.ico";

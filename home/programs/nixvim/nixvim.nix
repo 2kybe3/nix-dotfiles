@@ -4,6 +4,7 @@
 
   extraPlugins = with pkgs.vimPlugins; [
     vim-tpipeline
+    nvim-ts-autotag
   ];
 
   ## Default ##
@@ -34,56 +35,57 @@
 
   colorschemes.catppuccin.enable = true;
   extraConfigLua = ''
-    require("catppuccin").setup({
-      flavour = "macchiato",
-      transparent_background = true,
-      float = {
-        transparent = true,
-        solid = false,
-      },
-      styles = {
-        comments = { "italic" },
-        conditionals = { "italic" },
-      },
-      lsp_styles = {
-        virtual_text = {
-            errors = { "italic" },
-            hints = { "italic" },
-            warnings = { "italic" },
-            information = { "italic" },
-            ok = { "italic" },
+    require('nvim-ts-autotag').setup({})
+      require("catppuccin").setup({
+        flavour = "macchiato",
+        transparent_background = true,
+        float = {
+          transparent = true,
+          solid = false,
         },
-        underlines = {
-            errors = { "underline" },
-            hints = { "underline" },
-            warnings = { "underline" },
-            information = { "underline" },
-            ok = { "underline" },
+        styles = {
+          comments = { "italic" },
+          conditionals = { "italic" },
         },
-        inlay_hints = {
-            background = true,
+        lsp_styles = {
+          virtual_text = {
+              errors = { "italic" },
+              hints = { "italic" },
+              warnings = { "italic" },
+              information = { "italic" },
+              ok = { "italic" },
+          },
+          underlines = {
+              errors = { "underline" },
+              hints = { "underline" },
+              warnings = { "underline" },
+              information = { "underline" },
+              ok = { "underline" },
+          },
+          inlay_hints = {
+              background = true,
+          },
+          integrations = {
+            cmp = true,
+            gitsigns = true,
+          },
         },
-        integrations = {
-          cmp = true,
-          gitsigns = true,
-        },
-      },
-    })
-    vim.cmd("colorscheme catppuccin-nvim")
+      })
+      vim.cmd("colorscheme catppuccin-nvim")
 
-    -- Leader
-    vim.g.mapleader = " "
-    vim.g.maplocalleader = ","
-    vim.keymap.set("n", "<Space>", "<Nop>", { silent = true })
-    vim.keymap.set("v", "<Space>", "<Nop>", { silent = true })
+      -- Leader
+      vim.g.mapleader = " "
+      vim.g.maplocalleader = ","
+      vim.keymap.set("n", "<Space>", "<Nop>", { silent = true })
+      vim.keymap.set("v", "<Space>", "<Nop>", { silent = true })
 
-    vim.api.nvim_create_autocmd("FileType", {
-        pattern = "nix",
-        callback = function()
-             vim.opt_local.tabstop = 2
-             vim.opt_local.softtabstop = 2
-             vim.opt_local.shiftwidth = 2
-        end,
-    })
+      vim.api.nvim_create_autocmd("FileType", {
+          pattern = "nix",
+          callback = function()
+               vim.opt_local.tabstop = 2
+               vim.opt_local.softtabstop = 2
+               vim.opt_local.shiftwidth = 2
+          end,
+      })
   '';
 }
