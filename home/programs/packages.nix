@@ -1,7 +1,8 @@
 { pkgs, cpkgs, ... }:
 {
   home.packages =
-    (with pkgs; [
+    with pkgs;
+    [
       jetbrains.datagrip
       element-desktop
       jetbrains.idea
@@ -10,7 +11,11 @@
       wiremix
       vesktop
       delta
+      just
       gimp
+
+      # visualizer
+      cava
 
       (prismlauncher.override {
         jdks = [
@@ -18,7 +23,7 @@
           jdk25
         ];
       })
-    ])
+    ]
     ++ (with cpkgs; [
       git-local-only
     ]);

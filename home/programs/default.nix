@@ -1,5 +1,4 @@
 {
-  lib,
   self,
   pkgs,
   config,
@@ -23,6 +22,7 @@
     ./yt-dlp.nix
     ./ranger.nix
     ./keepass.nix
+    ./managarr.nix
     ./obsidian.nix
     ./packages.nix
     ./librewolf.nix

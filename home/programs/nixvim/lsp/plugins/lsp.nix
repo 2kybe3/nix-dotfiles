@@ -11,6 +11,7 @@
       zls.enable = true;
       just.enable = true;
       ts_ls.enable = true;
+      pylsp.enable = true;
       svelte.enable = true;
       yamlls.enable = true;
       statix.enable = true;

@@ -3,34 +3,34 @@ keys:
   - &hm-knx age1tcsye90nmzdntlkzq58ml0t2tuye6t2unt9fyccy0yxn2ctmtfrq6dnq3t
 
 creation_rules:
-  - path_regex: secrets/(wireguard|users|syncthing(-api)?|mullvad)\.yaml$
+  - path_regex: secrets\/(wireguard|users|syncthing(-api)?|mullvad)\.yaml$
     key_groups:
-    - age:
-      - *root-knx
-  - path_regex: secrets/keepass\.yaml$
+      - age:
+          - *root-knx
+  - path_regex: secrets\/keepass\.yaml$
     key_groups:
-    - age:
-      - *root-knx
-  - path_regex: secrets/(i3status|zipline|mail|nix\.conf|last\.fm|gh-notify-daemon)\.yaml$
+      - age:
+          - *root-knx
+  - path_regex: secrets\/(i3status|zipline|mail|nix\.conf|last\.fm|gh-notify-daemon|managarr)\.yaml$
     key_groups:
-    - age:
-      - *hm-knx
+      - age:
+          - *hm-knx
 
-  - path_regex: secrets/knx-syncthing-(cert|key)]\.pem$
+  - path_regex: secrets\/knx-syncthing-(cert|key)]\.pem$
     key_groups:
-    - age:
-      - *root-knx
+      - age:
+          - *root-knx
 
-  - path_regex: secrets/netrc\.txt$
+  - path_regex: secrets\/netrc\.txt$
     key_groups:
-    - age:
-      - *root-knx
+      - age:
+          - *root-knx
 
-  - path_regex: secrets/(wifi|caddy)\.env\.bin$
+  - path_regex: secrets\/(wifi|caddy)\.env\.bin$
     key_groups:
-    - age:
-      - *root-knx
-  - path_regex: secrets/acme\.env\.bin$
+      - age:
+          - *root-knx
+  - path_regex: secrets\/acme\.env\.bin$
     key_groups:
-    - age:
-      - *root-knx
+      - age:
+          - *root-knx
