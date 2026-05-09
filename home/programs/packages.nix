@@ -10,6 +10,7 @@
       wireshark
       wiremix
       vesktop
+      parallel
       delta
       just
       gimp
