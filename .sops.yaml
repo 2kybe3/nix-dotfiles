@@ -11,7 +11,11 @@ creation_rules:
     key_groups:
       - age:
           - *root-knx
-  - path_regex: secrets\/(i3status|zipline|mail|nix\.conf|last\.fm|gh-notify-daemon|managarr)\.yaml$
+  - path_regex: secrets\/(i3status|zipline|mail|nix\.conf|last\.fm|gh-notify-daemon)\.yaml$
+    key_groups:
+      - age:
+          - *hm-knx
+  - path_regex: secrets\/(managarr)\.yaml\.bin$
     key_groups:
       - age:
           - *hm-knx
