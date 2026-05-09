@@ -34,6 +34,7 @@
           "wheel"
           "docker"
           "libvirtd"
+          "adbusers"
           "wireshark"
           "networkmanager"
         ];

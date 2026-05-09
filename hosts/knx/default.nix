@@ -21,6 +21,7 @@ let
     "system"
     "desktop"
     "printer"
+    "android"
     "pipewire"
     "services"
     "journald"

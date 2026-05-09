@@ -63,6 +63,8 @@
               "steam-unwrapped"
               "steam"
 
+              "android-studio"
+
               "obsidian"
 
               "datagrip"
