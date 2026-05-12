@@ -1,8 +1,6 @@
 {
-  self,
   pkgs,
-  config,
-  system,
+  cpkgs,
   ...
 }:
 {
@@ -28,20 +26,9 @@
     ./librewolf.nix
   ];
 
-  home.packages = with pkgs; [
-    tree-sitter
+  home.packages = [
+    pkgs.tree-sitter
+    cpkgs.kyvim
   ];
-  programs = {
-    home-manager.enable = true;
-
-    nixvim = {
-      imports = [ ./nixvim ];
-      nixpkgs.useGlobalPackages = true;
-
-      _module.args = {
-        inherit self system;
-        inherit (config) home;
-      };
-    };
-  };
+  programs.home-manager.enable = true;
 }

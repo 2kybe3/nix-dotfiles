@@ -21,8 +21,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
+    kyvim = {
+      url = "git+https://git.kybe.xyz/2kybe3/kyvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -32,7 +32,7 @@
     };
 
     cheat-sh = {
-      url = "github:2kybe3/cheat-sh";
+      url = "git+https://git.kybe.xyz/2kybe3/cheat-sh";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -40,6 +40,7 @@
   outputs =
     {
       self,
+      kyvim,
       nixpkgs,
       cheat-sh,
       flake-utils,
@@ -82,6 +83,7 @@
         git-local-only = import ./random-scripts/git-local-only { inherit pkgs; };
         home-manager = home-manager.packages.${system}.default;
         cheat-sh = cheat-sh.packages.${system}.default;
+        kyvim = kyvim.packages.${system}.default;
       };
     in
     {
@@ -98,7 +100,6 @@
         };
 
         modules = [
-          inputs.nixvim.homeModules.nixvim
           inputs.sops-nix.homeManagerModules.sops
           inputs.gh-notify-daemon.homeManagerModules.gh-notify-daemon
           ./home
